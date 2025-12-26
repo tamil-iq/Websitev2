@@ -1,0 +1,375 @@
+import dashboard from "@/assets/homepage/dashboard-monitoring.png";
+import portal from "@/assets/homepage/patient-engagement-portal.png";
+import metrics from "@/assets/homepage/metrics.png";
+import rates from "@/assets/homepage/rates.png";
+import chatui from "@/assets/homepage/chat-ui.png";
+import scanreports from "@/assets/homepage/scan-reports.png";
+import { cn } from "@/lib/utils";
+import { ShieldCheck, UserCog, ClipboardList, Headset } from "lucide-react";
+import { TestimonialWithMarquee } from "@/components/ui/testtimonial-with-marquee"
+import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from "@/components/ui/marquee"
+
+const metricsData = [
+  {
+    label: "Radiologist Productivity Metrics",
+    description: "Real-time, role-based dashboards that track read volume, turnaround times (TAT) to improve performance and balance workloads.",
+    image: metrics,
+  },
+  {
+    label: "Equipment Utilisation Rates",
+    description: "Equipment occupancy, idle time, and capacity by modality and site - optimising scheduling to boost throughput and ROI.",
+    image: rates,
+  },
+  {
+    label: "Turn around time tracking",
+    description: "Keep teams on schedule - from order to final report",
+    image: "",
+  },
+  {
+    label: "Referral pattern analysis",
+    description: "Identify trends and optimise clinical collaborations",
+    image: "",
+  },
+]
+
+const portalData = [
+  {
+    label: "Secure Instant Scans & Reports",
+    description: "Patients can securely view their collection of all their medical reports and scans from anywhere on any device instantly.",
+    image: scanreports,
+  },
+  {
+    label: "AI powered Somatiq Ally",
+    description: "Translating complex medical data into simple, clear language for everyone. Somatiq Ally for your medical queries and extended support.",
+    image: chatui,
+  },
+  {
+    label: "Secure Link sharing with Physicians",
+    description: "Quick collaborations with care teams using encrypted links for enhanced privacy.",
+    image: "",
+  },
+  {
+    label: "Digital-Only Data Transfer",
+    description: "Access health documents online anytime, eliminating the need for physical media or CDs",
+    image: "",
+  },
+]
+
+const features = [
+  {
+    icon: ShieldCheck,
+    title: "HIPAA Compliant Architecture",
+  },
+  {
+    icon: UserCog,
+    title: "Role Based Access Control",
+  },
+  {
+    icon: ClipboardList,
+    title: "Comprehensive Audit Trails",
+  },
+  {
+    icon: Headset,
+    title: "Continuous Updates & 24/7 Support",
+  },
+];
+
+const testimonials = [
+  {
+    author: {
+      name: "Emma Thompson",
+      handle: "@emmaai",
+      role: "CEO",
+      company: "ABC Hospital",
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "Using this AI platform has transformed how we handle data analysis. The speed and accuracy are unprecedented.",
+    href: "https://twitter.com/emmaai"
+  },
+  {
+    author: {
+      name: "David Park",
+      handle: "@davidtech",
+      role: "CTO",
+      company: "XYZ Hospital",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "The API integration is flawless. We've reduced our development time by 60% since implementing this solution.",
+    href: "https://twitter.com/davidtech"
+  },
+  {
+    author: {
+      name: "Sofia Rodriguez",
+      handle: "@sofiaml",
+      role: "CMO",
+      company: "LMN Hospital",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+    },
+    text: "Finally, an AI tool that actually understands context! The accuracy in natural language processing is impressive."
+  }
+]
+
+export function DashboardSection() {
+  return (
+    <div >
+      {/* dashboard section */}
+      <section className="py-24 px-4 relative">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-light tracking-wide text-foreground mb-4">
+            Comprehensive Dashboard Monitoring
+          </h2>
+          <p className="text-muted font-extralight max-w-xl mx-auto">
+            Catered specially for Hospitals and Diagnostic centres
+            <br />
+            to prioritise time over data obsession
+          </p>
+        </div>
+
+        <img src={dashboard} alt="" className=" max-w-7xl mx-auto" />
+
+        <div className="feature-section container mx-auto mt-16">
+          <div className="grid grid-cols-2 gap-x-0 max-w-6xl mx-auto ">
+
+            {/* Top Row - Sections with images */}
+            {metricsData.slice(0, 2).map((item, index) => (
+              <div
+                key={item.label}
+                className={cn("metrics-wrapper border border-border p-10 pl-5 relative", index === 1 ? 'pl-12' : '', index === 0 ? 'border-r-0 border-l-0' : 'border-r-0')}
+              >
+                {index === 0 && (
+                  <>
+                    {/* Top right dot */}
+                    <div className="absolute top-0 right-0 w-1 h-1 bg-foreground/90 z-1 -translate-y-1/2 translate-x-1/2" />
+                    {/* Bottom right dot */}
+                    <div className="absolute bottom-0 right-0 w-1 h-1 bg-foreground/90 z-1 translate-y-1/2 translate-x-1/2" />
+                  </>
+                )}
+                <label className="text-2xl font-light text-foreground mb-3">
+                  {item.label}
+                </label>
+                <p className="text-muted font-extralight text-base mb-4 tracking-wide">
+                  {item.description}
+                </p>
+
+                {item.image && (
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="object-cover block "
+                  />
+                )}
+              </div>
+            ))}
+
+            {/* Bottom Row - Text-only sections */}
+            {metricsData.slice(2, 4).map((item, index) => (
+              <div
+                key={item.label}
+                className={cn("metrics-wrapper p-6 flex flex-col", index === 1 ? 'pl-12' : '')}
+              >
+                <label className="text-2xl font-light text-foreground mb-3">
+                  {item.label}
+                </label>
+                <p className="text-muted font-extralight text-base tracking-wide">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* portal section */}
+      <section>
+        <PortalSection />
+      </section>
+    </div>
+  );
+}
+
+
+
+export function ComplianceSection() {
+  return (
+    <div className="">
+      <section className="portal-section">
+        <div className="image-section relative mt-14">
+          <img src={portal} className="max-w-6xl mx-auto" alt="" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent max-w-7xl mx-auto pointer-events-none"></div>
+        </div>
+        <div className="feature-section container mx-auto mt-16">
+          <div className="grid grid-cols-2 gap-x-0 max-w-6xl mx-auto ">
+
+            {/* Top Row - Sections with images */}
+            {portalData.slice(0, 2).map((item, index) => (
+              <div
+                key={item.label}
+                className={cn("metrics-wrapper border border-border p-10 pl-5 relative", index === 1 ? 'pl-12' : '', index === 0 ? 'border-r-0 border-l-0' : 'border-r-0')}
+              >
+                {index === 0 && (
+                  <>
+                    {/* Top right dot */}
+                    <div className="absolute top-0 right-0 w-1 h-1 bg-foreground/90 z-1 -translate-y-1/2 translate-x-1/2" />
+                    {/* Bottom right dot */}
+                    <div className="absolute bottom-0 right-0 w-1 h-1 bg-foreground/90 z-1 translate-y-1/2 translate-x-1/2" />
+                  </>
+                )}
+                <label className="text-2xl font-light text-foreground mb-3">
+                  {item.label}
+                </label>
+                <p className="text-muted font-extralight text-base mb-4 tracking-wide">
+                  {item.description}
+                </p>
+
+                {item.image && (
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="object-cover block "
+                  />
+                )}
+              </div>
+            ))}
+
+            {/* Bottom Row - Text-only sections */}
+            {portalData.slice(2, 4).map((item, index) => (
+              <div
+                key={item.label}
+                className={cn("metrics-wrapper p-6 flex flex-col", index === 1 ? 'pl-12' : '')}
+              >
+                <label className="text-2xl font-light text-foreground mb-3">
+                  {item.label}
+                </label>
+                <p className="text-muted font-extralight text-base tracking-wide">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+
+          </div>
+        </div>
+
+
+
+        <div className="footer-section"></div>
+      </section>
+
+      {/* compliance section */}
+      <section className="py-24 px-4 relative">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-light tracking-wide text-foreground mb-4">
+            Security & Compliance
+          </h2>
+          <p className="text-muted font-extralight max-w-xl mx-auto">
+            Highest standards of data protection for <br /> healthcare organisations and their patients
+          </p>
+        </div>
+        <div className="relative grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto">
+          {/* Center intersection rectangle */}
+          <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-foreground/90 -translate-x-1/2 -translate-y-1/2 z-10" />
+          {features.map((feature, index) => (
+            <div className={cn("flex flex-col items-center justify-center gap-3 p-10 border border-border",
+             index === 0 ? 'border-0' : '', index === 1 ? 'border-r-0 border-t-0 border-b-0' : '', 
+             index === 2 ? 'border-l-0 border-b-0 border-r-0' : '', index === 3 ? 'border-r-0 border-b-0' : '' )}>
+              <div className="flex h-24 w-24 items-center justify-center rounded-full border-[1.5px] border-muted">
+                <feature.icon className="h-10 w-10 text-muted" strokeWidth={2}/>
+              </div>
+              <p className="text-center text-sm tracking-wider text-foreground font-light">{feature.title}</p>
+            </div>))}
+        </div>
+      </section>
+    </div>
+  )
+}
+
+
+export function PortalSection() {
+  return (
+    <section className="portal-section">
+      <div className="header-section flex flex-col gap-5 items-center justify-center">
+        <div className="title-section">
+          <label className="text-[40px] font-light text-foreground tracking-normal">
+            Patient Engagement Portal
+          </label>
+        </div>
+        <div className="description-section">
+          <p className="text-muted font-extralight text-sm tracking-wider text-center">
+            Empowering Patients with Secure, Instant Access to <br /> Scans and Reports
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+
+export function TestimonialsSection() {
+  return (
+    <section className="portal-section">
+      <div className="flex flex-col gap-5 items-center justify-center">
+       <TestimonialWithMarquee   
+       title="What our trusted partners say"
+       testimonials={testimonials}
+       />
+      </div>
+    </section>
+  )
+}
+
+const trustedCompanies = [
+  { name: "NewMed", logo: "/newmed-without-bg.png" },
+  { name: "OM Diagnostics", logo: "/om-without-bg.png" },
+  { name: "Prima", logo: "/prima-without-bg.png" },
+  { name: "TX Healthcare", logo: "/tx-without-bg.png" },
+];
+
+export function MarqueeSection() {
+  return (
+    <section className="w-full overflow-x-hidden py-12">
+      <div className="w-full max-w-full overflow-x-hidden mx-auto px-4">
+        <div className="text-center mb-8">
+          <label  className="text-muted font-extralight text-xl tracking-wide">
+            Trusted by:
+          </label>
+        </div>
+        <Marquee className="w-full max-w-full min-h-[120px]">
+          <MarqueeFade side="left" />
+          <MarqueeFade side="right" />
+          <MarqueeContent>
+            {trustedCompanies.map((company, index) => (
+              <MarqueeItem className="h-24 w-auto px-8 flex items-center justify-center" key={index}>
+                <img
+                  alt={company.name}
+                  className="h-24 w-auto max-w-[200px] object-contain grayscale brightness-0 invert"
+                  src={company.logo}
+                  onError={() => {
+                    console.error('Failed to load logo:', company.logo);
+                  }}
+                />
+              </MarqueeItem>
+            ))}
+          </MarqueeContent>
+        </Marquee>
+      </div>
+    </section>
+  )
+}
+
+
+
+
+export const HomePageSections = () => {
+  return (
+    <div>
+      <DashboardSection />
+      <ComplianceSection />
+      <TestimonialsSection />
+      <MarqueeSection />
+    </div>
+  )
+}
+
+export default DashboardSection;
