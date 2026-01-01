@@ -1,10 +1,61 @@
+import { motion } from 'framer-motion';
 import bgimage1 from "@/assets/about-us/about-us-left.png";
 import bgimage2 from "@/assets/about-us/about-us-right.png";
 
 
 export default function HeroSection() {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                staggerChildren: 0.2
+            }
+        }
+    };
+
+    const titleVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 50 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const subtitleVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 30 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const gridVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 1,
+                staggerChildren: 0.1
+            }
+        }
+    };
+
     return (
-        <section className="relative w-full overflow-hidden flex items-center justify-center container max-w-full h-[90vh] -mt-16">
+        <motion.section 
+            className="relative w-full overflow-hidden flex items-center justify-center container max-w-full h-[90vh] -mt-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+        >
             {/* Background images with blur */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 {/* Top gradient overlay */}
@@ -34,7 +85,10 @@ export default function HeroSection() {
                 />
             </div>
 
-            <div className="grid grid-cols-3 grid-rows-4 relative w-full h-full z-10">
+            <motion.div 
+                className="grid grid-cols-3 grid-rows-4 relative w-full h-full z-10"
+                variants={gridVariants}
+            >
                 {/* Vertical gradient borders */}
                 <div 
                     className="absolute top-0 bottom-0 left-1/3 w-px pointer-events-none opacity-30"
@@ -124,24 +178,24 @@ export default function HeroSection() {
                 
                 {/* Row 2 */}
                 <div className="col-span-1"></div>
-                <div className="flex flex-col items-center justify-center col-span-1">
+                <motion.div className="flex flex-col items-center justify-center col-span-1" variants={titleVariants}>
                    <p className="text-4xl font-light text-white mb-3 tracking-wide text-center leading-normal">Building SOMATIQ</p>
-                </div>
+                </motion.div>
                 <div className="col-span-1"></div>
                 
                 {/* Row 3 - Center cell with title and subtitle */}
                 <div className="col-span-1"></div>
-                <div className="flex flex-col items-center justify-center col-span-1">
+                <motion.div className="flex flex-col items-center justify-center col-span-1" variants={subtitleVariants}>
                    <p className="text-lg font-extralight text-foreground mb-3 tracking-wide text-center leading-normal">No legacy baggage. No complexity. No more RIS-PACS Jargon.</p>
                    <p className="text-lg font-extralight text-foreground mb-3 tracking-wide text-center leading-normal">Just imaging, simplified.</p>
-                </div>
+                </motion.div>
                 <div className="col-span-1"></div>
                 
                 {/* Row 4 - Center cell with description */}
                 <div className="col-span-1"></div>
                 <div className="col-span-1"></div>
                 <div className="col-span-1"></div>
-            </div>
-        </section>
+            </motion.div>
+        </motion.section>
     );
 }

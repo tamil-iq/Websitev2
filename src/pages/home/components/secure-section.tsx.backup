@@ -3,6 +3,7 @@ import { Separator } from '@/components/common/separator';
 import { getPngImageUrl } from '@/components/utils/assets';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { LayoutDashboard } from 'lucide-react';
 
 const tabs = ["Unified", "AI-Enabled", "Cloud-native", "Affordable"];
 
@@ -34,16 +35,6 @@ const tabContents: Record<string, TabContent> = {
         videoPlaceholder: "Pricing Overview"
     }
 };
-
-// const testimonialData = {
-//     quote:
-//         "The platform facilitates efficient scheduling and resource management, optimizing the use of imaging equipment.",
-//     author: {
-//         name: "Dr. Jenny D'souza",
-//         title: "Manager | City Hospital",
-//         avatarUrl: "",
-//     },
-// };
 
 type FeatureAccent = 'emerald' | 'amber' | 'violet';
 
@@ -79,7 +70,6 @@ const features = [
     },
 ] satisfies ReadonlyArray<Feature>;
 
-
 const accentStyles: Record<FeatureAccent, { glow: string; icon: string; border: string }> = {
     emerald: {
         glow: 'bg-[radial-gradient(circle_at_20%_10%,rgba(16,185,129,0.22),transparent_60%)]',
@@ -109,18 +99,29 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
 
     return (
         <section className="relative py-24 px-6 overflow-hidden bg-background">
-            <div className={cn(
-                "pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0855b4]/25 to-transparent transition-opacity duration-300",
-                hideLocalGradient ? "opacity-0" : "opacity-100"
-            )} />
+                 <div className={cn(
+                     "pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0855b4]/25 to-transparent transition-opacity duration-300",
+                     hideLocalGradient ? "opacity-0" : "opacity-100"
+                 )} />
 
-            <div className="relative xl:mx-24  space-y-16">
+            <div className="relative mx-24 space-y-16">
+                {/* Feature Capsule */}
+                <div className="flex justify-center">
+                    <div className="inline-flex items-center gap-3 bg-white border border-gray-200 rounded-full px-6 py-3 shadow-sm">
+        
+                                <span className="text-xl"><LayoutDashboard /></span>
+                                <span className="text-sm font-semibold text-green-700 uppercase tracking-wide">
+                                    "Features"
+                                </span>
+                            </div>
+                    </div>
+                </div>
 
                 {/* Header */}
                 <div className="text-center mb-10 flex flex-col gap-7">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-foreground ">
                         Everything you need. Nothing you don't.
-                    </h2>
+                    </h2> 
                     <p className='text-muted font-extralight tracking-wide max-w-3xl mx-auto'>
                         A complete radiology workspace—viewer, reporting, collaboration—in one unified interface. Intelligence woven into every interaction, native to the workflow from the start.
                     </p>
@@ -134,8 +135,9 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => setActiveTab(index)}
-                                    className={`${activeTab === index ? "" : "hover:text-foreground/60"
-                                        } relative cursor-pointer rounded-md px-5 py-1.5 text-sm font-extralight tracking-wider outline-primary transition focus-visible:outline-2`}
+                                    className={`${
+                                        activeTab === index ? "" : "hover:text-foreground/60"
+                                    } relative cursor-pointer rounded-md px-5 py-1.5 text-sm font-extralight tracking-wider outline-primary transition focus-visible:outline-2`}
                                     style={{
                                         WebkitTapHighlightColor: "transparent",
                                     }}
@@ -164,7 +166,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         <div className="relative drop-shadow-[0_-30px_16px_rgba(0,0,0,0.25)] drop-shadow-radix-gradient/50 border border-border rounded-xl overflow-hidden max-w-3xl mx-auto">
                             <div className=' video-wrapper'>
                                 <div className='video-container bg-background rounded-md'>
-                                    <motion.div
+                                    <motion.div 
                                         key={currentContent.videoPlaceholder}
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
@@ -179,7 +181,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                     </div>
                 </div>
 
-                <Separator bgColor='bg-linear-to-r from-transparent via-foreground/20 to-transparent' />
+                <Separator bgColor='bg-linear-to-r from-transparent via-foreground/20 to-transparent'/>
 
                 {/* Feature Cards */}
                 <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
@@ -192,23 +194,23 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
 
                             <div
                                 className={`relative h-full rounded-2xl border bg-card/30 backdrop-blur-md p-5 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.9)] transition-colors duration-300 ${feature.highlighted
-                                    ? accentStyles[feature.accent].border
-                                    : 'border-border/50 group-hover:border-border'
+                                        ? accentStyles[feature.accent].border
+                                        : 'border-border/50 group-hover:border-border'
                                     }`}
                             >
                                 <div className="flex flex-col items-start ">
                                     <div className='flex justify-between items-center gap-2'>
-                                        <div>
-                                            <img
-                                                src={feature.imageUrl}
-                                                alt={feature.title}
-                                                className="h-6 w-6 object-contain"
-                                            />
-                                        </div>
-                                        <h3 className="text-lg font-normal tracking-wide text-foreground">
+                                    <div>
+                                        <img 
+                                            src={feature.imageUrl} 
+                                            alt={feature.title} 
+                                            className="h-6 w-6 object-contain"
+                                        />
+                                    </div>
+                                     <h3 className="text-lg font-normal tracking-wide text-foreground">
                                             {feature.title}
                                         </h3>
-                                    </div>
+                                        </div>
                                     <div>
                                         <p className="mt-2 text-sm leading-relaxed text-muted font-extralight tracking-wide">
                                             {feature.description}
@@ -220,7 +222,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                     ))}
                 </div>
             </div>
-
+            
         </section>
     );
 };

@@ -1,5 +1,7 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   --radius-sm: calc(var(--radius) - 4px);
@@ -53,7 +55,7 @@
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(60.736% 0.19251 253.874);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary-foreground: oklch(14.51% 0.024 165.2);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(1 0 0 / 50%);
@@ -91,7 +93,7 @@
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.6 0.2 250 / 0.15);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary-foreground: oklch(14.51% 0.024 165.2);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -134,9 +136,33 @@
 @layer components {
   .tab-primary-gradient {
     @apply text-white px-4 py-2 rounded-md;
- background: linear-gradient(to bottom,
-    rgba(5, 41, 84, 0.2) 0%,
-    rgb(23, 129, 253, 0.2) 100%);
+    background: linear-gradient(to bottom,
+      rgba(5, 41, 84, 0.2) 0%,
+      rgb(23, 129, 253, 0.2) 100%);
+  }
+
+  .text-gradient {
+    @apply bg-linear-to-t from-muted via-foreground to-foreground bg-clip-text text-transparent;
+  }
+
+  .text-gradient-right {
+    @apply bg-linear-to-l from-muted via-foreground to-foreground bg-clip-text text-transparent;
+  }
+
+  .scroll-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      #0855b4 0%,
+      transparent 20%
+    );
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: -1;
   }
 }
 
@@ -151,4 +177,26 @@
 
 @theme {
   --animate-marquee: marquee var(--duration, 40s) linear infinite;
+}
+
+@theme inline {
+  --animate-rippling: rippling 1s ease-out;
+  @keyframes rippling {
+  0% {
+    opacity: 1;
+    }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

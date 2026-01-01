@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { cn } from "@/lib/utils";
 
 const benefits = [
@@ -67,18 +68,59 @@ const opportunities = [
 
 
 function WhyJoinUsSection() {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const headerVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 50 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const benefitVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 30 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
     return (
-        <section className="relative w-full overflow-hidden container max-w-6xl mx-auto h-[70vh]">
+        <motion.section 
+            className="relative w-full overflow-hidden container max-w-6xl mx-auto h-auto md:h-[70vh]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+        >
             <div className=" flex flex-col justify-between items-center gap-14">
-                <div >
+                <motion.div variants={headerVariants}>
                     <h2 className="text-3xl font-light tracking-wide text-foreground mb-4 ">Why Join Somatiq?</h2>
-                </div>
+                </motion.div>
 
                 {/* benefits section */}
-                <section className="relative w-full overflow-hidden flex items-center justify-center container max-w-full ">
+                <section className="relative w-full overflow-hidden flex items-center justify-center container max-w-full md:h-full ">
 
-
-                    <div className="grid grid-cols-3 grid-rows-2 relative w-full  z-10">
+                    <motion.div 
+                        className="grid grid-cols-3 grid-rows-2 relative w-full  z-10"
+                        variants={containerVariants}
+                    >
                         {/* Vertical gradient borders */}
                         <div
                             className="absolute top-0 bottom-0 left-1/3 w-px pointer-events-none opacity-30"
@@ -122,35 +164,82 @@ function WhyJoinUsSection() {
 
                         {/* Row 1 */}
                         {benefits.slice(0, 3).map((benefit, index) => (
-                            <div key={index} className="flex flex-col items-start justify-start p-8 gap-2">
+                            <motion.div 
+                                key={index} 
+                                className="flex flex-col items-start justify-start p-8 gap-2"
+                                variants={benefitVariants}
+                            >
                                 <h3 className="text-xl font-normal text-foreground mb-3 text-left tracking-wide">{benefit.title}</h3>
                                 <p className="text-sm font-light text-muted text-left leading-relaxed tracking-wider">{benefit.description}</p>
-                            </div>
+                            </motion.div>
                         ))}
 
                         {/* Row 2 */}
                         {benefits.slice(3, 6).map((benefit, index) => (
-                            <div key={index + 3} className="flex flex-col items-start justify-start p-8 gap-2">
+                            <motion.div 
+                                key={index + 3} 
+                                className="flex flex-col items-start justify-start p-8 gap-2"
+                                variants={benefitVariants}
+                            >
                                 <h3 className="text-xl font-normal text-foreground mb-3 text-left tracking-wide max-w-2xs">{benefit.title}</h3>
                                 <p className="text-sm font-extralight text-muted text-left leading-relaxed tracking-wider">{benefit.description}</p>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
                 </section>
             </div>
-        </section>
+        </motion.section>
     )
 }
 
 function LookingForSection() {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                staggerChildren: 0.15
+            }
+        }
+    };
+
+    const headerVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 50 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const featureVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 30 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
     return (
-        <section className="py-24 px-4 relative">
+        <motion.section 
+            className="py-24 px-4 relative"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+        >
             <div className=" flex flex-col items-center gap-14">
                 {/* header */}
-                <div className=" flex items-center justify-center">
+                <motion.div className=" flex items-center justify-center" variants={headerVariants}>
                     <h2 className="text-3xl font-light tracking-wide text-foreground mb-4 ">Who we’re looking for?</h2>
-                </div>
-                <div className="relative grid grid-cols-1 md:grid-cols-2 max-w-6xl mx-auto">
+                </motion.div>
+                <motion.div className="relative grid grid-cols-1 md:grid-cols-2 max-w-6xl mx-auto" variants={containerVariants}>
                     {/* Vertical gradient border */}
                     <div
                         className="absolute top-0 bottom-0 left-1/2 w-px pointer-events-none opacity-30"
@@ -169,37 +258,81 @@ function LookingForSection() {
                     <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-foreground/90 -translate-x-1/2 -translate-y-1/2 z-10" />
 
                     {looking.map((feature, index) => (
-                        <div key={index} className={cn("flex flex-col items-center justify-center gap-3 p-8",
-                            index === 0 || index === 2 ? 'items-end' : 'items-start')}>
+                        <motion.div 
+                            key={index} 
+                            className={cn("flex flex-col items-center justify-center gap-3 p-8",
+                            index === 0 || index === 2 ? 'items-end' : 'items-start')}
+                            variants={featureVariants}
+                        >
                             <p className="text-base tracking-wide text-foreground/80 font-light leading-relaxed max-w-2xs">{feature.description}</p>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </motion.section>
     )
 }
 
 function OpportunitySection(){
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const headerVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 50 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const opportunityVariants = {
+        hidden: { 
+            opacity: 0, 
+            x: -30 
+        },
+        visible: { 
+            opacity: 1, 
+            x: 0
+        }
+    };
+
     return(
-        <div className=" text-foreground flex items-center justify-center p-8">
-      <div className="max-w-4xl w-full">
+        <motion.div 
+            className=" text-foreground flex items-center justify-center p-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+        >
+      <motion.div className="max-w-4xl w-full" variants={containerVariants}>
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div className="text-center mb-16" variants={headerVariants}>
           <h1 className="text-5xl font-light mb-4">
             Opportunities at Somatiq
           </h1>
           <p className="text-xl font-light text-gray-300">
             Let's Build The Future Of Radiology, Together
           </p>
-        </div>
+        </motion.div>
 
         {/* Opportunities List */}
-        <div className="space-y-6">
+        <motion.div className="space-y-6" variants={containerVariants}>
           {opportunities.map((opportunity, index) => (
-            <div
+            <motion.div
               key={index}
               className={cn("border-t border-muted pt-6", index === 0 ? "border-t-0" : "")}
+              variants={opportunityVariants}
             >
               <h2 className="text-lg font-light tracking-wide mb-2">
                 {opportunity.title}
@@ -207,23 +340,76 @@ function OpportunitySection(){
               <p className="text-muted font-extralight tracking-wide text-sm">
                 {opportunity.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
     )
 }
 
 function JoinusSection() {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                staggerChildren: 0.2
+            }
+        }
+    };
+
+    const headerVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 50 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const quoteVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 30 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const contactVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 30 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
     return (
-        <section className="py-20 px-4 relative">
-            <div className="text-center mb-16">
+        <motion.section 
+            className="py-20 px-4 relative"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+        >
+            <motion.div className="text-center mb-16" variants={headerVariants}>
                 <h2 className="text-3xl md:text-4xl font-light tracking-wide text-foreground mb-4">
                     Join us Today
                 </h2>
-            </div>
-            <section className="relative w-full overflow-hidden container max-w-full h-[50vh]">
+            </motion.div>
+            <motion.section 
+                className="relative w-full overflow-hidden container max-w-full h-[50vh]"
+                variants={containerVariants}
+            >
                 <div className="grid grid-cols-3 grid-rows-2 relative w-full h-full z-10">
                     {/* Vertical gradient borders */}
                     <div
@@ -266,15 +452,15 @@ function JoinusSection() {
                     />
                     {/* Row 1 */}
                     <div className="col-span-1"></div>
-                    <div className="col-span-1 flex items-end justify-center pb-10">
+                    <motion.div className="col-span-1 flex items-end justify-center pb-10" variants={quoteVariants}>
                         <p className="text-xl text-foreground leading-relaxed font-extralight text-center tracking-wide p-2 max-w-sm">
-                            “If you’re a radiologist who values precision, efficiency, and purpose - Somatiq is your next home”</p>
-                    </div>
+                            "If you're a radiologist who values precision, efficiency, and purpose - Somatiq is your next home"</p>
+                    </motion.div>
                     <div className="col-span-1"></div>
 
                     {/* Row 2 */}
                     <div className="col-span-1"></div>
-                    <div className="max-w-4xl mx-auto text-center space-y-4">
+                    <motion.div className="max-w-4xl mx-auto text-center space-y-4" variants={contactVariants}>
                         {/* Apply Now Line */}
                            <div className="flex items-center justify-center gap-2 text-sm pt-8">
                             <div className="grid grid-cols-2 gap-3">
@@ -313,11 +499,11 @@ function JoinusSection() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                     <div className="col-span-1"></div>
                 </div>
-            </section>
-        </section>
+            </motion.section>
+        </motion.section>
     )
 }
 

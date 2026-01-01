@@ -1,9 +1,66 @@
+import { motion } from 'framer-motion';
 import heroimage from "@/assets/careers/careers-hero.png";
 import bgimage1 from "@/assets/about-us/about-us-left.png";
 import bgimage2 from "@/assets/about-us/about-us-right.png";
 
 
 export default function HeroSection() {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.8,
+                staggerChildren: 0.2,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    const titleVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 50 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const subtitleVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 30 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const descriptionVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 30 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
+    const missionVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 30 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0
+        }
+    };
+
     return (
 
         <section className="relative w-full overflow-hidden flex items-center justify-center container max-w-full h-[90vh] -mt-16">
@@ -37,22 +94,35 @@ export default function HeroSection() {
                
             </div>
 
-             <div className=" flex flex-col items-center justify-center gap-12">
+             <motion.div 
+                className=" flex flex-col items-center justify-center gap-12"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={containerVariants}
+            >
                     <div className=" flex flex-col items-center">
                         <img src={heroimage} alt="Hero Image" className="w-1/3 h-fullobject-cover" />
                     </div>
 
-                    <div className=" flex flex-col items-center justify-center gap-6">
-                        <h1 className="text-5xl font-normal tracking-wide text-foreground">Careers at Somatiq</h1>
-                        <p className="text-xl text-foreground font-extralight tracking-wide">
+                    <motion.div 
+                        className=" flex flex-col items-center justify-center gap-6"
+                        variants={containerVariants}
+                    >
+                        <motion.h1 className="text-5xl font-normal tracking-wide text-foreground" variants={titleVariants}>
+                            <label className='text-gradient'>Careers at Somatiq</label>
+                        </motion.h1>
+                        <motion.p className="text-xl text-foreground font-extralight tracking-wide" variants={subtitleVariants}>
                             For Radiologists — Shape the Future of Radiology & AI
-                        </p>
-                        <span className="text-sm text-muted font-light tracking-wider max-w-xl">
-                            Join a growing network of radiologists who are transforming diagnostics through innovation and collaboration. Whether you’re a seasoned radiologist or early in your career, Somatiq provides an ecosystem built by radiologists, for radiologists.
-                        </span>
-                        <span className="text-sm text-foreground font-light tracking-wide">Our mission: faster, smarter, and more fulfilling reporting.</span>
-                    </div>
-                </div>
+                        </motion.p>
+                        <motion.span className="text-sm text-muted font-light tracking-wider max-w-xl" variants={descriptionVariants}>
+                            Join a growing network of radiologists who are transforming diagnostics through innovation and collaboration. Whether you're a seasoned radiologist or early in your career, Somatiq provides an ecosystem built by radiologists, for radiologists.
+                        </motion.span>
+                        <motion.span className="text-sm text-foreground font-light tracking-wide" variants={missionVariants}>
+                            Our mission: faster, smarter, and more fulfilling reporting.
+                        </motion.span>
+                    </motion.div>
+                </motion.div>
 
 
         </section>

@@ -8,10 +8,12 @@ import Contact from './pages/contact';
 import './index.css';
 import Teleradiology from './pages/teleradiology';
 import Careers from './pages/careers';
+import ScrollToTop from './components/common/scroll-to-top';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />

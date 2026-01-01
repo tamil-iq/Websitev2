@@ -1,5 +1,5 @@
-import bgimage1 from "@/assets/img/teleradiology/hero-section.png";
-import bgimage2 from "@/assets/img/teleradiology/hero-section.png";
+import bgimage1 from "@/assets/images/teleradiology/hero-section.png";
+import bgimage2 from "@/assets/images/teleradiology/hero-section.png";
 
 
 export default function HeroSection() {
