@@ -103,7 +103,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="pt-6 text-center">
           <p className="text-foreground/80 font-extralight tracking-wide text-sm">
-            © 2025 Somatiq AI Labs Private Limited. All Rights Reserved.
+            © 2026 Somatiq AI Tech Private Limited. All Rights Reserved.
           </p>
         </div>
       </div>

@@ -108,7 +108,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
     const currentContent = tabContents[currentTab];
 
     return (
-        <section className="relative py-24 px-6 overflow-hidden bg-background">
+        <section id="everything-section" className="relative py-24 px-6 overflow-hidden bg-background">
             <div className={cn(
                 "pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0855b4]/25 to-transparent transition-opacity duration-300",
                 hideLocalGradient ? "opacity-0" : "opacity-100"
@@ -119,11 +119,11 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                 {/* Header */}
                 <div className="text-center mb-10 flex flex-col gap-7">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-foreground ">
-                        Everything you need. Nothing you don't.
+                        Everything you need. Built for modern radiology.
                     </h2>
-                    <p className='text-muted font-extralight tracking-wide max-w-3xl mx-auto'>
+                    {/* <p className='text-muted font-extralight tracking-wide max-w-3xl mx-auto'>
                         A complete radiology workspace—viewer, reporting, collaboration—in one unified interface. Intelligence woven into every interaction, native to the workflow from the start.
-                    </p>
+                    </p> */}
 
                     {/* Tabs */}
                     <div className=' flex items-center justify-center'>
@@ -140,15 +140,15 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                         WebkitTapHighlightColor: "transparent",
                                     }}
                                 >
-                                    {activeTab === index && (
+                                    {/* {activeTab === index && (
                                         <motion.span
                                             layoutId="bubble"
                                             className="absolute inset-0 z-10 bg-primary/20"
                                             style={{ borderRadius: 6 }}
                                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                         />
-                                    )}
-                                    <span className={activeTab === index ? "text-foreground font-normal" : "text-muted"}>
+                                    )} */}
+                                    <span className={activeTab === index ? "text-foreground font-normal" : "text-foreground"}>
                                         {label}
                                     </span>
                                 </motion.button>

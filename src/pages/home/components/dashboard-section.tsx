@@ -35,13 +35,13 @@ const metricsData = [
 
 const portalData = [
   {
-    label: "Secure Instant Scans & Reports",
-    description: "Patients can securely view their collection of all their medical reports and scans from anywhere on any device instantly.",
+    label: "Secure and Instant access",
+    description: "View, store and share reports/scans from anywhere , on any device.",
     image: scanreports,
   },
   {
-    label: "AI powered Somatiq Ally",
-    description: "Translating complex medical data into simple, clear language for everyone. Somatiq Ally for your medical queries and extended support.",
+    label: "Ask Somatiq AI",
+    description: "Explains radiology reports in simple language. Helps patients understand their diagnosis better.",
     image: chatui,
   },
   {
@@ -59,7 +59,7 @@ const portalData = [
 const features = [
   {
     icon: ShieldCheck,
-    title: "HIPAA Compliant Architecture",
+    title: "HIPAA Compliant Architecture <br/> ISO certified",
   },
   {
     icon: UserCog,
@@ -144,7 +144,7 @@ export function DashboardSection() {
   const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation(0.1)
 
   return (
-    <div>
+    <div id="features-section">
       {/* dashboard section */}
       <section className="py-24 px-4 relative">
         <div 
@@ -155,11 +155,12 @@ export function DashboardSection() {
           )}
         >
           <h2 className="text-3xl md:text-4xl font-light tracking-wide text-foreground mb-4">
-            See what matters. Act on what's urgent.
+            <label className="text-gradient">See what matters. Stay in control.</label>
+            {/* Act on what's urgent. */}
 
           </h2>
-          <p className="text-muted font-extralight max-w-xl mx-auto">
-            Real-time visibility into volumes, turnaround times, and utilization—across every site, every radiologist, every modality.
+          <p className="text-muted font-extralight max-w-sm mx-auto">
+          Visibility into volumes, turnaround times, and utilization across the radiology operations.
           </p>
         </div>
 
@@ -272,7 +273,7 @@ export function ComplianceSection() {
             imageVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
           )}
         >
-          <img src={portal} className="xl:max-w-6xl xl:mx-auto lg:mx-10" alt="" />
+          {/* <img src={portal} className="xl:max-w-6xl xl:mx-auto lg:mx-10" alt="" /> */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent max-w-7xl mx-auto pointer-events-none"></div>
         </div>
         <div 
@@ -292,7 +293,7 @@ export function ComplianceSection() {
                   key={item.label}
                   ref={itemRef}
                   className={cn(
-                    "metrics-wrapper border border-border p-10 pl-5 relative transition-all duration-700 transform",
+                    "metrics-wrapper border border-border p-10 pl-5  relative transition-all duration-700 transform",
                     index === 1 ? 'pl-12' : '', 
                     index === 0 ? 'border-r-0 border-l-0' : 'border-r-0',
                     itemVisible ? "opacity-100 translate-x-0" : index === 0 ? "opacity-0 -translate-x-10" : "opacity-0 translate-x-10"
@@ -306,12 +307,14 @@ export function ComplianceSection() {
                       <div className="absolute bottom-0 right-0 w-1 h-1 bg-foreground/90 z-1 translate-y-1/2 translate-x-1/2" />
                     </>
                   )}
+                  <div className="flex flex-col gap-1">
                   <label className="text-2xl font-light text-foreground mb-3">
                     {item.label}
                   </label>
                   <p className="text-muted font-extralight text-base mb-4 tracking-wide">
                     {item.description}
                   </p>
+                  </div>
 
                   {item.image && (
                     <img
@@ -396,7 +399,10 @@ export function ComplianceSection() {
                 <div className="flex h-24 w-24 items-center justify-center rounded-full border-[1.5px] border-muted">
                   <feature.icon className="h-10 w-10 text-muted" strokeWidth={2}/>
                 </div>
-                <p className="text-center text-sm tracking-wider text-foreground font-light">{feature.title}</p>
+                <p
+                  className="text-center text-sm tracking-wider text-foreground font-light"
+                  dangerouslySetInnerHTML={{ __html: feature.title }}
+                />
               </div>
             )
           })}
@@ -433,7 +439,8 @@ export function PortalSection() {
           )}
         >
           <p className="text-muted font-extralight text-sm tracking-wider text-center">
-            Empowering Patients with Secure, Instant Access to <br /> Scans and Reports
+            {/* Empowering Patients with Secure, Instant Access to <br /> Scans and Reports */}
+            patient can book appointments, view reports, and manage their health records.
           </p>
         </div>
       </div>

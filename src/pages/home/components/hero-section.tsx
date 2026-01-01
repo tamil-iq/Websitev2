@@ -36,7 +36,7 @@ const TrustBadge = () => {
         <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
       </span>
       <span className="text-sm text-muted font-light tracking-wide">
-        Trusted by India's leading diagnostic networks
+        Trusted by India's leading diagnostic/hospital networks
       </span>
     </motion.div>
   );
@@ -99,9 +99,9 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           className="max-w-xl mx-auto text-base md:text-lg text-muted leading-relaxed tracking-wide font-light"
         >
-          From patient registration to report delivery—unified RIS-PACS with
-          intelligence woven into every workflow. One platform. One vendor.
-          Complete focus on diagnosis.
+          From patient registration to final report — unified RIS-PACS with native
+          intelligence at every step. <br/><span className="font-light text-foreground tracking-wide"> One platform. One vendor.
+          Complete focus on diagnosis.</span>
         </motion.p>
 
         {/* CTA buttons */}
@@ -115,7 +115,12 @@ const HeroSection = () => {
           <AnimatedButton onClick={() => console.log('Schedule demo clicked')}>
             schedule a demo
           </AnimatedButton>
-          <RippleButton onClick={() => console.log('Explore platform clicked')} >
+          <RippleButton onClick={() => {
+            const everythingSection = document.getElementById('everything-section');
+            if (everythingSection) {
+              everythingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }} >
             <div className="flex items-center gap-2">
               <span>Explore platform </span>
               <ChevronsRightIcon/>
