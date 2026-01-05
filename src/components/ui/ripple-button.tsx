@@ -57,7 +57,7 @@ const RippleButton = React.forwardRef<HTMLButtonElement, RippleButtonProps>(
     return (
       <button
         className={cn(
-          "relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border-[1px]  px-9 py-4 text-center text-foreground font-light tracking-wider uppercase text-[15px]",
+          "relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border-[1px] px-4 py-3 text-center text-foreground font-light tracking-wider uppercase text-sm sm:px-6 sm:py-3 sm:text-sm md:px-8 md:py-4 md:text-[15px] lg:px-9 lg:py-4 lg:text-[15px]",
           className,
         )}
         onClick={handleClick}

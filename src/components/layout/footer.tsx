@@ -17,14 +17,14 @@ const Footer = () => {
         }}
       />
 
-      <div className="relative z-10 max-w-4/5 mx-auto px-6 py-12">
+      <div className="relative z-10 xl:max-w-4/5 lg:mx-2 xl:mx-auto px-6 py-12">
         {/* Scroll to top */}
         <button
           onClick={scrollToTop}
           className="flex items-center gap-2 mx-auto mb-16 text-footer-muted hover:text-footer-foreground transition-colors group"
         >
           <ChevronsUp className="w-4 h-4 animate-bounce-slow" />
-          <span className="text-sm tracking-wider font-extralight">scroll to the top</span>
+          <span className="text-sm tracking-wider font-extralight ">scroll to the top</span>
           <ChevronsUp className="w-4 h-4 animate-bounce-slow" />
         </button>
 

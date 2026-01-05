@@ -1,18 +1,20 @@
 import bgimage1 from "@/assets/teleradiology/hero-left.png";
 import bgimage2 from "@/assets/teleradiology/hero-section.png";
 import { motion } from "framer-motion";
+import { HeroSectionMobile } from "@/pages/teleradiology/components/hero-section-mobile";
 
 
 export default function HeroSection() {
     return (
         <motion.section 
-            className="relative w-full overflow-hidden flex items-center justify-center container max-w-full h-[90vh] -mt-16"
+            className=""
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
         >
+            <div className="relative w-full overflow-hidden hidden md:flex items-center justify-center container max-w-full h-[90vh] -mt-16">
             {/* Background images with blur */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
                 {/* Top gradient overlay */}
                 <div
                     className="absolute inset-0"
@@ -40,35 +42,35 @@ export default function HeroSection() {
                 />
             </div>
 
-            <div className="grid xl:grid-cols-3 lg:grid-cols-4 grid-rows-4 relative w-full h-full z-10">
+            <div className="grid xl:grid-cols-3 lg:grid-cols-4 md:grid-rows-4 relative w-full h-full z-10 ">
                 {/* Vertical gradient borders */}
                 <div 
-                    className="absolute top-0 bottom-0 xl:left-[30%] lg:left-1/4 w-px pointer-events-none opacity-30"
+                    className="absolute top-0 bottom-0 xl:left-[30%] lg:left-1/4 w-px pointer-events-none opacity-30 hidden md:block"
                     style={{
                         background: 'linear-gradient(to bottom, rgba(255, 123, 229, 0) 13%, rgba(255, 123, 229, 1) 27%, rgba(255, 123, 229, 1) 73%, rgba(255, 123, 229, 0) 89%)'
                     }}
                 />
                 <div 
-                    className="absolute top-0 bottom-0 xl:right-[30%] lg:right-1/4  w-px pointer-events-none opacity-30 hidden lg:block"
+                    className="absolute top-0 bottom-0 xl:right-[30%] lg:right-1/4  w-px pointer-events-none opacity-30 hidden md:block"
                     style={{
                         background: 'linear-gradient(to bottom, rgba(255, 123, 229, 0) 13%, rgba(255, 123, 229, 1) 27%, rgba(255, 123, 229, 1) 73%, rgba(255, 123, 229, 0) 89%)'
                     }}
                 />
                 {/* Horizontal gradient borders */}
                 <div 
-                    className="absolute left-0 right-0 top-1/4 h-px pointer-events-none opacity-30"
+                    className="absolute left-0 right-0 top-1/4 h-px pointer-events-none opacity-30 hidden md:block"
                     style={{
                         background: 'linear-gradient(to right, rgba(255, 123, 229, 0) 13%, rgba(255, 123, 255, 1) 21%, rgba(255, 123, 229, 1) 79%, rgba(255, 123, 229, 0) 87%)'
                     }}
                 />
                 <div 
-                    className="absolute left-0 right-0 top-2/4 h-px pointer-events-none opacity-30"
+                    className="absolute left-0 right-0 top-2/4 h-px pointer-events-none opacity-30 hidden md:block"
                     style={{
                         background: 'linear-gradient(to right, rgba(255, 123, 229, 0) 13%, rgba(255, 123, 255, 1) 21%, rgba(255, 123, 229, 1) 79%, rgba(255, 123, 229, 0) 87%)'
                     }}
                 />
                 <div 
-                    className="absolute left-0 right-0 top-3/4 h-px pointer-events-none opacity-30"
+                    className="absolute left-0 right-0 top-3/4 h-px pointer-events-none opacity-30 hidden md:block"
                     style={{
                         background: 'linear-gradient(to right, rgba(255, 123, 229, 0) 13%, rgba(255, 123, 255, 1) 21%, rgba(255, 123, 229, 1) 79%, rgba(255, 123, 229, 0) 87%)'
                     }}
@@ -76,21 +78,21 @@ export default function HeroSection() {
                 {/* Intersection points */}
                 {/* Vertical line 1 (1/4 on lg) intersections */}
                 <div 
-                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:left-[30%] lg:left-[25%]"
+                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:left-[30%] lg:left-[25%] hidden md:block"
                     style={{
                         top: '25%',
                         transform: 'translate(-50%, -50%)'
                     }}
                 />
                 <div 
-                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:left-[30%] lg:left-[25%]"
+                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:left-[30%] lg:left-[25%] hidden md:block"
                     style={{
                         top: '50%',
                         transform: 'translate(-50%, -50%)'
                     }}
                 />
                 <div 
-                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:left-[30%] lg:left-[25%]"
+                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:left-[30%] lg:left-[25%] hidden md:block"
                     style={{
                         top: '75%',
                         transform: 'translate(-50%, -50%)'
@@ -98,21 +100,21 @@ export default function HeroSection() {
                 />
                 {/* Vertical line 3 (3/4 on lg) intersections - only on large screens */}
                 <div 
-                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:right-[29.8%] lg:right-[24.7%] hidden lg:block"
+                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:right-[29.8%] lg:right-[24.7%] hidden md:block"
                     style={{
                         top: '25%',
                         transform: 'translate(-50%, -50%)'
                     }}
                 />
                 <div 
-                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:right-[29.8%] lg:right-[24.7%] hidden lg:block"
+                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:right-[29.8%] lg:right-[24.7%] hidden md:block"
                     style={{
                         top: '50%',
                         transform: 'translate(-50%, -50%)'
                     }}
                 />
                 <div 
-                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:right-[29.8%] lg:right-[24.7%] hidden lg:block"
+                    className="absolute w-1 h-1 bg-foreground/90 pointer-events-none xl:right-[29.8%] lg:right-[24.7%] hidden md:block"
                     style={{
                         top: '75%',
                         transform: 'translate(-50%, -50%)'
@@ -138,7 +140,7 @@ export default function HeroSection() {
                        animate={{ opacity: 1, y: 0 }}
                        transition={{ duration: 1, delay: 0.3 }}
                    >
-                    <label className="text-gradient text-[50px]">24/7 Expert Teleradiology</label>
+                    <label className="text-gradient md:text-[50px] text-3xl">24/7 Expert Teleradiology</label>
                    </motion.h1>
                    <motion.p 
                        className="text-xl text-white/80 uppercase tracking-wider font-light"
@@ -146,7 +148,7 @@ export default function HeroSection() {
                        animate={{ opacity: 1, y: 0 }}
                        transition={{ duration: 1, delay: 0.4 }}
                    >
-                    <label className="text-gradient">TRUSTED. FAST. UNIFIED.</label>
+                    <label className="text-gradient text-base">TRUSTED. FAST. UNIFIED.</label>
                    </motion.p>
                 </motion.div>
                 <div className="col-span-1 xl:hidden lg:block"></div>
@@ -171,6 +173,9 @@ export default function HeroSection() {
                 <div className="col-span-1"></div>
                 <div className="col-span-1 xl:hidden lg:block"></div>
             </div>
+            </div>
+            <HeroSectionMobile />
+           
         </motion.section>
     );
 }

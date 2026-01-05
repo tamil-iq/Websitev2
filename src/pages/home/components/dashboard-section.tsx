@@ -170,11 +170,11 @@ export function DashboardSection() {
             imageVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
           )}
         >
-          <img src={dashboard} alt="" className=" xl:max-w-7xl mx-auto" />
+          <img src={dashboard} alt="" className="xl:max-w-7xl mx-auto" />
         </div>
 
         <div className="feature-section container mx-auto mt-16">
-          <div className="grid grid-cols-2 gap-x-0 max-w-6xl mx-auto ">
+          <div className="grid md:grid-cols-2 gap-x-0 max-w-6xl mx-auto ">
 
             {/* Top Row - Sections with images */}
             {metricsData.slice(0, 2).map((item, index) => {
@@ -184,25 +184,25 @@ export function DashboardSection() {
                   key={item.label}
                   ref={itemRef}
                   className={cn(
-                    "metrics-wrapper border border-border p-10 pl-5 relative transition-all duration-700 transform",
-                    index === 1 ? 'pl-12' : '', 
-                    index === 0 ? 'border-r-0 border-l-0' : 'border-r-0',
+                    "metrics-wrapper md:border md:border-border md:p-10 md:pl-5 py-6 pl-0 relative transition-all duration-700 transform max-md:border-none",
+                    index === 1 ? 'md:pl-12 pl-0' : '', 
+                    index === 0 ? 'md:border-r-0 md:border-l-0 border-r border-l' : 'md:border-r-0 border-r',
                     itemVisible ? "opacity-100 translate-x-0" : index === 0 ? "opacity-0 -translate-x-10" : "opacity-0 translate-x-10"
                   )}
                 >
                   {index === 0 && (
                     <>
                       {/* Top right dot */}
-                      <div className="absolute top-0 right-0 w-1 h-1 bg-foreground/90 z-1 -translate-y-1/2 translate-x-1/2" />
+                      <div className="absolute top-0 right-0 w-1 h-1 bg-foreground/90 z-1 -translate-y-1/2 translate-x-1/2 hidden md:block" />
                       {/* Bottom right dot */}
-                      <div className="absolute bottom-0 right-0 w-1 h-1 bg-foreground/90 z-1 translate-y-1/2 translate-x-1/2" />
+                      <div className="absolute bottom-0 right-0 w-1 h-1 bg-foreground/90 z-1 translate-y-1/2 translate-x-1/2 hidden md:block" />
                     </>
                   )}
                   <div className="flex flex-col gap-2">
                   <label className="text-2xl font-light text-foreground">
                     {item.label}
                   </label>
-                  <p className="text-muted font-extralight text-base mb-4 tracking-wide">
+                  <p className="text-muted font-extralight md:text-base text-sm mb-4 tracking-wide">
                     {item.description}
                   </p>
                   </div>
@@ -225,15 +225,15 @@ export function DashboardSection() {
                   key={item.label}
                   ref={itemRef}
                   className={cn(
-                    "metrics-wrapper p-6 flex flex-col transition-all duration-700 transform",
-                    index === 1 ? 'pl-12' : '',
+                    "metrics-wrapper md:p-6 px-0 py-6 flex flex-col transition-all duration-700 transform ",
+                    index === 1 ? 'md:pl-12 pl-0 ' : '',
                     itemVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                   )}
                 >
                   <label className="text-2xl font-light text-foreground mb-3">
                     {item.label}
                   </label>
-                  <p className="text-muted font-extralight text-base tracking-wide">
+                  <p className="text-muted font-extralight md:text-base text-sm tracking-wide">
                     {item.description}
                   </p>
                 </div>
@@ -273,7 +273,7 @@ export function ComplianceSection() {
           )}
         >
           <img src={portal} className="xl:max-w-6xl xl:mx-auto lg:mx-10" alt="" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent max-w-7xl mx-auto pointer-events-none"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent max-w-7xl mx-auto pointer-events-none"></div>
         </div>
         <div 
           ref={portalTitleRef}
@@ -282,7 +282,7 @@ export function ComplianceSection() {
             portalTitleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}
         >
-          <div className="grid grid-cols-2 gap-x-0 max-w-6xl mx-auto ">
+          <div className="grid md:grid-cols-2 gap-x-0 max-w-6xl mx-auto ">
 
             {/* Top Row - Sections with images */}
             {portalData.slice(0, 2).map((item, index) => {
@@ -292,24 +292,24 @@ export function ComplianceSection() {
                   key={item.label}
                   ref={itemRef}
                   className={cn(
-                    "metrics-wrapper border border-border p-10 pl-5 relative transition-all duration-700 transform",
-                    index === 1 ? 'pl-12' : '', 
-                    index === 0 ? 'border-r-0 border-l-0' : 'border-r-0',
+                    "metrics-wrapper md:border border-border md:p-10 md:pl-5 px-2 py-6 relative transition-all duration-700 transform max-md-border-none",
+                    index === 1 ? 'md:pl-12 px-2' : '', 
+                    index === 0 ? 'md:border-r-0 md:border-l-0 border-r-0 border-l-0' : 'border-r-0',
                     itemVisible ? "opacity-100 translate-x-0" : index === 0 ? "opacity-0 -translate-x-10" : "opacity-0 translate-x-10"
                   )}
                 >
                   {index === 0 && (
                     <>
                       {/* Top right dot */}
-                      <div className="absolute top-0 right-0 w-1 h-1 bg-foreground/90 z-1 -translate-y-1/2 translate-x-1/2" />
+                      <div className="absolute top-0 right-0 w-1 h-1 bg-foreground/90 z-1 -translate-y-1/2 translate-x-1/2 hidden md:block" />
                       {/* Bottom right dot */}
-                      <div className="absolute bottom-0 right-0 w-1 h-1 bg-foreground/90 z-1 translate-y-1/2 translate-x-1/2" />
+                      <div className="absolute bottom-0 right-0 w-1 h-1 bg-foreground/90 z-1 translate-y-1/2 translate-x-1/2 hidden md:block" />
                     </>
                   )}
                   <label className="text-2xl font-light text-foreground mb-3">
                     {item.label}
                   </label>
-                  <p className="text-muted font-extralight text-base mb-4 tracking-wide">
+                  <p className="text-muted font-extralight md:text-base text-sm mb-4 tracking-wide">
                     {item.description}
                   </p>
 
@@ -332,15 +332,15 @@ export function ComplianceSection() {
                   key={item.label}
                   ref={itemRef}
                   className={cn(
-                    "metrics-wrapper p-6 flex flex-col transition-all duration-700 transform",
-                    index === 1 ? 'pl-12' : '',
+                    "metrics-wrapper md:p-6 px-2 py-6 flex flex-col transition-all duration-700 transform",
+                    index === 1 ? 'md:pl-12 px-2' : '',
                     itemVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                   )}
                 >
                   <label className="text-2xl font-light text-foreground mb-3">
                     {item.label}
                   </label>
-                  <p className="text-muted font-extralight text-base tracking-wide">
+                  <p className="text-muted font-extralight md:text-base text-sm tracking-wide">
                     {item.description}
                   </p>
                 </div>
@@ -365,7 +365,7 @@ export function ComplianceSection() {
           <h2 className="text-3xl md:text-4xl font-light tracking-wide text-foreground mb-4">
             Security & Compliance
           </h2>
-          <p className="text-muted font-extralight max-w-xl mx-auto">
+          <p className="text-muted font-extralight max-w-xl md:text-base text-sm mx-auto">
             Highest standards of data protection for <br /> healthcare organisations and their patients
           </p>
         </div>
@@ -377,7 +377,7 @@ export function ComplianceSection() {
           )}
         >
           {/* Center intersection rectangle */}
-          <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-foreground/90 -translate-x-1/2 -translate-y-1/2 z-10" />
+          <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-foreground/90 -translate-x-1/2 -translate-y-1/2 z-10 hidden md:block" />
           {features.map((feature, index) => {
             const { ref: itemRef, isVisible: itemVisible } = useScrollAnimation(0.1)
             return (
@@ -385,11 +385,11 @@ export function ComplianceSection() {
                 key={feature.title}
                 ref={itemRef}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-3 p-10 border border-border transition-all duration-700 transform",
-                  index === 0 ? 'border-0' : '', 
-                  index === 1 ? 'border-r-0 border-t-0 border-b-0' : '', 
-                  index === 2 ? 'border-l-0 border-b-0 border-r-0' : '', 
-                  index === 3 ? 'border-r-0 border-b-0' : '',
+                  "flex flex-col items-center justify-center gap-3 p-10 md:border border-border transition-all duration-700 transform max-md-border-none",
+                  index === 0 ? 'md:border-0 border-0' : '', 
+                  index === 1 ? 'md:border-r-0 md:border-t-0 md:border-b-0' : '', 
+                  index === 2 ? 'md:border-l-0 md:border-b-0 md:border-r-0' : '', 
+                  index === 3 ? 'md:border-r-0 md:border-b-0' : '',
                   itemVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
                 )}
               >
@@ -421,7 +421,7 @@ export function PortalSection() {
             titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}
         >
-          <label className="text-[40px] font-light text-foreground tracking-normal">
+          <label className="md:text-[40px] text-3xl font-light text-foreground tracking-normal">
             Patient Engagement Portal
           </label>
         </div>
@@ -432,7 +432,7 @@ export function PortalSection() {
             descVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}
         >
-          <p className="text-muted font-extralight text-sm tracking-wider text-center">
+          <p className="text-muted font-extralight md:text-base text-sm tracking-wider text-center">
             Empowering Patients with Secure, Instant Access to <br /> Scans and Reports
           </p>
         </div>

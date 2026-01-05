@@ -6,7 +6,7 @@ import { RippleButton } from "@/components/ui/ripple-button";
 import { ChevronsRightIcon } from '@/components/ui/right-icon';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-
+import { TrustBadge } from '@/components/common/trust-badge';
 
 
 const trustedCompanies = [
@@ -19,28 +19,6 @@ const trustedCompanies = [
 
 
 
-const TrustBadge = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <motion.div 
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 border border-border backdrop-blur-sm"
-    >
-      <span className="relative flex h-2 w-2">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-      </span>
-      <span className="text-sm text-muted font-light tracking-wide">
-        Trusted by India's leading diagnostic networks
-      </span>
-    </motion.div>
-  );
-};
 
 
 
@@ -60,15 +38,15 @@ const HeroSection = () => {
   const logosInView = useInView(logosRef, { once: true, margin: "-50px" });
 
   return (
- <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden ">
+ <section className="relative lg:min-h-screen flex flex-col items-start lg:items-center pt-18 lg:pt-0 lg:justify-center px-4 sm:px-6 overflow-hidden ">
       {/* Gradient background effect */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1200px] h-[400px] bg-primary/3 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] sm:w-[800px] sm:h-[600px] bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] sm:w-[1200px] sm:h-[400px] bg-primary/3 rounded-full blur-3xl" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 xl:max-w-7xl lg:max-w-4xl mx-auto text-center space-y-4">
+      <div className="relative z-10 w-full lg:max-w-7xl mx-auto text-center space-y-4 lg:px-4">
         {/* Trust badge */}
         <motion.div 
           ref={trustBadgeRef}
@@ -76,7 +54,7 @@ const HeroSection = () => {
           animate={trustBadgeInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <TrustBadge />
+          <TrustBadge description="Trusted by India's leading diagnostic networks"/>
         </motion.div>
 
         {/* Main headline */}
@@ -85,9 +63,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={headlineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight pb-2 "
+          className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight pb-2 "
         >
-          <span className="block text-gradient">One <span>Intelligent</span> platform for your</span>
+          <span className="block text-gradient ">One <span>Intelligent</span> platform for your</span>
           <span className="block mt-2 text-gradient">entire radiology workflow</span>
         </motion.h1>
 
@@ -97,7 +75,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={subheadlineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-          className="max-w-xl mx-auto text-base md:text-lg text-muted leading-relaxed tracking-wide font-light"
+          className="max-w-xs hidden lg:block sm:max-w-sm md:max-w-xl mx-auto text-sm sm:text-base md:text-lg text-muted leading-relaxed tracking-wide font-light"
         >
           From patient registration to report delivery—unified RIS-PACS with
           intelligence woven into every workflow. One platform. One vendor.
@@ -110,7 +88,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={buttonsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-4"
         >
           <AnimatedButton onClick={() => console.log('Schedule demo clicked')}>
             schedule a demo
@@ -129,23 +107,23 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={logosInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
-          className="pt-16 md:pt-24"
+          className="pt-12 sm:pt-16 md:pt-24"
         >
-          <div className="w-full max-w-full overflow-x-hidden mx-auto px-4">
+          <div className="w-full max-w-full overflow-x-hidden mx-auto px-2 sm:px-4">
                   <div className="text-center mb-8">
-                    <label  className="text-muted font-extralight text-xl tracking-wide">
+                    <label  className="text-muted font-extralight text-lg sm:text-xl tracking-wide">
                       Trusted by:
                     </label>
                   </div>
-                  <Marquee className="w-full max-w-full min-h-[120px]">
+                  <Marquee className="w-full max-w-full min-h-[100px] sm:min-h-[120px]">
                     <MarqueeFade side="left" />
                     <MarqueeFade side="right" />
                     <MarqueeContent>
                       {trustedCompanies.map((company, index) => (
-                        <MarqueeItem className="h-24 w-auto px-8 flex items-center justify-center" key={index}>
+                        <MarqueeItem className="h-16 sm:h-20 md:h-24 w-auto px-4 sm:px-6 md:px-8 flex items-center justify-center" key={index}>
                           <img
                             alt={company.name}
-                            className="h-24 w-auto max-w-[200px] object-contain grayscale brightness-0 invert"
+                            className="h-16 sm:h-20 md:h-24 w-auto max-w-[150px] sm:max-w-[180px] md:max-w-[200px] object-contain grayscale brightness-0 invert"
                             src={company.logo}
                             onError={() => {
                               console.error('Failed to load logo:', company.logo);

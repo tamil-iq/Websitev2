@@ -108,9 +108,9 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
     const currentContent = tabContents[currentTab];
 
     return (
-        <section className="relative py-24 px-6 overflow-hidden bg-background">
+        <section className="relative px-2 py-14 lg:py-24 overflow-hidden bg-background">
             <div className={cn(
-                "pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0855b4]/25 to-transparent transition-opacity duration-300",
+                "pointer-events-none absolute inset-0 bg-linear-to-b from-[#0855b4]/25 to-transparent transition-opacity duration-300",
                 hideLocalGradient ? "opacity-0" : "opacity-100"
             )} />
 
@@ -118,16 +118,16 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
 
                 {/* Header */}
                 <div className="text-center mb-10 flex flex-col gap-7">
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-foreground ">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-light text-foreground">
                         Everything you need. Nothing you don't.
                     </h2>
-                    <p className='text-muted font-extralight tracking-wide max-w-3xl mx-auto'>
+                    <p className='text-muted text-sm md:text-base lg:text-lg font-extralight tracking-wide max-w-3xl mx-auto'>
                         A complete radiology workspace—viewer, reporting, collaboration—in one unified interface. Intelligence woven into every interaction, native to the workflow from the start.
                     </p>
 
                     {/* Tabs */}
                     <div className=' flex items-center justify-center'>
-                        <div className=' flex border border-background-gradient/60 tab-primary-gradient rounded-md '>
+                        <div className=' flex gap-1 border border-background-gradient/60 tab-primary-gradient rounded-md'>
                             {tabs.map((label, index) => (
                                 <motion.button
                                     key={label}
@@ -135,19 +135,19 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => setActiveTab(index)}
                                     className={`${activeTab === index ? "" : "hover:text-foreground/60"
-                                        } relative cursor-pointer rounded-md px-5 py-1.5 text-sm font-extralight tracking-wider outline-primary transition focus-visible:outline-2`}
+                                        } relative cursor-pointer rounded-md lg:px-5 lg:py-1.5 p-3 lg:text-sm text-xs font-extralight tracking-wider outline-primary transition focus-visible:outline-2`}
                                     style={{
                                         WebkitTapHighlightColor: "transparent",
                                     }}
                                 >
-                                    {activeTab === index && (
+                                    {/* {activeTab === index && (
                                         <motion.span
                                             layoutId="bubble"
                                             className="absolute inset-0 z-10 bg-primary/20"
                                             style={{ borderRadius: 6 }}
                                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                         />
-                                    )}
+                                    )} */}
                                     <span className={activeTab === index ? "text-foreground font-normal" : "text-muted"}>
                                         {label}
                                     </span>
@@ -159,7 +159,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
 
                 <div className="relative mb-16">
                     <div className="relative mx-auto max-w-4xl">
-                        <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-accent/5 to-transparent rounded-2xl blur-2xl scale-95" />
+                        <div className="absolute inset-0 bg-linear-to-b from-primary/10 via-accent/5 to-transparent rounded-2xl blur-2xl scale-95" />
                         {/* Mockup container */}
                         <div className="relative drop-shadow-[0_-30px_16px_rgba(0,0,0,0.25)] drop-shadow-radix-gradient/50 border border-border rounded-xl overflow-hidden max-w-3xl mx-auto">
                             <div className=' video-wrapper'>

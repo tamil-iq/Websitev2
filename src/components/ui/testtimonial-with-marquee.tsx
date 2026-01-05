@@ -26,7 +26,7 @@ export function TestimonialWithMarquee({
     )}>
       <div className=" flex flex-col items-center gap-4 text-center sm:gap-16">
         <div className="flex flex-col items-center gap-4 px-4 sm:gap-8">
-          <h2 className="text-3xl font-normal leading-tight sm:text-5xl sm:leading-tight">
+          <h2 className="md:text-3xl text-2xl font-normal leading-tight sm:text-5xl sm:leading-tight">
             {title}
           </h2>
           {/* <p className="text-md max-w-[600px] font-medium text-muted-foreground sm:text-xl">
@@ -42,19 +42,23 @@ export function TestimonialWithMarquee({
                 animation: `marquee var(--duration, 40s) linear infinite`
               }}
             >
-              {[...Array(4)].map((_, setIndex) => (
-                testimonials.map((testimonial, i) => (
-                  <TestimonialCard 
-                    key={`${setIndex}-${i}`}
-                    {...testimonial}
-                  />
-                ))
+              {testimonials.map((testimonial, i) => (
+                <TestimonialCard 
+                  key={`first-${i}`}
+                  {...testimonial}
+                />
               ))}
-            </div>
+              {testimonials.map((testimonial, i) => (
+                <TestimonialCard 
+                  key={`second-${i}`}
+                  {...testimonial}
+                />
+              ))}
+            </div> 
           </div>
 
-          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 bg-gradient-to-r from-background sm:block" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/3 bg-gradient-to-l from-background sm:block" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-1/3 bg-linear-to-r from-background sm:block" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/3 bg-linear-to-l from-background sm:block" />
         </div>
       </div>
     </section>

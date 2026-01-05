@@ -138,13 +138,13 @@ function StatsSection() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative w-full overflow-hidden container max-w-full h-[70vh] -mt-16"
+            className="relative w-full overflow-hidden container max-w-full md:h-[70vh] h-[50vh] -mt-16"
         >
             <motion.div 
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="grid grid-cols-[25%_50%_25%] grid-rows-3  relative w-full h-full z-10"
+                className="md:grid grid-cols-[25%_50%_25%] grid-rows-3  relative w-full h-full z-10 hidden"
             >
                 {/* Vertical gradient borders */}
                 <div 
@@ -217,6 +217,14 @@ function StatsSection() {
                 </motion.div>
                 <div className="col-span-1"></div>
             </motion.div>
+            <motion.div className=''>
+                <div className="flex items-center justify-center max-w-6xl">
+                    <span className='text-lg text-muted leading-relaxed font-extralight text-center tracking-wide p-2 max-w-3xl '>
+                    Built by radiologists and engineers who've lived the frustrations of fragmented infrastructure. Our mission is to help radiologists see clearer, diagnose with confidence, and reclaim the time they lose fighting their tools instead of using them.
+                    </span>
+                </div>
+
+            </motion.div>
         </motion.section>
     )
 }
@@ -234,19 +242,42 @@ function StatsDisplay() {
             className="relative w-full py-16 pt-4 px-4 -mt-24"
         >
             <div className="container mx-auto">
-                <div className="flex flex-col md:flex-row items-center justify-center md:justify-between max-w-5xl mx-auto">
-                    {stats.map((stat, index) => (
+                <div className="grid grid-cols-2 md:flex md:flex-row items-center justify-center md:justify-between max-w-5xl mx-auto">
+                    {stats.slice(0, 2).map((stat, index) => (
                         <motion.div 
                             key={index} 
                             initial={{ opacity: 0, y: 50 }}
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                             transition={{ duration: 0.6, delay: 0.2 + (index * 0.1) }}
-                            className="flex flex-col items-center text-center px-8 py-6"
+                            className="flex flex-col items-center text-center md:px-8 md:py-6"
                         >
                             <Counter 
                                 value={stat.value} 
                                 isInView={isInView} 
                                 delay={0.3 + (index * 0.1)} 
+                            />
+                            <span className="text-sm md:text-base tracking-wide font-light text-foreground mb-1">
+                                {stat.label}
+                            </span>
+                            {stat.sublabel && (
+                                <span className="text-xs md:text-sm text-muted font-extralight tracking-wide">
+                                    {stat.sublabel}
+                                </span>
+                            )}
+                        </motion.div>
+                    ))}
+                    {stats.slice(2).map((stat, index) => (
+                        <motion.div 
+                            key={index + 2} 
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                            transition={{ duration: 0.6, delay: 0.2 + ((index + 2) * 0.1) }}
+                            className="flex flex-col items-center text-center px-8 py-6 col-span-2 md:col-span-1 md:flex md:flex-row"
+                        >
+                            <Counter 
+                                value={stat.value} 
+                                isInView={isInView} 
+                                delay={0.3 + ((index + 2) * 0.1)} 
                             />
                             <span className="text-sm md:text-base tracking-wide font-light text-foreground mb-1">
                                 {stat.label}

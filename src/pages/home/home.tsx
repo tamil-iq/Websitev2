@@ -36,7 +36,7 @@ const Home = () => {
       {/* Fixed gradient overlay at the top - appears after hero section */}
       <div 
         className={cn(
-          "pointer-events-none fixed top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-[#0855b4]/25 to-transparent z-10 transition-opacity duration-300",
+          "pointer-events-none fixed top-0 left-0 right-0 h-1/2 bg-linear-to-b from-[#0855b4]/25 to-transparent z-10 transition-opacity duration-300",
           showGradient ? "opacity-100" : "opacity-0"
         )}
       />
