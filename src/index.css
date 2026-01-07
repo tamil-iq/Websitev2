@@ -149,6 +149,28 @@
     @apply bg-linear-to-l from-muted via-foreground to-foreground bg-clip-text text-transparent;
   }
 
+  /* Persona gradient text styles */
+  .text-gradient-radiologist {
+    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-admin {
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-patient {
+    background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 50%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .scroll-gradient {
     position: absolute;
     top: 0;

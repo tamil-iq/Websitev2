@@ -142,14 +142,12 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         </span>
                         <span className="text-xs text-primary font-medium tracking-wide">For Radiologists</span>
                     </div>
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-foreground mb-4">
-                        Do what you do best: Diagnose.
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
+                        <span className="text-foreground">Do what you do best: </span>
+                        <span className="text-gradient-radiologist">Diagnose.</span>
                     </h2>
-                    <p className="text-xl text-muted font-light max-w-2xl mx-auto mb-2">
-                        We'll handle the rest.
-                    </p>
-                    <p className="text-sm text-primary/80 font-medium tracking-wide">
-                        Your workflow, accelerated.
+                    <p className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto">
+                        We'll handle the rest. <span className="text-foreground/80">Your workflow, accelerated.</span>
                     </p>
                 </motion.div>
 

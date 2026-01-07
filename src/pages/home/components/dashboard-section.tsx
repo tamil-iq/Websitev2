@@ -122,11 +122,12 @@ export function AdministratorsSection() {
                         </span>
                         <span className="text-xs text-emerald-300 font-medium tracking-wide">For Administrators</span>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground mb-4">
-                        Decide with clarity.
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
+                        <span className="text-foreground">Decide with </span>
+                        <span className="text-gradient-admin">clarity.</span>
                     </h2>
-                    <p className="text-muted font-light max-w-xl mx-auto">
-                        Real-time insights for informed decisions
+                    <p className="text-lg md:text-xl text-muted font-light max-w-xl mx-auto">
+                        Real-time insights for informed decisions.
                     </p>
                 </motion.div>
 
@@ -251,12 +252,12 @@ export function PatientPortalSection() {
                         </span>
                         <span className="text-xs text-violet-300 font-medium tracking-wide">For Patients</span>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground mb-4">
-                        What your patients will love.
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
+                        <span className="text-foreground">What your patients will </span>
+                        <span className="text-gradient-patient">love.</span>
                     </h2>
-                    <p className="text-muted font-light max-w-xl mx-auto">
-                        A patient experience that sets your center apart.<br />
-                        Modern, seamless, and built for trust.
+                    <p className="text-lg md:text-xl text-muted font-light max-w-xl mx-auto">
+                        A patient experience that sets your center apart.
                     </p>
                 </motion.div>
 

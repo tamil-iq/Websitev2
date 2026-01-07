@@ -36,7 +36,7 @@ const TrustBadge = () => {
         <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
       </span>
       <span className="text-sm text-muted font-light tracking-wide">
-        Trusted by India's leading diagnostic/hospital networks
+        Trusted by Bengaluru's largest imaging chain
       </span>
     </motion.div>
   );
@@ -80,67 +80,71 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Main headline */}
-        <motion.h1 
+        <motion.h1
           ref={headlineRef}
           initial={{ opacity: 0, y: 30 }}
           animate={headlineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight pb-2 "
+          className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium leading-[1.1] pb-2"
         >
-          <span className="block text-gradient">One <span>Intelligent</span> platform for your</span>
-          <span className="block mt-2 text-gradient">entire radiology workflow</span>
+          <span className="block text-foreground">One <span className="text-gradient-radiologist">Intelligent</span> platform for your</span>
+          <span className="block mt-3 text-foreground">entire radiology workflow</span>
         </motion.h1>
 
         {/* Subheadline */}
-        <motion.p 
+        <motion.p
           ref={subheadlineRef}
           initial={{ opacity: 0, y: 30 }}
           animate={subheadlineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-          className="max-w-xl mx-auto text-base md:text-lg text-muted leading-relaxed tracking-wide font-light"
+          className="max-w-2xl mx-auto text-base md:text-lg lg:text-xl text-muted leading-relaxed tracking-wide font-light pt-4"
         >
-          From patient registration to final report — unified RIS-PACS with native
-          intelligence at every step. <br/><span className="font-light text-foreground tracking-wide"> One platform. One vendor.
-          Complete focus on diagnosis.</span>
+          From patient registration to final report — unified RIS-PACS with native intelligence.
+          <br />
+          <span className="text-foreground font-medium">Cut turnaround time by <span className="text-gradient-radiologist">50%</span>.</span>
         </motion.p>
 
         {/* CTA buttons */}
-        <motion.div 
+        <motion.div
           ref={buttonsRef}
           initial={{ opacity: 0, y: 30 }}
           animate={buttonsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
         >
-          <AnimatedButton onClick={() => console.log('Schedule demo clicked')}>
-            schedule a demo
-          </AnimatedButton>
+          {/* Primary CTA with glow effect */}
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary via-cyan-500 to-primary rounded-full blur-md opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
+            <AnimatedButton onClick={() => console.log('Schedule demo clicked')}>
+              Schedule a Demo
+            </AnimatedButton>
+          </div>
           <RippleButton onClick={() => {
-            const everythingSection = document.getElementById('everything-section');
-            if (everythingSection) {
-              everythingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const radiologistsSection = document.getElementById('radiologists-section');
+            if (radiologistsSection) {
+              radiologistsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
           }} >
             <div className="flex items-center gap-2">
-              <span>Explore platform </span>
+              <span>Explore platform</span>
               <ChevronsRightIcon/>
             </div>
           </RippleButton>
         </motion.div>
 
         {/* Client logos */}
-        <motion.div 
+        <motion.div
           ref={logosRef}
           initial={{ opacity: 0, y: 40 }}
           animate={logosInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
-          className="pt-16 md:pt-24"
+          className="pt-12 md:pt-16"
         >
           <div className="w-full max-w-full overflow-x-hidden mx-auto px-4">
-                  <div className="text-center mb-8">
-                    <label  className="text-muted font-extralight text-xl tracking-wide">
-                      Trusted by:
-                    </label>
+                  <div className="text-center mb-6">
+                    <span className="text-sm text-muted/70 font-light tracking-widest uppercase">
+                      Trusted by
+                    </span>
                   </div>
                   <Marquee className="w-full max-w-full min-h-[120px]">
                     <MarqueeFade side="left" />
