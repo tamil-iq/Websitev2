@@ -2,57 +2,38 @@ import { cn } from '@/lib/utils';
 import { Separator } from '@/components/common/separator';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Check } from 'lucide-react';
 
-// Visual flow steps
-const flowSteps = ["Dictate", "Review", "Sign off"];
-
-// Feature data with refined copy
+// Feature data - Apple style: minimal, impactful
 const features = [
     {
         id: 'reporting',
         label: "Reporting",
-        title: "Dictate. Review. Sign off.",
-        description: (
-            <>
-                Speech-to-text, intelligent priors, and adaptive AI reporting.{' '}
-                <span className="text-primary font-medium">Not another LLM wrapper.</span>
-            </>
-        ),
+        title: <>Dictate. Review. Sign off. <span className="text-primary">That's it!</span></>,
         video: "/videos/ai-reporting.mp4",
+        color: "59, 130, 246", // primary blue RGB
         step: 0,
     },
     {
         id: 'viewer',
         label: "Viewer",
-        title: "A viewer that feels like magic.",
-        description: (
-            <>
-                Workstation power, browser simplicity — MPR, MIP, 3D, instantly.{' '}
-                <span className="text-primary font-medium">Zero footprint.</span>
-            </>
-        ),
+        title: <>Workstation power. Browser simplicity. Feels like <span className="text-primary">magic!</span></>,
         video: "/videos/zero-footprint.mp4",
+        color: "59, 130, 246", // primary blue RGB
         step: 1,
     },
     {
         id: 'anywhere',
         label: "Access",
-        title: "One login. Every study.",
-        description: (
-            <>
-                Start at work, continue from home.{' '}
-                <span className="text-primary font-medium">Your worklist, wherever you are.</span>
-            </>
-        ),
+        title: <>One login. Any device. Total <span className="text-primary">freedom!</span></>,
         video: "/videos/any-device.mp4",
+        color: "59, 130, 246", // primary blue RGB
         step: 2,
     },
 ];
 
 const testimonialData = {
     quote:
-        "My reporting time was reduced by 50%. The platform felt familiar from day one, with virtually no learning curve — allowing me to focus on what truly matters: the patient.",
+        "My reporting time reduced by nearly 50%. The platform felt familiar from day one, with virtually no learning curve—allowing me to focus on what truly matters: the patient.",
     author: {
         name: "Dr. Nikita Sridhar",
         role: "Consultant Radiologist",
@@ -75,9 +56,9 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
 
     const ROTATION_INTERVAL = 5000; // 5 seconds per feature
 
-    // Auto-rotate logic
+    // Auto-rotate logic - stops after one complete cycle
     useEffect(() => {
-        if (!isAutoPlaying || !isInView) return;
+        if (!isAutoPlaying || !isInView || completedCycle) return;
 
         const progressInterval = setInterval(() => {
             setProgress((prev) => {
@@ -93,6 +74,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                 const next = (prev + 1) % features.length;
                 if (next === 0 && prev === features.length - 1) {
                     setCompletedCycle(true);
+                    setIsAutoPlaying(false); // Stop auto-rotation after one cycle
                 }
                 return next;
             });
@@ -103,14 +85,12 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
             clearInterval(progressInterval);
             clearInterval(rotationInterval);
         };
-    }, [isAutoPlaying, isInView]);
+    }, [isAutoPlaying, isInView, completedCycle]);
 
     const handleFeatureClick = useCallback((index: number) => {
         setActiveFeature(index);
         setProgress(0);
         setIsAutoPlaying(false);
-        // Resume auto-play after 10 seconds of inactivity
-        setTimeout(() => setIsAutoPlaying(true), 10000);
     }, []);
 
     const currentFeature = features[activeFeature];
@@ -130,107 +110,51 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
             <div className="relative max-w-6xl mx-auto space-y-16">
 
                 {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="text-center"
-                >
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+                <div className="text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6"
+                    >
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                         </span>
                         <span className="text-xs text-primary font-medium tracking-wide">For Radiologists</span>
-                    </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
-                        <span className="text-foreground">Do what you do best: </span>
-                        <span className="text-gradient-radiologist">Diagnose.</span>
+                    </motion.div>
+
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-4">
+                        {["Do", "what", "you", "do", "best:"].map((word, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                transition={{ duration: 0.4, delay: 0.1 + i * 0.08, ease: "easeOut" }}
+                                className="inline-block text-foreground mr-[0.3em]"
+                            >
+                                {word}
+                            </motion.span>
+                        ))}
+                        <motion.span
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
+                            className="inline-block text-gradient-radiologist"
+                        >
+                            Diagnose.
+                        </motion.span>
                     </h2>
-                    <p className="text-lg md:text-xl text-muted font-light max-w-2xl mx-auto">
-                        We'll handle the rest. <span className="text-foreground/80">Your workflow, accelerated.</span>
-                    </p>
-                </motion.div>
 
-                {/* Visual Flow Stepper */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                    className="flex items-center justify-center gap-4 md:gap-8"
-                >
-                    {flowSteps.map((step, index) => {
-                        const isActive = activeFeature >= index;
-                        const isCompleted = completedCycle || activeFeature > index;
-
-                        return (
-                            <div key={step} className="flex items-center gap-4 md:gap-8">
-                                <div className="flex flex-col items-center gap-2">
-                                    {/* Step circle */}
-                                    <motion.div
-                                        className={cn(
-                                            "relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border-2 transition-all duration-500",
-                                            isCompleted
-                                                ? "bg-primary/20 border-primary"
-                                                : isActive
-                                                    ? "bg-primary/10 border-primary/60"
-                                                    : "bg-white/[0.02] border-white/[0.15]"
-                                        )}
-                                        animate={isActive && !isCompleted ? { scale: [1, 1.05, 1] } : {}}
-                                        transition={{ duration: 2, repeat: Infinity }}
-                                    >
-                                        <AnimatePresence mode="wait">
-                                            {isCompleted ? (
-                                                <motion.div
-                                                    initial={{ scale: 0 }}
-                                                    animate={{ scale: 1 }}
-                                                    exit={{ scale: 0 }}
-                                                    transition={{ type: "spring", stiffness: 300 }}
-                                                >
-                                                    <Check className="w-5 h-5 md:w-6 md:h-6 text-primary" strokeWidth={2.5} />
-                                                </motion.div>
-                                            ) : (
-                                                <motion.span
-                                                    initial={{ opacity: 0 }}
-                                                    animate={{ opacity: 1 }}
-                                                    exit={{ opacity: 0 }}
-                                                    className={cn(
-                                                        "text-sm md:text-base font-medium",
-                                                        isActive ? "text-primary" : "text-muted"
-                                                    )}
-                                                >
-                                                    {index + 1}
-                                                </motion.span>
-                                            )}
-                                        </AnimatePresence>
-                                    </motion.div>
-
-                                    {/* Step label */}
-                                    <span className={cn(
-                                        "text-sm md:text-base font-medium transition-colors duration-300",
-                                        isActive ? "text-foreground" : "text-muted"
-                                    )}>
-                                        {step}
-                                    </span>
-                                </div>
-
-                                {/* Connector line */}
-                                {index < flowSteps.length - 1 && (
-                                    <div className="relative w-12 md:w-20 h-0.5 bg-white/[0.1] rounded-full overflow-hidden">
-                                        <motion.div
-                                            className="absolute inset-y-0 left-0 bg-primary rounded-full"
-                                            initial={{ width: "0%" }}
-                                            animate={{
-                                                width: isCompleted || activeFeature > index ? "100%" : "0%"
-                                            }}
-                                            transition={{ duration: 0.5, ease: "easeOut" }}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        );
-                    })}
-                </motion.div>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                        transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+                        className="text-2xl md:text-3xl font-light text-muted/80 max-w-xl mx-auto tracking-tight"
+                    >
+                        We'll handle the rest.
+                    </motion.p>
+                </div>
 
                 {/* Main Content Grid */}
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
@@ -252,19 +176,20 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                     className={cn(
                                         "flex-1 w-full text-left p-5 rounded-xl border transition-all duration-300 relative overflow-hidden",
                                         isActive
-                                            ? "bg-white/[0.04] border-primary/30"
+                                            ? "bg-white/[0.04]"
                                             : "bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.03] hover:border-white/[0.12]"
                                     )}
+                                    style={isActive ? { borderColor: `rgba(${feature.color}, 0.4)` } : {}}
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.99 }}
                                 >
-                                    {/* Progress bar for active card */}
-                                    {isActive && isAutoPlaying && (
-                                        <motion.div
-                                            className="absolute bottom-0 left-0 h-0.5 bg-primary/60"
-                                            initial={{ width: "0%" }}
-                                            animate={{ width: `${progress}%` }}
-                                            transition={{ duration: 0.05, ease: "linear" }}
+                                    {/* Subtle gradient sweep for active card - sweeps towards the highlighted word */}
+                                    {isActive && (
+                                        <div
+                                            className="absolute inset-0 pointer-events-none"
+                                            style={{
+                                                background: `linear-gradient(90deg, transparent 0%, rgba(${feature.color}, ${0.01 + (progress / 100) * 0.04}) ${progress}%, rgba(${feature.color}, 0.06) 100%)`,
+                                            }}
                                         />
                                     )}
 
@@ -276,13 +201,13 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                                 ? "bg-primary/20 text-primary"
                                                 : "bg-white/[0.05] text-muted"
                                         )}>
-                                            <span className="text-lg font-semibold">{index + 1}</span>
+                                            <span className="text-lg font-light">{index + 1}</span>
                                         </div>
 
                                         <div className="flex-1 min-w-0">
                                             {/* Label badge */}
                                             <span className={cn(
-                                                "inline-block text-xs font-medium tracking-wide px-2 py-0.5 rounded-full mb-2 transition-colors duration-300",
+                                                "inline-block text-xs font-light tracking-wide px-2 py-0.5 rounded-full mb-2 transition-colors duration-300",
                                                 isActive
                                                     ? "bg-primary/20 text-primary"
                                                     : "bg-white/[0.05] text-muted"
@@ -291,18 +216,11 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                             </span>
 
                                             <h3 className={cn(
-                                                "text-lg font-medium mb-1 transition-colors duration-300",
-                                                isActive ? "text-foreground" : "text-foreground/80"
+                                                "text-lg font-medium tracking-tight transition-colors duration-300",
+                                                isActive ? "text-foreground" : "text-foreground/70"
                                             )}>
                                                 {feature.title}
                                             </h3>
-
-                                            <p className={cn(
-                                                "text-sm leading-relaxed transition-colors duration-300",
-                                                isActive ? "text-muted" : "text-muted/70"
-                                            )}>
-                                                {feature.description}
-                                            </p>
                                         </div>
                                     </div>
                                 </motion.button>
@@ -338,8 +256,8 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                                 <path d="M8 5v14l11-7z" />
                                             </svg>
                                         </div>
-                                        <p className="text-muted font-light">{currentFeature.title}</p>
-                                        <p className="text-xs text-muted/60 mt-1">Video demo coming soon</p>
+                                        <p className="text-muted font-light tracking-wide">{currentFeature.title}</p>
+                                        <p className="text-xs text-muted/60 font-extralight mt-1">Video demo coming soon</p>
                                     </div>
                                 </motion.div>
                             </AnimatePresence>
@@ -347,7 +265,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                             {/* Feature label overlay */}
                             <div className="absolute top-4 left-4 z-10">
                                 <div className="px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm border border-white/[0.1]">
-                                    <span className="text-xs text-foreground font-medium">{currentFeature.label}</span>
+                                    <span className="text-xs text-foreground font-light tracking-wide">{currentFeature.label}</span>
                                 </div>
                             </div>
                         </div>
@@ -363,7 +281,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                     transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
                     className="max-w-3xl mx-auto text-center"
                 >
-                    <blockquote className="text-xl md:text-2xl font-light text-foreground/90 leading-relaxed mb-6">
+                    <blockquote className="text-lg md:text-xl font-extralight text-foreground/90 leading-relaxed mb-6 tracking-wide">
                         "{testimonialData.quote}"
                     </blockquote>
                     <div className="flex items-center justify-center gap-3">
@@ -379,9 +297,9 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                             )}
                         </div>
                         <div className="text-left">
-                            <p className="text-foreground font-medium">{testimonialData.author.name}</p>
-                            <p className="text-sm text-muted">{testimonialData.author.role}</p>
-                            <p className="text-xs text-muted/70">{testimonialData.author.organization}</p>
+                            <p className="text-foreground font-light tracking-wide">{testimonialData.author.name}</p>
+                            <p className="text-sm text-muted font-extralight tracking-wide">{testimonialData.author.role}</p>
+                            <p className="text-xs text-muted/70 font-extralight tracking-wide">{testimonialData.author.organization}</p>
                         </div>
                     </div>
                 </motion.div>
@@ -394,7 +312,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                     className="text-center"
                 >
                     <button className="group inline-flex items-center gap-2 px-6 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-full transition-all duration-300">
-                        <span className="text-primary font-medium">Experience the platform</span>
+                        <span className="text-primary font-light tracking-wide">Experience the platform</span>
                         <svg
                             className="w-4 h-4 text-primary transition-transform duration-300 group-hover:translate-x-1"
                             fill="none"

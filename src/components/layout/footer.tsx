@@ -2,6 +2,43 @@ import { ChevronsUp } from "lucide-react";
 import footerBg from "@/assets/footer-bg.png";
 import { AnimatedButton } from "@/components/common/animated-button";
 import { Separator } from "@/components/common/separator";
+import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from "@/components/ui/marquee";
+
+const trustedCompanies = [
+  { name: "NewMed", logo: "/newmed-without-bg.png" },
+  { name: "OM Diagnostics", logo: "/om-without-bg.png" },
+  { name: "Prima", logo: "/prima-without-bg.png" },
+  { name: "TX Healthcare", logo: "/tx-without-bg.png" },
+];
+
+export const TrustedBySection = () => {
+  return (
+    <section className="py-16 bg-background">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-8">
+          <span className="text-sm text-muted/70 font-light tracking-widest uppercase">
+            Trusted by
+          </span>
+        </div>
+        <Marquee className="w-full max-w-full min-h-[100px]">
+          <MarqueeFade side="left" />
+          <MarqueeFade side="right" />
+          <MarqueeContent>
+            {trustedCompanies.map((company, index) => (
+              <MarqueeItem className="h-20 w-auto px-8 flex items-center justify-center group/logo" key={index}>
+                <img
+                  alt={company.name}
+                  className="h-20 w-auto max-w-[180px] object-contain grayscale brightness-0 invert opacity-60 transition-all duration-300 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 group-hover/logo:scale-110"
+                  src={company.logo}
+                />
+              </MarqueeItem>
+            ))}
+          </MarqueeContent>
+        </Marquee>
+      </div>
+    </section>
+  );
+};
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -33,8 +70,9 @@ const Footer = () => {
           <div className="max-w-xl">
             <p className="text-xs text-muted/60 font-light tracking-widest uppercase mb-3">Our Mission</p>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight text-foreground leading-tight">
-              Building imaging infrastructure for a{' '}
-              <span className="text-gradient-radiologist">billion</span> people.
+              Building imaging infrastructure
+              <br />
+              for a <span className="text-gradient-radiologist">billion</span> people.
             </h2>
           </div>
 

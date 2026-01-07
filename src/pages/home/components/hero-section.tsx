@@ -1,19 +1,9 @@
 
 import { AnimatedButton } from '@/components/common/animated-button';
-import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from "@/components/ui/marquee"
 import { RippleButton } from "@/components/ui/ripple-button";
 import { ChevronsRightIcon } from '@/components/ui/right-icon';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-
-
-
-const trustedCompanies = [
-  { name: "NewMed", logo: "/newmed-without-bg.png" },
-  { name: "OM Diagnostics", logo: "/om-without-bg.png" },
-  { name: "Prima", logo: "/prima-without-bg.png" },
-  { name: "TX Healthcare", logo: "/tx-without-bg.png" },
-];
 
 // Animated counter component
 const AnimatedCounter = ({ value, suffix = "", duration = 2 }: { value: number; suffix?: string; duration?: number }) => {
@@ -94,13 +84,11 @@ const HeroSection = () => {
   const headlineRef = useRef(null);
   const subheadlineRef = useRef(null);
   const buttonsRef = useRef(null);
-  const logosRef = useRef(null);
 
   const trustBadgeInView = useInView(trustBadgeRef, { once: true, margin: "-100px" });
   const headlineInView = useInView(headlineRef, { once: true, margin: "-100px" });
   const subheadlineInView = useInView(subheadlineRef, { once: true, margin: "-100px" });
   const buttonsInView = useInView(buttonsRef, { once: true, margin: "-100px" });
-  const logosInView = useInView(logosRef, { once: true, margin: "-50px" });
 
   return (
  <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden ">
@@ -146,8 +134,6 @@ const HeroSection = () => {
           className="max-w-2xl mx-auto text-base md:text-lg lg:text-xl text-muted leading-relaxed tracking-wide font-light pt-4"
         >
           From patient registration to final report — unified RIS-PACS with native intelligence.
-          <br />
-          <span className="text-foreground font-medium">Cut turnaround time by <AnimatedCounter value={50} suffix="%" duration={1.5} />.</span>
         </motion.p>
 
         {/* Stats Section */}
@@ -177,13 +163,9 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
         >
-          {/* Primary CTA with glow effect */}
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary via-cyan-500 to-primary rounded-full blur-md opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
-            <AnimatedButton onClick={() => console.log('Schedule demo clicked')}>
-              Schedule a Demo
-            </AnimatedButton>
-          </div>
+          <AnimatedButton onClick={() => console.log('Schedule demo clicked')}>
+            SCHEDULE A DEMO
+          </AnimatedButton>
           <RippleButton onClick={() => {
             const radiologistsSection = document.getElementById('radiologists-section');
             if (radiologistsSection) {
@@ -195,41 +177,6 @@ const HeroSection = () => {
               <ChevronsRightIcon/>
             </div>
           </RippleButton>
-        </motion.div>
-
-        {/* Client logos */}
-        <motion.div
-          ref={logosRef}
-          initial={{ opacity: 0, y: 40 }}
-          animate={logosInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
-          className="pt-12 md:pt-16"
-        >
-          <div className="w-full max-w-full overflow-x-hidden mx-auto px-4">
-                  <div className="text-center mb-6">
-                    <span className="text-sm text-muted/70 font-light tracking-widest uppercase">
-                      Trusted by
-                    </span>
-                  </div>
-                  <Marquee className="w-full max-w-full min-h-[120px]">
-                    <MarqueeFade side="left" />
-                    <MarqueeFade side="right" />
-                    <MarqueeContent>
-                      {trustedCompanies.map((company, index) => (
-                        <MarqueeItem className="h-24 w-auto px-8 flex items-center justify-center group/logo" key={index}>
-                          <img
-                            alt={company.name}
-                            className="h-24 w-auto max-w-[200px] object-contain grayscale brightness-0 invert opacity-60 transition-all duration-300 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 group-hover/logo:scale-110"
-                            src={company.logo}
-                            onError={() => {
-                              console.error('Failed to load logo:', company.logo);
-                            }}
-                          />
-                        </MarqueeItem>
-                      ))}
-                    </MarqueeContent>
-                  </Marquee>
-                </div>
         </motion.div>
       </div>
     </section>
