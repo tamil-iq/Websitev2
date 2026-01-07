@@ -7,7 +7,7 @@ import { Check } from 'lucide-react';
 // Visual flow steps
 const flowSteps = ["Dictate", "Review", "Sign off"];
 
-// Feature data with concise copy
+// Feature data with refined copy
 const features = [
     {
         id: 'reporting',
@@ -15,8 +15,8 @@ const features = [
         title: "Dictate. Review. Sign off.",
         description: (
             <>
-                AI that learns your style — not a generic LLM wrapper.{' '}
-                <span className="text-primary font-medium">Built for radiology.</span>
+                Speech-to-text, intelligent priors, and adaptive AI reporting.{' '}
+                <span className="text-primary font-medium">Not another LLM wrapper.</span>
             </>
         ),
         video: "/videos/ai-reporting.mp4",
@@ -25,11 +25,11 @@ const features = [
     {
         id: 'viewer',
         label: "Viewer",
-        title: "Workstation power. Any device.",
+        title: "A viewer that feels like magic.",
         description: (
             <>
-                MPR, MIP, 3D — instant in your browser.{' '}
-                <span className="text-primary font-medium">Zero installs.</span>
+                Workstation power, browser simplicity — MPR, MIP, 3D, instantly.{' '}
+                <span className="text-primary font-medium">Zero footprint.</span>
             </>
         ),
         video: "/videos/zero-footprint.mp4",
