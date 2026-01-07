@@ -1,486 +1,488 @@
 import dashboard from "@/assets/homepage/dashboard-monitoring.png";
-import portal from "@/assets/homepage/patient-engagement-portal.png";
 import metrics from "@/assets/homepage/metrics.png";
 import rates from "@/assets/homepage/rates.png";
 import chatui from "@/assets/homepage/chat-ui.png";
 import scanreports from "@/assets/homepage/scan-reports.png";
 import { cn } from "@/lib/utils";
-import { ShieldCheck, UserCog, Hospital, Headset } from "lucide-react";
-import { TestimonialWithMarquee } from "@/components/ui/testtimonial-with-marquee"
-import { useEffect, useRef, useState } from "react"
+import { TrendingUp, Gauge, BarChart3 } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 
-
-const metricsData = [
-  {
-    label: "Radiologist Productivity",
-    description: "Track read volume, TAT, and SLA performance. Balance workloads before bottlenecks form.",
-    image: metrics,
-  },
-  {
-    label: "Equipment Utilisation",
-    description: "Occupancy, idle time, and capacity by modality. Maximize throughput and ROI.",
-    image: rates,
-  },
-  {
-    label: "Patient Portal",
-    description: "Reports patients can actually understand. AI-powered explanations in plain language.",
-    image: "",
-  },
-  {
-    label: "Multi-Site Coordination",
-    description: "One dashboard for your entire network. Share studies, balance loads, maintain standards.",
-    image: "",
-  },
-]
-
-const portalData = [
-  {
-    label: "Secure and Instant access",
-    description: "View, store and share reports/scans from anywhere , on any device.",
-    image: scanreports,
-  },
-  {
-    label: "Ask Somatiq AI",
-    description: "Explains radiology reports in simple language. Helps patients understand their diagnosis better.",
-    image: chatui,
-  },
-  {
-    label: "Secure Link sharing with Physicians",
-    description: "Quick collaborations with care teams using encrypted links for enhanced privacy.",
-    image: "",
-  },
-  {
-    label: "Digital-Only Data Transfer",
-    description: "Access health documents online anytime, eliminating the need for physical media or CDs",
-    image: "",
-  },
-]
-
-const features = [
-  {
-    icon: ShieldCheck,
-    title: "HIPAA Compliant Architecture <br/> ISO certified",
-  },
-  {
-    icon: UserCog,
-    title: "Role Based Access Control",
-  },
-  {
-    icon: Hospital,
-    title: "NABH Ready",
-  },
-  {
-    icon: Headset,
-    title: "Continuous Updates & 24/7 Support",
-  },
+// Admin bento items - Linear/Notion inspired
+const adminBentoItems = [
+    {
+        id: 'dashboard',
+        title: "Command Center",
+        description: "Real-time visibility across your entire operation",
+        icon: BarChart3,
+        image: dashboard,
+        size: "large", // spans 2 cols
+        gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
+    },
+    {
+        id: 'analytics',
+        title: "TAT Analytics",
+        description: "Track turnaround times and SLA performance",
+        icon: TrendingUp,
+        image: metrics,
+        size: "medium",
+        gradient: "from-cyan-500/20 via-blue-500/10 to-transparent",
+    },
+    {
+        id: 'utilization',
+        title: "Equipment Utilization",
+        description: "Occupancy and capacity by modality",
+        icon: Gauge,
+        image: rates,
+        size: "medium",
+        gradient: "from-violet-500/20 via-purple-500/10 to-transparent",
+    },
 ];
 
-const testimonials = [
-  {
-    author: {
-      name: "Emma Thompson",
-      handle: "@emmaai",
-      role: "CEO",
-      company: "ABC Hospital",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+// Patient features - Benefits for patients visiting diagnostic centers
+const patientFeatures = [
+    {
+        id: 'access',
+        title: "Instant Report Access",
+        description: "No waiting in queues. Reports available on any device, the moment they're ready.",
+        icon: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776" />
+            </svg>
+        ),
     },
-    text: "Using this AI platform has transformed how we handle data analysis. The speed and accuracy are unprecedented.",
-    href: "https://twitter.com/emmaai"
-  },
-  {
-    author: {
-      name: "David Park",
-      handle: "@davidtech",
-      role: "CTO",
-      company: "XYZ Hospital",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    {
+        id: 'ai',
+        title: "AI-Powered Clarity",
+        description: "Complex radiology findings explained in simple, understandable language.",
+        icon: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
+            </svg>
+        ),
     },
-    text: "The API integration is flawless. We've reduced our development time by 60% since implementing this solution.",
-    href: "https://twitter.com/davidtech"
-  },
-  {
-    author: {
-      name: "Sofia Rodriguez",
-      handle: "@sofiaml",
-      role: "CMO",
-      company: "LMN Hospital",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+    {
+        id: 'share',
+        title: "Easy Physician Sharing",
+        description: "One-click secure sharing with doctors. No CDs, no printouts, no hassle.",
+        icon: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+            </svg>
+        ),
     },
-    text: "Finally, an AI tool that actually understands context! The accuracy in natural language processing is impressive."
-  }
-]
+    {
+        id: 'history',
+        title: "Lifetime Health Record",
+        description: "Every scan, every report — organized and accessible forever.",
+        icon: (
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+        ),
+    },
+];
 
-// Custom hook for scroll-triggered animations
-const useScrollAnimation = (threshold = 0.1) => {
-  const [isVisible, setIsVisible] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+const complianceBadges = [
+    { label: "HIPAA" },
+    { label: "ISO 27001" },
+    { label: "NABH Ready" },
+    { label: "Role-Based Access" },
+    { label: "24/7 Support" },
+];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold }
-    )
+// ============================================
+// ADMINISTRATORS SECTION - Linear/Notion Bento Style
+// ============================================
+export function AdministratorsSection() {
+    const sectionRef = useRef(null);
+    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
+    return (
+        <section id="administrators-section" className="relative py-32 px-4 overflow-hidden">
+            {/* Gradient background */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/8 rounded-full blur-[120px]" />
+                <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/8 rounded-full blur-[100px]" />
+            </div>
 
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
-      }
-    }
-  }, [threshold])
+            <div ref={sectionRef} className="relative max-w-6xl mx-auto">
 
-  return { ref, isVisible }
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="text-center mb-16"
+                >
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                        </span>
+                        <span className="text-xs text-emerald-300 font-medium tracking-wide">For Administrators</span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground mb-4">
+                        Decide with clarity.
+                    </h2>
+                    <p className="text-muted font-light max-w-xl mx-auto">
+                        Real-time insights for informed decisions
+                    </p>
+                </motion.div>
+
+                {/* Bento Grid */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto"
+                >
+                    {adminBentoItems.slice(0, 2).map((item, index) => (
+                        <motion.div
+                            key={item.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ duration: 0.5, delay: 0.1 * index, ease: "easeOut" }}
+                            className={cn(
+                                "group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]",
+                            )}
+                        >
+                            {/* Gradient overlay on hover */}
+                            <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-3 mb-3">
+                                    <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
+                                        <item.icon className="w-5 h-5 text-foreground/70" />
+                                    </div>
+                                    <h3 className="text-xl font-medium text-foreground">
+                                        {item.title}
+                                    </h3>
+                                </div>
+                                <p className="text-muted font-light text-sm mb-4">
+                                    {item.description}
+                                </p>
+
+                                {item.image && (
+                                    <div className="relative rounded-lg overflow-hidden border border-white/[0.08]">
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        </motion.div>
+                    ))}
+
+                    {/* Third item spans full width */}
+                    {adminBentoItems.slice(2, 3).map((item) => (
+                        <motion.div
+                            key={item.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+                            className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04] md:col-span-2"
+                        >
+                            <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                            <div className="relative z-10 flex flex-col md:flex-row gap-6 items-center">
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
+                                            <item.icon className="w-5 h-5 text-foreground/70" />
+                                        </div>
+                                        <h3 className="text-xl font-medium text-foreground">
+                                            {item.title}
+                                        </h3>
+                                    </div>
+                                    <p className="text-muted font-light text-sm">
+                                        {item.description}
+                                    </p>
+                                </div>
+                                {item.image && (
+                                    <div className="relative rounded-lg overflow-hidden border border-white/[0.08] w-full md:w-1/2">
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+            </div>
+        </section>
+    );
 }
 
-export function DashboardSection() {
-  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation(0.1)
-  const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation(0.1)
+// ============================================
+// PATIENT PORTAL SECTION - Stripe/Figma inspired
+// ============================================
+export function PatientPortalSection() {
+    const sectionRef = useRef(null);
+    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+    const [activeFeature, setActiveFeature] = useState(0);
 
-  return (
-    <div id="features-section">
-      {/* dashboard section */}
-      <section className="py-24 px-4 relative">
-        <div 
-          ref={titleRef}
-          className={cn(
-            "text-center mb-16 transition-all duration-1000 transform",
-            titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          )}
-        >
-          <h2 className="text-3xl md:text-4xl font-light tracking-wide text-foreground mb-4">
-            <label className="text-gradient">See what matters. Stay in control.</label>
-            {/* Act on what's urgent. */}
+    return (
+        <section id="patients-section" className="relative py-32 px-4 overflow-hidden">
+            {/* Stripe-inspired gradient background */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-1/3 right-0 w-[800px] h-[800px] bg-violet-500/5 rounded-full blur-[150px]" />
+                <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px]" />
+            </div>
 
-          </h2>
-          <p className="text-muted font-extralight max-w-sm mx-auto">
-          Visibility into volumes, turnaround times, and utilization across the radiology operations.
-          </p>
-        </div>
+            <div ref={sectionRef} className="relative max-w-6xl mx-auto">
 
-        <div 
-          ref={imageRef}
-          className={cn(
-            "transition-all duration-1000 transform",
-            imageVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          )}
-        >
-          <img src={dashboard} alt="" className=" xl:max-w-7xl mx-auto" />
-        </div>
-
-        <div className="feature-section container mx-auto mt-16">
-          <div className="grid grid-cols-2 gap-x-0 max-w-6xl mx-auto ">
-
-            {/* Top Row - Sections with images */}
-            {metricsData.slice(0, 2).map((item, index) => {
-              const { ref: itemRef, isVisible: itemVisible } = useScrollAnimation(0.1)
-              return (
-                <div
-                  key={item.label}
-                  ref={itemRef}
-                  className={cn(
-                    "metrics-wrapper border border-border p-10 pl-5 relative transition-all duration-700 transform",
-                    index === 1 ? 'pl-12' : '', 
-                    index === 0 ? 'border-r-0 border-l-0' : 'border-r-0',
-                    itemVisible ? "opacity-100 translate-x-0" : index === 0 ? "opacity-0 -translate-x-10" : "opacity-0 translate-x-10"
-                  )}
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="text-center mb-16"
                 >
-                  {index === 0 && (
-                    <>
-                      {/* Top right dot */}
-                      <div className="absolute top-0 right-0 w-1 h-1 bg-foreground/90 z-1 -translate-y-1/2 translate-x-1/2" />
-                      {/* Bottom right dot */}
-                      <div className="absolute bottom-0 right-0 w-1 h-1 bg-foreground/90 z-1 translate-y-1/2 translate-x-1/2" />
-                    </>
-                  )}
-                  <div className="flex flex-col gap-2">
-                  <label className="text-2xl font-light text-foreground">
-                    {item.label}
-                  </label>
-                  <p className="text-muted font-extralight text-base mb-4 tracking-wide">
-                    {item.description}
-                  </p>
-                  </div>
-                  {item.image && (
-                    <img
-                      src={item.image}
-                      alt=""
-                      className="object-cover block "
-                    />
-                  )}
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-400"></span>
+                        </span>
+                        <span className="text-xs text-violet-300 font-medium tracking-wide">For Patients</span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground mb-4">
+                        What your patients will love.
+                    </h2>
+                    <p className="text-muted font-light max-w-xl mx-auto">
+                        A patient experience that sets your center apart.<br />
+                        Modern, seamless, and built for trust.
+                    </p>
+                </motion.div>
+
+                {/* Main Content - Figma-style interactive layout */}
+                <div className="grid lg:grid-cols-5 gap-8 items-center">
+
+                    {/* Left: Feature Pills - Notion style */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        className="lg:col-span-2 space-y-3"
+                    >
+                        {patientFeatures.map((feature, index) => (
+                            <motion.button
+                                key={feature.id}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                                transition={{ duration: 0.4, delay: 0.3 + index * 0.1, ease: "easeOut" }}
+                                onClick={() => setActiveFeature(index)}
+                                className={cn(
+                                    "w-full group relative flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300",
+                                    activeFeature === index
+                                        ? "bg-white/[0.06] border border-violet-500/30"
+                                        : "bg-white/[0.02] border border-transparent hover:bg-white/[0.04] hover:border-white/[0.08]"
+                                )}
+                            >
+                                {/* Active indicator */}
+                                {activeFeature === index && (
+                                    <motion.div
+                                        layoutId="activeIndicator"
+                                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-violet-400 to-purple-500 rounded-full"
+                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                    />
+                                )}
+
+                                <div className={cn(
+                                    "flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300",
+                                    activeFeature === index
+                                        ? "bg-white/[0.08] text-foreground"
+                                        : "bg-white/[0.03] text-muted group-hover:text-foreground/70"
+                                )}>
+                                    {feature.icon}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <h3 className={cn(
+                                        "font-medium text-sm transition-colors duration-300",
+                                        activeFeature === index ? "text-foreground" : "text-foreground/70"
+                                    )}>
+                                        {feature.title}
+                                    </h3>
+                                    <p className={cn(
+                                        "text-xs font-light mt-0.5 transition-colors duration-300",
+                                        activeFeature === index ? "text-muted" : "text-muted/70"
+                                    )}>
+                                        {feature.description}
+                                    </p>
+                                </div>
+                                <svg
+                                    className={cn(
+                                        "w-4 h-4 transition-all duration-300",
+                                        activeFeature === index
+                                            ? "text-violet-400 translate-x-0 opacity-100"
+                                            : "text-foreground/30 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+                                    )}
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                            </motion.button>
+                        ))}
+                    </motion.div>
+
+                    {/* Right: Floating UI Preview - Stripe layered style */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                        transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        className="lg:col-span-3 relative"
+                    >
+                        {/* Glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-purple-500/10 to-fuchsia-500/20 rounded-3xl blur-3xl opacity-50" />
+
+                        {/* Stacked cards - Stripe depth effect */}
+                        <div className="relative h-[400px] md:h-[450px]">
+                            {/* Back layer - Reports */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20, rotate: -3 }}
+                                animate={isInView ? {
+                                    opacity: activeFeature === 0 || activeFeature === 3 ? 0.9 : 0.5,
+                                    y: 0,
+                                    rotate: -3,
+                                    scale: activeFeature === 0 || activeFeature === 3 ? 1 : 0.95
+                                } : { opacity: 0, y: 20 }}
+                                transition={{ duration: 0.6, delay: 0.5 }}
+                                className="absolute top-8 left-0 w-[70%] transition-all duration-500"
+                            >
+                                <div className="relative rounded-2xl overflow-hidden border border-white/[0.1] shadow-2xl shadow-black/50">
+                                    <img
+                                        src={scanreports}
+                                        alt="Scan reports"
+                                        className="w-full"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+                                </div>
+                            </motion.div>
+
+                            {/* Front layer - Chat AI */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20, rotate: 2 }}
+                                animate={isInView ? {
+                                    opacity: activeFeature === 1 ? 1 : 0.8,
+                                    y: 0,
+                                    rotate: 2,
+                                    scale: activeFeature === 1 ? 1.02 : 1,
+                                    x: activeFeature === 1 ? -10 : 0
+                                } : { opacity: 0, y: 20 }}
+                                transition={{ duration: 0.6, delay: 0.6 }}
+                                className="absolute top-16 right-0 w-[75%] transition-all duration-500"
+                            >
+                                <div className="relative rounded-2xl overflow-hidden border border-white/[0.1] shadow-2xl shadow-black/50">
+                                    <img
+                                        src={chatui}
+                                        alt="AI Chat"
+                                        className="w-full"
+                                    />
+                                    {/* AI sparkle indicator */}
+                                    {activeFeature === 1 && (
+                                        <motion.div
+                                            initial={{ opacity: 0, scale: 0 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-violet-500/20 border border-violet-500/30"
+                                        >
+                                            <span className="relative flex h-1.5 w-1.5">
+                                                <span className="animate-ping absolute h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                                                <span className="relative rounded-full h-1.5 w-1.5 bg-violet-400"></span>
+                                            </span>
+                                            <span className="text-[10px] text-violet-300 font-medium">AI Active</span>
+                                        </motion.div>
+                                    )}
+                                </div>
+                            </motion.div>
+
+                            {/* Floating badge for share feature */}
+                            {activeFeature === 2 && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    className="absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center gap-2"
+                                >
+                                    <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                    <span className="text-xs text-emerald-300 font-medium">Link shared securely</span>
+                                </motion.div>
+                            )}
+                        </div>
+                    </motion.div>
                 </div>
-              )
-            })}
 
-            {/* Bottom Row - Text-only sections */}
-            {metricsData.slice(2, 4).map((item, index) => {
-              const { ref: itemRef, isVisible: itemVisible } = useScrollAnimation(0.1)
-              return (
-                <div
-                  key={item.label}
-                  ref={itemRef}
-                  className={cn(
-                    "metrics-wrapper p-6 flex flex-col transition-all duration-700 transform",
-                    index === 1 ? 'pl-12' : '',
-                    itemVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                  )}
-                >
-                  <label className="text-2xl font-light text-foreground mb-3">
-                    {item.label}
-                  </label>
-                  <p className="text-muted font-extralight text-base tracking-wide">
-                    {item.description}
-                  </p>
-                </div>
-              )
-            })}
-
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* portal section */}
-      <section>
-        <PortalSection />
-      </section>
-    </div>
-  );
+            </div>
+        </section>
+    );
 }
 
-
-
+// ============================================
+// COMPLIANCE SECTION - Horizontal Trust Bar
+// ============================================
 export function ComplianceSection() {
-  const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation(0.1)
-  const { ref: portalTitleRef, isVisible: portalTitleVisible } = useScrollAnimation(0.1)
-  const { ref: complianceTitleRef, isVisible: complianceTitleVisible } = useScrollAnimation(0.1)
-  const { ref: featuresRef, isVisible: featuresVisible } = useScrollAnimation(0.1)
+    const sectionRef = useRef(null);
+    const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
-  return (
-    <div className="">
-      <section className="portal-section">
-        <div 
-          ref={imageRef}
-          className={cn(
-            "image-section relative mt-14 transition-all duration-1000 transform",
-            imageVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          )}
-        >
-          {/* <img src={portal} className="xl:max-w-6xl xl:mx-auto lg:mx-10" alt="" /> */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent max-w-7xl mx-auto pointer-events-none"></div>
-        </div>
-        <div 
-          ref={portalTitleRef}
-          className={cn(
-            "feature-section container mx-auto mt-16 transition-all duration-1000 transform",
-            portalTitleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          )}
-        >
-          <div className="grid grid-cols-2 gap-x-0 max-w-6xl mx-auto ">
-
-            {/* Top Row - Sections with images */}
-            {portalData.slice(0, 2).map((item, index) => {
-              const { ref: itemRef, isVisible: itemVisible } = useScrollAnimation(0.1)
-              return (
-                <div
-                  key={item.label}
-                  ref={itemRef}
-                  className={cn(
-                    "metrics-wrapper border border-border p-10 pl-5  relative transition-all duration-700 transform",
-                    index === 1 ? 'pl-12' : '', 
-                    index === 0 ? 'border-r-0 border-l-0' : 'border-r-0',
-                    itemVisible ? "opacity-100 translate-x-0" : index === 0 ? "opacity-0 -translate-x-10" : "opacity-0 translate-x-10"
-                  )}
+    return (
+        <section className="relative py-16 px-4">
+            <div ref={sectionRef} className="relative max-w-5xl mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center"
                 >
-                  {index === 0 && (
-                    <>
-                      {/* Top right dot */}
-                      <div className="absolute top-0 right-0 w-1 h-1 bg-foreground/90 z-1 -translate-y-1/2 translate-x-1/2" />
-                      {/* Bottom right dot */}
-                      <div className="absolute bottom-0 right-0 w-1 h-1 bg-foreground/90 z-1 translate-y-1/2 translate-x-1/2" />
-                    </>
-                  )}
-                  <div className="flex flex-col gap-1">
-                  <label className="text-2xl font-light text-foreground mb-3">
-                    {item.label}
-                  </label>
-                  <p className="text-muted font-extralight text-base mb-4 tracking-wide">
-                    {item.description}
-                  </p>
-                  </div>
+                    <p className="text-sm text-muted font-light tracking-wide mb-6">
+                        Built for healthcare
+                    </p>
 
-                  {item.image && (
-                    <img
-                      src={item.image}
-                      alt=""
-                      className="object-cover block "
-                    />
-                  )}
-                </div>
-              )
-            })}
-
-            {/* Bottom Row - Text-only sections */}
-            {portalData.slice(2, 4).map((item, index) => {
-              const { ref: itemRef, isVisible: itemVisible } = useScrollAnimation(0.1)
-              return (
-                <div
-                  key={item.label}
-                  ref={itemRef}
-                  className={cn(
-                    "metrics-wrapper p-6 flex flex-col transition-all duration-700 transform",
-                    index === 1 ? 'pl-12' : '',
-                    itemVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                  )}
-                >
-                  <label className="text-2xl font-light text-foreground mb-3">
-                    {item.label}
-                  </label>
-                  <p className="text-muted font-extralight text-base tracking-wide">
-                    {item.description}
-                  </p>
-                </div>
-              )
-            })}
-
-          </div>
-        </div>
-
-        <div className="footer-section"></div>
-      </section>
-
-      {/* compliance section */}
-      <section className="py-24 px-4 relative">
-        <div 
-          ref={complianceTitleRef}
-          className={cn(
-            "text-center mb-16 transition-all duration-1000 transform",
-            complianceTitleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          )}
-        >
-          <h2 className="text-3xl md:text-4xl font-light tracking-wide text-foreground mb-4">
-            Security & Compliance
-          </h2>
-          <p className="text-muted font-extralight max-w-xl mx-auto">
-            Highest standards of data protection for <br /> healthcare organisations and their patients
-          </p>
-        </div>
-        <div 
-          ref={featuresRef}
-          className={cn(
-            "relative grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto transition-all duration-1000 transform",
-            featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          )}
-        >
-          {/* Center intersection rectangle */}
-          <div className="absolute top-1/2 left-1/2 w-1 h-1 bg-foreground/90 -translate-x-1/2 -translate-y-1/2 z-10" />
-          {features.map((feature, index) => {
-            const { ref: itemRef, isVisible: itemVisible } = useScrollAnimation(0.1)
-            return (
-              <div
-                key={feature.title}
-                ref={itemRef}
-                className={cn(
-                  "flex flex-col items-center justify-center gap-3 p-10 border border-border transition-all duration-700 transform",
-                  index === 0 ? 'border-0' : '', 
-                  index === 1 ? 'border-r-0 border-t-0 border-b-0' : '', 
-                  index === 2 ? 'border-l-0 border-b-0 border-r-0' : '', 
-                  index === 3 ? 'border-r-0 border-b-0' : '',
-                  itemVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
-                )}
-              >
-                <div className="flex h-24 w-24 items-center justify-center rounded-full border-[1.5px] border-muted">
-                  <feature.icon className="h-10 w-10 text-muted" strokeWidth={2}/>
-                </div>
-                <p
-                  className="text-center text-sm tracking-wider text-foreground font-light"
-                  dangerouslySetInnerHTML={{ __html: feature.title }}
-                />
-              </div>
-            )
-          })}
-        </div>
-      </section>
-    </div>
-  )
+                    {/* Horizontal badge row */}
+                    <div className="flex flex-wrap items-center justify-center gap-3">
+                        {complianceBadges.map((badge, index) => (
+                            <motion.div
+                                key={badge.label}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
+                                className="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.15] transition-colors duration-300"
+                            >
+                                <span className="text-sm text-foreground/80 font-light tracking-wide">
+                                    {badge.label}
+                                </span>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
 }
 
-
-export function PortalSection() {
-  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation(0.1)
-  const { ref: descRef, isVisible: descVisible } = useScrollAnimation(0.1)
-
-  return (
-    <section className="portal-section">
-      <div className="header-section flex flex-col gap-5 items-center justify-center">
-        <div 
-          ref={titleRef}
-          className={cn(
-            "title-section transition-all duration-1000 transform",
-            titleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          )}
-        >
-          <label className="text-[40px] font-light text-foreground tracking-normal">
-            Patient Engagement Portal
-          </label>
+// ============================================
+// COMBINED EXPORT
+// ============================================
+export function DashboardSection() {
+    return (
+        <div id="features-section">
+            <AdministratorsSection />
+            <PatientPortalSection />
+            <ComplianceSection />
         </div>
-        <div 
-          ref={descRef}
-          className={cn(
-            "description-section transition-all duration-1000 transform delay-200",
-            descVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          )}
-        >
-          <p className="text-muted font-extralight text-sm tracking-wider text-center">
-            {/* Empowering Patients with Secure, Instant Access to <br /> Scans and Reports */}
-            patient can book appointments, view reports, and manage their health records.
-          </p>
-        </div>
-      </div>
-    </section>
-  )
+    );
 }
-
-
-export function TestimonialsSection() {
-  return (
-    <section className="portal-section">
-      <div className="flex flex-col gap-5 items-center justify-center">
-       <TestimonialWithMarquee   
-       title="What our trusted partners say"
-       testimonials={testimonials}
-       />
-      </div>
-    </section>
-  )
-}
-
-// const trustedCompanies = [
-//   { name: "NewMed", logo: "/newmed-without-bg.png" },
-//   { name: "OM Diagnostics", logo: "/om-without-bg.png" },
-//   { name: "Prima", logo: "/prima-without-bg.png" },
-//   { name: "TX Healthcare", logo: "/tx-without-bg.png" },
-// ];
-
-
-
-
 
 export const HomePageSections = () => {
-  return (
-    <div>
-      <DashboardSection />
-      <ComplianceSection />
-      <TestimonialsSection />
-    </div>
-  )
-}
+    return <DashboardSection />;
+};
 
 export default DashboardSection;
