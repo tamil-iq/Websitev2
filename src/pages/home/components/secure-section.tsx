@@ -7,7 +7,7 @@ import { Check } from 'lucide-react';
 // Visual flow steps
 const flowSteps = ["Dictate", "Review", "Sign off"];
 
-// Feature data with improved copy per user requirements
+// Feature data with concise copy
 const features = [
     {
         id: 'reporting',
@@ -15,9 +15,8 @@ const features = [
         title: "Dictate. Review. Sign off.",
         description: (
             <>
-                Speech-to-text with intelligent priors and an AI assistant that learns your style —
-                not a generic LLM wrapper you could replace with ChatGPT.{' '}
-                <span className="text-primary font-medium">Workflow-native intelligence, built for radiology.</span>
+                AI that learns your style — not a generic LLM wrapper.{' '}
+                <span className="text-primary font-medium">Built for radiology.</span>
             </>
         ),
         video: "/videos/ai-reporting.mp4",
@@ -29,9 +28,8 @@ const features = [
         title: "Workstation power. Any device.",
         description: (
             <>
-                MPR, MIP, 3D reconstruction — instant in your browser.
-                Same performance on workstation, laptop, or tablet.{' '}
-                <span className="text-primary font-medium">Device and browser agnostic. Zero installs.</span>
+                MPR, MIP, 3D — instant in your browser.{' '}
+                <span className="text-primary font-medium">Zero installs.</span>
             </>
         ),
         video: "/videos/zero-footprint.mp4",
@@ -43,8 +41,7 @@ const features = [
         title: "One login. Every study.",
         description: (
             <>
-                Start on your workstation, continue from home.
-                Immediate viewing access on mobile when you need it.{' '}
+                Start at work, continue from home.{' '}
                 <span className="text-primary font-medium">Your worklist, wherever you are.</span>
             </>
         ),
@@ -146,11 +143,13 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         <span className="text-xs text-primary font-medium tracking-wide">For Radiologists</span>
                     </div>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-foreground mb-4">
-                        Reporting that respects your time
+                        Do what you do best: Diagnose.
                     </h2>
-                    <p className="text-lg text-muted font-light max-w-2xl mx-auto">
-                        A complete radiology workspace — viewer, reporting, collaboration —
-                        unified in one interface. Intelligence woven into every step.
+                    <p className="text-xl text-muted font-light max-w-2xl mx-auto mb-2">
+                        We'll handle the rest.
+                    </p>
+                    <p className="text-sm text-primary/80 font-medium tracking-wide">
+                        Your workflow, accelerated.
                     </p>
                 </motion.div>
 
@@ -235,14 +234,14 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                 </motion.div>
 
                 {/* Main Content Grid */}
-                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
 
                     {/* Left: Feature Cards */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                         transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                        className="space-y-4"
+                        className="flex flex-col gap-4"
                     >
                         {features.map((feature, index) => {
                             const isActive = activeFeature === index;
@@ -252,7 +251,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                     key={feature.id}
                                     onClick={() => handleFeatureClick(index)}
                                     className={cn(
-                                        "w-full text-left p-5 md:p-6 rounded-xl border transition-all duration-300 relative overflow-hidden",
+                                        "flex-1 w-full text-left p-5 rounded-xl border transition-all duration-300 relative overflow-hidden",
                                         isActive
                                             ? "bg-white/[0.04] border-primary/30"
                                             : "bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.03] hover:border-white/[0.12]"
@@ -293,14 +292,14 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                             </span>
 
                                             <h3 className={cn(
-                                                "text-lg md:text-xl font-medium mb-2 transition-colors duration-300",
+                                                "text-lg font-medium mb-1 transition-colors duration-300",
                                                 isActive ? "text-foreground" : "text-foreground/80"
                                             )}>
                                                 {feature.title}
                                             </h3>
 
                                             <p className={cn(
-                                                "text-base leading-relaxed transition-colors duration-300",
+                                                "text-sm leading-relaxed transition-colors duration-300",
                                                 isActive ? "text-muted" : "text-muted/70"
                                             )}>
                                                 {feature.description}
@@ -317,13 +316,13 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         initial={{ opacity: 0, x: 30 }}
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                         transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-                        className="relative"
+                        className="relative flex flex-col"
                     >
                         {/* Glow effect */}
                         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20 rounded-2xl blur-3xl opacity-50" />
 
-                        {/* Video container */}
-                        <div className="relative rounded-2xl border border-white/[0.1] overflow-hidden shadow-2xl shadow-black/50">
+                        {/* Video container - flex-1 to match height */}
+                        <div className="relative flex-1 rounded-2xl border border-white/[0.1] overflow-hidden shadow-2xl shadow-black/50">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={currentFeature.id}
@@ -331,7 +330,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.98 }}
                                     transition={{ duration: 0.4, ease: "easeOut" }}
-                                    className="aspect-video bg-black/50 flex items-center justify-center"
+                                    className="absolute inset-0 bg-black/50 flex items-center justify-center"
                                 >
                                     {/* Placeholder for actual video */}
                                     <div className="text-center p-8">
@@ -347,7 +346,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                             </AnimatePresence>
 
                             {/* Feature label overlay */}
-                            <div className="absolute top-4 left-4">
+                            <div className="absolute top-4 left-4 z-10">
                                 <div className="px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm border border-white/[0.1]">
                                     <span className="text-xs text-foreground font-medium">{currentFeature.label}</span>
                                 </div>
