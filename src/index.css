@@ -197,6 +197,61 @@
   }
 }
 
+/* Floating animation for gradient orbs */
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(10px, -20px) scale(1.05);
+  }
+  50% {
+    transform: translate(-5px, 10px) scale(0.95);
+  }
+  75% {
+    transform: translate(-15px, -10px) scale(1.02);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-15px, 15px) scale(0.98);
+  }
+  50% {
+    transform: translate(10px, -10px) scale(1.05);
+  }
+  75% {
+    transform: translate(5px, 20px) scale(0.95);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.05;
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    opacity: 0.08;
+    transform: translate(-50%, 0) scale(1.1);
+  }
+}
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 25s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
 @theme {
   --animate-marquee: marquee var(--duration, 40s) linear infinite;
 }

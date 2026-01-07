@@ -1,4 +1,5 @@
-import React, { ElementType, ReactNode, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
+import type { ElementType, ReactNode } from "react"
 
 import { cn } from "@/lib/utils"
 

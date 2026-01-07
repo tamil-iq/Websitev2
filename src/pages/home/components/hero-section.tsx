@@ -1,11 +1,10 @@
 
 import { AnimatedButton } from '@/components/common/animated-button';
-// import heroimage from "@/assets/homepage/hero-image.png";
 import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from "@/components/ui/marquee"
 import { RippleButton } from "@/components/ui/ripple-button";
 import { ChevronsRightIcon } from '@/components/ui/right-icon';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 
 
@@ -14,6 +13,50 @@ const trustedCompanies = [
   { name: "OM Diagnostics", logo: "/om-without-bg.png" },
   { name: "Prima", logo: "/prima-without-bg.png" },
   { name: "TX Healthcare", logo: "/tx-without-bg.png" },
+];
+
+// Animated counter component
+const AnimatedCounter = ({ value, suffix = "", duration = 2 }: { value: number; suffix?: string; duration?: number }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / (duration * 1000), 1);
+
+      // Ease out cubic for smooth deceleration
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.floor(easeOut * value));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isInView, value, duration]);
+
+  return (
+    <span ref={ref} className="text-gradient-radiologist tabular-nums">
+      {displayValue}{suffix}
+    </span>
+  );
+};
+
+// Stats data
+const stats = [
+  { value: 50000, suffix: "+", label: "Scans processed" },
+  { value: 99.9, suffix: "%", label: "Uptime" },
+  { value: 3, suffix: " min", label: "Avg. TAT" },
 ];
 
 
@@ -61,10 +104,13 @@ const HeroSection = () => {
 
   return (
  <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden ">
-      {/* Gradient background effect */}
+      {/* Animated gradient background effect */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/5 rounded-full blur-3xl animate-pulse-slow" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1200px] h-[400px] bg-primary/3 rounded-full blur-3xl" />
+        {/* Animated gradient orbs */}
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-3xl animate-float-delayed" />
       </div>
 
       {/* Content */}
@@ -101,8 +147,27 @@ const HeroSection = () => {
         >
           From patient registration to final report — unified RIS-PACS with native intelligence.
           <br />
-          <span className="text-foreground font-medium">Cut turnaround time by <span className="text-gradient-radiologist">50%</span>.</span>
+          <span className="text-foreground font-medium">Cut turnaround time by <AnimatedCounter value={50} suffix="%" duration={1.5} />.</span>
         </motion.p>
+
+        {/* Stats Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={subheadlineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-8 md:gap-12 pt-6"
+        >
+          {stats.map((stat, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <span className="text-2xl md:text-3xl font-semibold text-foreground">
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2} />
+              </span>
+              <span className="text-xs md:text-sm text-muted font-light tracking-wide mt-1">
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
 
         {/* CTA buttons */}
         <motion.div
@@ -151,10 +216,10 @@ const HeroSection = () => {
                     <MarqueeFade side="right" />
                     <MarqueeContent>
                       {trustedCompanies.map((company, index) => (
-                        <MarqueeItem className="h-24 w-auto px-8 flex items-center justify-center" key={index}>
+                        <MarqueeItem className="h-24 w-auto px-8 flex items-center justify-center group/logo" key={index}>
                           <img
                             alt={company.name}
-                            className="h-24 w-auto max-w-[200px] object-contain grayscale brightness-0 invert"
+                            className="h-24 w-auto max-w-[200px] object-contain grayscale brightness-0 invert opacity-60 transition-all duration-300 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 group-hover/logo:scale-110"
                             src={company.logo}
                             onError={() => {
                               console.error('Failed to load logo:', company.logo);

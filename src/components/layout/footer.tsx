@@ -28,18 +28,23 @@ const Footer = () => {
           <ChevronsUp className="w-4 h-4 animate-bounce-slow" />
         </button>
 
-        {/* Main content section */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-20">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-normal tracking-normal text-footer-foreground mb-4 leading-tight">
-              Better Imaging Leads to Better Healthcare
+        {/* Vision Statement - Left aligned */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-16">
+          <div className="max-w-xl">
+            <p className="text-xs text-muted/60 font-light tracking-widest uppercase mb-3">Our Mission</p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight text-foreground leading-tight">
+              Building imaging infrastructure for a{' '}
+              <span className="text-gradient-radiologist">billion</span> people.
             </h2>
-            <p className="text-muted font-extralight tracking-wide text-base">
-              &lt;Fast reporting, precise diagnosis, no wasted time&gt;
-            </p>
           </div>
 
-          <AnimatedButton>SCHEDULE A DEMO</AnimatedButton>
+          {/* CTA section */}
+          <div className="flex flex-col items-start gap-3 md:pt-8">
+            <p className="text-foreground/80 font-light tracking-wide text-sm">
+              Ready to transform your imaging workflow?
+            </p>
+            <AnimatedButton>SCHEDULE A DEMO</AnimatedButton>
+          </div>
         </div>
 
         {/* Footer links section */}
