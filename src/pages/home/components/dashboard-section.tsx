@@ -256,8 +256,8 @@ export function PatientPortalSection() {
                         <span className="text-foreground">What your patients will </span>
                         <span className="text-gradient-patient">love.</span>
                     </h2>
-                    <p className="text-lg md:text-xl text-muted font-light max-w-xl mx-auto">
-                        A patient experience that sets your center apart.
+                    <p className="text-lg md:text-xl text-foreground/70 font-light max-w-xl mx-auto">
+                        A patient experience that sets your center or hospital apart.
                     </p>
                 </motion.div>
 

@@ -52,10 +52,11 @@ const features = [
 
 const testimonialData = {
     quote:
-        "Our average turnaround time dropped by 40% within the first month. The unified workflow means radiologists spend time on diagnosis, not navigating between systems.",
+        "My reporting time was reduced by 50%. The platform felt familiar from day one, with virtually no learning curve — allowing me to focus on what truly matters: the patient.",
     author: {
-        name: "Dr. Rajesh Kumar",
-        title: "Chief Radiologist | Metro Diagnostics",
+        name: "Dr. Nikita Sridhar",
+        role: "Consultant Radiologist",
+        organization: "Prima Diagnostics, Bengaluru",
         avatarUrl: "",
     },
 };
@@ -366,14 +367,21 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         "{testimonialData.quote}"
                     </blockquote>
                     <div className="flex items-center justify-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                            <span className="text-primary font-medium">
-                                {testimonialData.author.name.split(' ').map(n => n[0]).join('')}
-                            </span>
+                        <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 overflow-hidden flex items-center justify-center">
+                            {testimonialData.author.avatarUrl ? (
+                                <img
+                                    src={testimonialData.author.avatarUrl}
+                                    alt={testimonialData.author.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            ) : (
+                                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5" />
+                            )}
                         </div>
                         <div className="text-left">
                             <p className="text-foreground font-medium">{testimonialData.author.name}</p>
-                            <p className="text-sm text-muted">{testimonialData.author.title}</p>
+                            <p className="text-sm text-muted">{testimonialData.author.role}</p>
+                            <p className="text-xs text-muted/70">{testimonialData.author.organization}</p>
                         </div>
                     </div>
                 </motion.div>

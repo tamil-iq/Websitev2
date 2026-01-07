@@ -54,9 +54,9 @@ const AnimatedCounter = ({ value, suffix = "", duration = 2 }: { value: number; 
 
 // Stats data
 const stats = [
-  { value: 50000, suffix: "+", label: "Scans processed" },
+  { value: 100000, suffix: "+", label: "Scans processed" },
   { value: 99.9, suffix: "%", label: "Uptime" },
-  { value: 3, suffix: " min", label: "Avg. TAT" },
+  { value: 100, suffix: "+", label: "Radiologists using platform" },
 ];
 
 
