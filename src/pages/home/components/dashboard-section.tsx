@@ -99,7 +99,7 @@ export function AdministratorsSection() {
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
     return (
-        <section id="administrators-section" className="relative py-32 px-4 overflow-hidden">
+        <section id="administrators-section" className="relative py-24 px-6 overflow-hidden">
             {/* Gradient background */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/8 rounded-full blur-[120px]" />
@@ -108,28 +108,52 @@ export function AdministratorsSection() {
 
             <div ref={sectionRef} className="relative max-w-6xl mx-auto">
 
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="text-center mb-16"
-                >
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
-                        </span>
-                        <span className="text-xs text-emerald-300 font-medium tracking-wide">For Administrators</span>
-                    </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
-                        <span className="text-foreground">Decide with </span>
-                        <span className="text-gradient-admin">clarity.</span>
+                {/* Section Header - Left aligned like Radiologists */}
+                <div className="text-left mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        className="inline-flex items-center gap-3 mb-6"
+                    >
+                        <span className="w-5 h-3 rounded-full bg-emerald-400" />
+                        <span className="text-sm text-foreground/70 font-light tracking-wide">For Administrators</span>
+                        <svg className="w-4 h-4 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </motion.div>
+
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6">
+                        {["Decide", "with"].map((word, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                transition={{ duration: 0.4, delay: 0.1 + i * 0.08, ease: "easeOut" }}
+                                className="inline-block text-foreground mr-[0.3em]"
+                            >
+                                {word}
+                            </motion.span>
+                        ))}
+                        <motion.span
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
+                            className="inline-block text-emerald-400"
+                        >
+                            clarity.
+                        </motion.span>
                     </h2>
-                    <p className="text-lg md:text-xl text-muted font-light max-w-xl mx-auto">
-                        Real-time insights for informed decisions.
-                    </p>
-                </motion.div>
+
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                        transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+                        className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl"
+                    >
+                        Real-time visibility across your entire operation. Track performance, monitor equipment, and make informed decisions.
+                    </motion.p>
+                </div>
 
                 {/* Bento Grid */}
                 <motion.div
@@ -229,7 +253,7 @@ export function PatientPortalSection() {
     const [activeFeature, setActiveFeature] = useState(0);
 
     return (
-        <section id="patients-section" className="relative py-32 px-4 overflow-hidden">
+        <section id="patients-section" className="relative py-24 px-6 overflow-hidden">
             {/* Stripe-inspired gradient background */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-1/3 right-0 w-[800px] h-[800px] bg-violet-500/5 rounded-full blur-[150px]" />
@@ -238,28 +262,52 @@ export function PatientPortalSection() {
 
             <div ref={sectionRef} className="relative max-w-6xl mx-auto">
 
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="text-center mb-16"
-                >
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 mb-6">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-400"></span>
-                        </span>
-                        <span className="text-xs text-violet-300 font-medium tracking-wide">For Patients</span>
-                    </div>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
-                        <span className="text-foreground">What your patients will </span>
-                        <span className="text-gradient-patient">love.</span>
+                {/* Section Header - Left aligned like Radiologists */}
+                <div className="text-left mb-16">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        className="inline-flex items-center gap-3 mb-6"
+                    >
+                        <span className="w-5 h-3 rounded-full bg-violet-400" />
+                        <span className="text-sm text-foreground/70 font-light tracking-wide">For Patients</span>
+                        <svg className="w-4 h-4 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </motion.div>
+
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6">
+                        {["What", "your", "patients", "will"].map((word, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                                transition={{ duration: 0.4, delay: 0.1 + i * 0.08, ease: "easeOut" }}
+                                className="inline-block text-foreground mr-[0.3em]"
+                            >
+                                {word}
+                            </motion.span>
+                        ))}
+                        <motion.span
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+                            className="inline-block text-violet-400"
+                        >
+                            love.
+                        </motion.span>
                     </h2>
-                    <p className="text-lg md:text-xl text-foreground/70 font-light max-w-xl mx-auto">
-                        A patient experience that sets your center or hospital apart.
-                    </p>
-                </motion.div>
+
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                        transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+                        className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl"
+                    >
+                        A patient experience that truly sets your center or hospital apart—instant access to reports, AI-powered explanations, and effortless sharing.
+                    </motion.p>
+                </div>
 
                 {/* Main Content - Figma-style interactive layout */}
                 <div className="grid lg:grid-cols-5 gap-8 items-center">
@@ -304,13 +352,13 @@ export function PatientPortalSection() {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <h3 className={cn(
-                                        "font-medium text-sm transition-colors duration-300",
+                                        "font-medium text-base md:text-lg transition-colors duration-300",
                                         activeFeature === index ? "text-foreground" : "text-foreground/70"
                                     )}>
                                         {feature.title}
                                     </h3>
                                     <p className={cn(
-                                        "text-xs font-light mt-0.5 transition-colors duration-300",
+                                        "text-sm font-light mt-1 transition-colors duration-300 line-clamp-2",
                                         activeFeature === index ? "text-muted" : "text-muted/70"
                                     )}>
                                         {feature.description}

@@ -97,8 +97,8 @@ const HeroSection = () => {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/5 rounded-full blur-3xl animate-pulse-slow" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1200px] h-[400px] bg-primary/3 rounded-full blur-3xl" />
         {/* Animated gradient orbs */}
-        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-3xl animate-float-delayed" />
+        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#0EA5E9]/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#8B5CF6]/5 rounded-full blur-3xl animate-float-delayed" />
       </div>
 
       {/* Content */}
@@ -119,7 +119,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={headlineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium leading-[1.1] pb-2"
+          className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.1] tracking-tight pb-2"
         >
           <span className="block text-foreground">One <span className="text-gradient-radiologist">Intelligent</span> platform for your</span>
           <span className="block mt-3 text-foreground">entire radiology workflow</span>
@@ -131,7 +131,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={subheadlineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-          className="max-w-2xl mx-auto text-base md:text-lg lg:text-xl text-muted leading-relaxed tracking-wide font-light pt-4"
+          className="max-w-2xl mx-auto text-lg md:text-xl text-foreground/60 leading-relaxed font-light pt-4"
         >
           From patient registration to final report — unified RIS-PACS with native intelligence.
         </motion.p>

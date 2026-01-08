@@ -237,10 +237,10 @@
     height: 100%;
     background: linear-gradient(
       to bottom,
-      #0855b4 0%,
+      #3B82F6 0%,
       transparent 20%
     );
-    opacity: 0.25;
+    opacity: 0.20;
     pointer-events: none;
     z-index: -1;
   }
@@ -356,4 +356,122 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Animated Text Cycle - Gradient animations
+   One-time animation: Dictate → Review → Sign off (stops at Sign off)
+   Timing: 6s total, each word gets 2s of highlight
+*/
+
+/* Foreground (gradient text) - visible when word is "active" */
+@keyframes gradient-foreground-1 {
+  0% { opacity: 1; }
+  25% { opacity: 1; }
+  33.333% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.animate-gradient-foreground-1 {
+  animation: gradient-foreground-1 6s forwards;
+}
+
+@keyframes gradient-foreground-2 {
+  0% { opacity: 0; }
+  25% { opacity: 0; }
+  33.333% { opacity: 1; }
+  58.333% { opacity: 1; }
+  66.667% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.animate-gradient-foreground-2 {
+  animation: gradient-foreground-2 6s forwards;
+}
+
+@keyframes gradient-foreground-3 {
+  0% { opacity: 0; }
+  58.333% { opacity: 0; }
+  66.667% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.animate-gradient-foreground-3 {
+  animation: gradient-foreground-3 6s forwards;
+}
+
+/* Background (solid white text) - visible when word is NOT active (inverse) */
+@keyframes gradient-background-1 {
+  0% { opacity: 0; }
+  25% { opacity: 0; }
+  33.333% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.before\:animate-gradient-background-1::before {
+  animation: gradient-background-1 6s forwards;
+}
+
+@keyframes gradient-background-2 {
+  0% { opacity: 1; }
+  25% { opacity: 1; }
+  33.333% { opacity: 0; }
+  58.333% { opacity: 0; }
+  66.667% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.before\:animate-gradient-background-2::before {
+  animation: gradient-background-2 6s forwards;
+}
+
+@keyframes gradient-background-3 {
+  0% { opacity: 1; }
+  58.333% { opacity: 1; }
+  66.667% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.before\:animate-gradient-background-3::before {
+  animation: gradient-background-3 6s forwards;
+}
+
+/* Gradient colors - single accent color (primary blue) for all words */
+.from-gradient-1-start {
+  --tw-gradient-from: #3B82F6;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0));
+}
+
+.to-gradient-1-end {
+  --tw-gradient-to: #60A5FA;
+}
+
+.from-gradient-2-start {
+  --tw-gradient-from: #3B82F6;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0));
+}
+
+.to-gradient-2-end {
+  --tw-gradient-to: #60A5FA;
+}
+
+.from-gradient-3-start {
+  --tw-gradient-from: #3B82F6;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0));
+}
+
+.to-gradient-3-end {
+  --tw-gradient-to: #60A5FA;
+}
+
+/* Additional text animation styles */
+.before\:content-\[attr\(data-content\)\]::before {
+  content: attr(data-content);
+}
+
+.tracking-tighter {
+  letter-spacing: -0.05em;
+}
+
+.tracking-tightest {
+  letter-spacing: -0.09em;
 }

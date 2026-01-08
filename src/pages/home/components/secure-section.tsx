@@ -2,32 +2,73 @@ import { cn } from '@/lib/utils';
 import { Separator } from '@/components/common/separator';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { AnimatedTextCycle } from '@/components/ui/animated-text-cycle';
 
-// Feature data - Apple style: minimal, impactful
+// AI Badge component for "breeze" word - static
+const AIBadge = () => (
+    <span className="absolute -top-3 -right-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md">
+        AI
+    </span>
+);
+
+// Device icon for "freedom" word
+const DeviceIcon = () => (
+    <span className="absolute -top-2 -right-3 text-white/90">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
+        </svg>
+    </span>
+);
+
+// Magic sparkle icon for "magic" word - static triangle cluster, bright stars
+const MagicIcon = () => (
+    <>
+        {/* Large star - top of triangle */}
+        <span className="absolute -top-4 -right-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFD700">
+                <path d="M12 2L13.09 8.26L19 7L14.74 11.09L21 12L14.74 12.91L19 17L13.09 15.74L12 22L10.91 15.74L5 17L9.26 12.91L3 12L9.26 11.09L5 7L10.91 8.26L12 2Z"/>
+            </svg>
+        </span>
+        {/* Medium star - bottom left of triangle */}
+        <span className="absolute -top-1 -right-0">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#FFC107">
+                <path d="M12 2L13.09 8.26L19 7L14.74 11.09L21 12L14.74 12.91L19 17L13.09 15.74L12 22L10.91 15.74L5 17L9.26 12.91L3 12L9.26 11.09L5 7L10.91 8.26L12 2Z"/>
+            </svg>
+        </span>
+        {/* Small star - bottom right of triangle */}
+        <span className="absolute -top-1 -right-4">
+            <svg width="7" height="7" viewBox="0 0 24 24" fill="#FFEB3B">
+                <path d="M12 2L13.09 8.26L19 7L14.74 11.09L21 12L14.74 12.91L19 17L13.09 15.74L12 22L10.91 15.74L5 17L9.26 12.91L3 12L9.26 11.09L5 7L10.91 8.26L12 2Z"/>
+            </svg>
+        </span>
+    </>
+);
+
+// Feature cards with descriptions
 const features = [
     {
         id: 'reporting',
-        label: "Reporting",
-        title: <>Dictate. Review. Sign off. <span className="text-primary">That's it!</span></>,
+        label: "REPORTING",
+        headline: <>Focus on <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">diagnosis.<AIBadge /></span></>,
+        description: "We'll handle everything else.",
         video: "/videos/ai-reporting.mp4",
-        color: "59, 130, 246", // primary blue RGB
-        step: 0,
+        color: "59, 130, 246",
     },
     {
         id: 'viewer',
-        label: "Viewer",
-        title: <>Workstation power. Browser simplicity. Feels like <span className="text-primary">magic!</span></>,
+        label: "VIEWER",
+        headline: <>Feels like <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">magic.<MagicIcon /></span></>,
+        description: "True workstation power with the ease of a browser.",
         video: "/videos/zero-footprint.mp4",
-        color: "59, 130, 246", // primary blue RGB
-        step: 1,
+        color: "59, 130, 246",
     },
     {
         id: 'anywhere',
-        label: "Access",
-        title: <>One login. Any device. Total <span className="text-primary">freedom!</span></>,
+        label: "ACCESS",
+        headline: <>Total <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">freedom.<DeviceIcon /></span></>,
+        description: "One secure login. Any device. Anywhere.",
         video: "/videos/any-device.mp4",
-        color: "59, 130, 246", // primary blue RGB
-        step: 2,
+        color: "59, 130, 246",
     },
 ];
 
@@ -103,57 +144,37 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
         >
             {/* Background gradient */}
             <div className={cn(
-                "pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0855b4]/25 to-transparent transition-opacity duration-300",
+                "pointer-events-none absolute inset-0 bg-gradient-to-b from-[#3B82F6]/20 to-transparent transition-opacity duration-300",
                 hideLocalGradient ? "opacity-0" : "opacity-100"
             )} />
 
             <div className="relative max-w-6xl mx-auto space-y-16">
 
                 {/* Section Header */}
-                <div className="text-center">
+                <div className="text-left">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6"
+                        className="inline-flex items-center gap-3 mb-6"
                     >
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                        </span>
-                        <span className="text-xs text-primary font-medium tracking-wide">For Radiologists</span>
+                        <span className="w-5 h-3 rounded-full bg-primary" />
+                        <span className="text-sm text-foreground/70 font-light tracking-wide">For Radiologists</span>
+                        <svg className="w-4 h-4 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
                     </motion.div>
 
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-4">
-                        {["Do", "what", "you", "do", "best:"].map((word, i) => (
-                            <motion.span
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                                transition={{ duration: 0.4, delay: 0.1 + i * 0.08, ease: "easeOut" }}
-                                className="inline-block text-foreground mr-[0.3em]"
-                            >
-                                {word}
-                            </motion.span>
-                        ))}
-                        <motion.span
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
-                            className="inline-block text-gradient-radiologist"
-                        >
-                            Diagnose.
-                        </motion.span>
-                    </h2>
-
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                        transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-                        className="text-2xl md:text-3xl font-light text-muted/80 max-w-xl mx-auto tracking-tight"
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
                     >
-                        We'll handle the rest.
-                    </motion.p>
+                        <AnimatedTextCycle
+                            words={["Dictate.", "Review.", "Sign off."]}
+                        />
+                    </motion.div>
+
                 </div>
 
                 {/* Main Content Grid */}
@@ -164,7 +185,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         initial={{ opacity: 0, x: -30 }}
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                         transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-                        className="flex flex-col gap-4"
+                        className="flex flex-col gap-3"
                     >
                         {features.map((feature, index) => {
                             const isActive = activeFeature === index;
@@ -174,12 +195,12 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                     key={feature.id}
                                     onClick={() => handleFeatureClick(index)}
                                     className={cn(
-                                        "flex-1 w-full text-left p-5 rounded-xl border transition-all duration-300 relative overflow-hidden",
+                                        "flex-1 w-full text-left px-5 py-5 md:px-6 md:py-6 rounded-xl border transition-all duration-300 relative overflow-hidden",
                                         isActive
-                                            ? "bg-white/[0.04]"
-                                            : "bg-white/[0.02] border-white/[0.08] hover:bg-white/[0.03] hover:border-white/[0.12]"
+                                            ? "bg-white/[0.03] border-white/[0.15]"
+                                            : "bg-transparent border-white/[0.06] hover:bg-white/[0.02] hover:border-white/[0.1]"
                                     )}
-                                    style={isActive ? { borderColor: `rgba(${feature.color}, 0.4)` } : {}}
+                                    style={isActive ? { borderColor: `rgba(${feature.color}, 0.3)` } : {}}
                                     whileHover={{ scale: 1.01 }}
                                     whileTap={{ scale: 0.99 }}
                                 >
@@ -193,35 +214,27 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                         />
                                     )}
 
-                                    <div className="flex items-start gap-4">
-                                        {/* Feature indicator */}
-                                        <div className={cn(
-                                            "flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300",
-                                            isActive
-                                                ? "bg-primary/20 text-primary"
-                                                : "bg-white/[0.05] text-muted"
+                                    <div className="flex flex-col gap-2">
+                                        {/* Label */}
+                                        <span className="text-xs font-medium tracking-widest text-muted/70 uppercase">
+                                            {feature.label}
+                                        </span>
+
+                                        {/* Bold headline with highlighted word */}
+                                        <h3 className={cn(
+                                            "text-2xl md:text-3xl font-bold tracking-tight leading-tight transition-all duration-300",
+                                            isActive ? "text-foreground" : "text-foreground/90"
                                         )}>
-                                            <span className="text-lg font-light">{index + 1}</span>
-                                        </div>
+                                            {feature.headline}
+                                        </h3>
 
-                                        <div className="flex-1 min-w-0">
-                                            {/* Label badge */}
-                                            <span className={cn(
-                                                "inline-block text-xs font-light tracking-wide px-2 py-0.5 rounded-full mb-2 transition-colors duration-300",
-                                                isActive
-                                                    ? "bg-primary/20 text-primary"
-                                                    : "bg-white/[0.05] text-muted"
-                                            )}>
-                                                {feature.label}
-                                            </span>
-
-                                            <h3 className={cn(
-                                                "text-lg font-medium tracking-tight transition-colors duration-300",
-                                                isActive ? "text-foreground" : "text-foreground/70"
-                                            )}>
-                                                {feature.title}
-                                            </h3>
-                                        </div>
+                                        {/* Description */}
+                                        <p className={cn(
+                                            "text-sm md:text-base font-light transition-colors duration-300 mt-1",
+                                            isActive ? "text-foreground/70" : "text-foreground/50"
+                                        )}>
+                                            {feature.description}
+                                        </p>
                                     </div>
                                 </motion.button>
                             );
@@ -238,8 +251,8 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         {/* Glow effect */}
                         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20 rounded-2xl blur-3xl opacity-50" />
 
-                        {/* Video container - flex-1 to match height */}
-                        <div className="relative flex-1 rounded-2xl border border-white/[0.1] overflow-hidden shadow-2xl shadow-black/50">
+                        {/* Video container - stretches to match cards */}
+                        <div className="relative flex-1 min-h-[300px] rounded-2xl border border-white/[0.1] overflow-hidden shadow-2xl shadow-black/50">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={currentFeature.id}
@@ -256,7 +269,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                                 <path d="M8 5v14l11-7z" />
                                             </svg>
                                         </div>
-                                        <p className="text-muted font-light tracking-wide">{currentFeature.title}</p>
+                                        <p className="text-muted font-light tracking-wide">{currentFeature.description}</p>
                                         <p className="text-xs text-muted/60 font-extralight mt-1">Video demo coming soon</p>
                                     </div>
                                 </motion.div>
