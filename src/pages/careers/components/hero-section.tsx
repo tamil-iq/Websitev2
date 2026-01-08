@@ -76,7 +76,7 @@ export default function HeroSection() {
                     <img
                         src={heroimage}
                         alt="Somatiq Team"
-                        className="w-full max-w-md md:max-w-lg rounded-2xl shadow-2xl shadow-primary/10"
+                        className="w-full max-w-xs md:max-w-sm rounded-2xl shadow-xl shadow-primary/10"
                     />
                 </motion.div>
             </div>

@@ -61,7 +61,10 @@ function WhySomatiqSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-4">
+                    <span className="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-primary mb-4">
+                        Why Join Us
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
                         Why Somatiq?
                     </h2>
                     <p className="text-lg text-foreground/60 font-light max-w-2xl mx-auto">
@@ -112,7 +115,10 @@ function OpportunitySection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-4">
+                    <span className="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-primary mb-4">
+                        Opportunities
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
                         Open Roles
                     </h2>
                     <p className="text-lg text-foreground/60 font-light">
@@ -155,15 +161,19 @@ function CTASection() {
             transition={{ duration: 0.8 }}
         >
             <div className="max-w-3xl mx-auto text-center">
-                <motion.h2
-                    className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-6"
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    Ready to Build Something Meaningful?
-                </motion.h2>
+                    <span className="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-primary mb-4">
+                        Get Started
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-6">
+                        Ready to Build Something Meaningful?
+                    </h2>
+                </motion.div>
 
                 <motion.p
                     className="text-lg text-foreground/60 font-light mb-10 max-w-xl mx-auto"
