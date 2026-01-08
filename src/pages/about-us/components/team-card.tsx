@@ -24,45 +24,45 @@ const TeamSectionPage = () => {
       <div className="max-w-5xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-[oklch(0.6_0.2_250)] mb-4">
+          <span className="inline-block text-xs font-semibold uppercase tracking-[0.15em] text-primary mb-4">
             Leadership
           </span>
-          <h2 className="font-serif text-5xl text-white font-normal">
+          <h2 className="text-4xl md:text-5xl font-semibold text-foreground">
             Team behind SOMATIQ
           </h2>
         </div>
-        
+
         {/* Team Grid */}
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-8">
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="bg-[oklch(0.145_0_0)] border border-[oklch(1_0_0/10%)] rounded-3xl p-12 transition-all duration-300 hover:border-[oklch(0.6_0.2_250)]"
+              className="bg-white/[0.02] border border-white/[0.08] rounded-2xl p-8 md:p-10 transition-all duration-300 hover:border-primary/30 hover:bg-white/[0.04]"
             >
               {/* Team Header */}
-              <div className="flex gap-6 mb-8">
-                <img 
-                  src={member.image} 
+              <div className="flex gap-5 mb-6">
+                <img
+                  src={member.image}
                   alt={member.name}
-                  className="w-20 h-20 rounded-2xl object-cover flex-shrink-0"
+                  className="w-16 h-16 md:w-20 md:h-20 rounded-xl object-cover flex-shrink-0"
                 />
                 <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-white mb-1">
+                  <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-1">
                     {member.name}
                   </h3>
-                  <p className="text-[0.95rem] text-[oklch(0.6_0.2_250)] font-medium">
+                  <p className="text-sm md:text-base text-primary font-medium">
                     {member.role}
                   </p>
                 </div>
               </div>
-              
+
               {/* Bio */}
-              <p className="text-base text-[oklch(0.708_0_0)] leading-relaxed mb-8">
+              <p className="text-sm md:text-base text-foreground/60 font-light leading-relaxed mb-6">
                 {member.bio}
               </p>
-              
+
               {/* Quote */}
-              <p className="font-serif text-lg italic text-white pl-6 border-l-4 border-[oklch(0.6_0.2_250)] leading-relaxed">
+              <p className="text-base md:text-lg italic text-foreground/80 pl-5 border-l-2 border-primary/50 leading-relaxed">
                 {member.quote}
               </p>
             </div>
