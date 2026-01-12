@@ -93,7 +93,7 @@ const HeroSection = () => {
   const buttonsInView = useInView(buttonsRef, { once: true, margin: "-100px" });
 
   return (
- <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden ">
+ <section className="relative min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-4 py-12 overflow-hidden">
       {/* Animated gradient background effect */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/5 rounded-full blur-3xl animate-pulse-slow" />

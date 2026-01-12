@@ -39,7 +39,7 @@ export default function HeroSection() {
                 />
             </div>
 
-            {/* Content - Simplified, centered layout */}
+            {/* Content - Centered layout */}
             <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
                 {/* Badge */}
                 <motion.div
@@ -49,7 +49,7 @@ export default function HeroSection() {
                     className="inline-flex items-center gap-3 mb-8"
                 >
                     <span className="w-5 h-3 rounded-full bg-primary" />
-                    <span className="text-sm text-foreground/70 font-light tracking-wide">About Us</span>
+                    <span className="text-sm text-foreground/70 font-light tracking-wide">Our Story</span>
                     <svg className="w-4 h-4 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
@@ -57,7 +57,7 @@ export default function HeroSection() {
 
                 {/* Main headline */}
                 <motion.h1
-                    className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-6 leading-[1.1]"
+                    className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-8 leading-[1.1]"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
@@ -68,26 +68,39 @@ export default function HeroSection() {
                     </span>
                 </motion.h1>
 
-                {/* Subheadline */}
+                {/* Story paragraphs */}
                 <motion.p
-                    className="text-lg md:text-xl text-foreground/60 font-light leading-relaxed max-w-2xl mx-auto mb-4"
+                    className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-3xl mx-auto mb-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                >
+                    We built Somatiq because the imaging infrastructure in our country is{' '}
+                    <span className="text-foreground font-medium">fundamentally broken</span>.
+                    Dominated by legacy vendors, lacking innovation, and not built for the future.
+                </motion.p>
+
+                <motion.p
+                    className="text-xl md:text-2xl text-primary font-medium leading-relaxed max-w-2xl mx-auto mb-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                    No legacy baggage. No complexity. No more RIS-PACS jargon.
+                    This is not just a technology gap — it is a healthcare problem.
                 </motion.p>
+
                 <motion.p
-                    className="text-lg md:text-xl text-foreground/80 font-medium leading-relaxed max-w-2xl mx-auto"
+                    className="text-lg md:text-xl text-foreground/60 font-light leading-relaxed max-w-3xl mx-auto"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
                 >
-                    Just imaging, simplified.
+                    Diagnosis sits at the core of patient care. When workflows are fragmented, outcomes suffer.
+                    We saw a messy ecosystem that needed <span className="text-primary font-medium">rebuilding</span>, not patching.
                 </motion.p>
             </div>
 
-            {/* Decorative grid lines - simplified */}
+            {/* Decorative grid lines */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 {/* Vertical lines */}
                 <div

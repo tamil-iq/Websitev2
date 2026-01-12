@@ -3,6 +3,7 @@ import SecureSection from './components/secure-section';
 import { HomePageSections } from './components/dashboard-section';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { SEO } from '@/components/common/seo';
 
 const Home = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -35,6 +36,11 @@ const Home = () => {
 
   return (
     <div className="w-full overflow-x-hidden">
+      <SEO
+        title="Somatiq | Intelligent RIS-PACS Platform for Radiology"
+        description="One intelligent platform for your entire radiology workflow. Unified RIS-PACS with native intelligence, from patient registration to final report."
+        canonical="/"
+      />
       {/* Fixed gradient overlay at the top - appears after hero section */}
       <div 
         className={cn(

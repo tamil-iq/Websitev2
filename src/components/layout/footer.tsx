@@ -100,6 +100,18 @@ const Footer = () => {
             </h3>
             <div className="flex flex-col gap-3">
               <Link
+                to="/product"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                Product
+              </Link>
+              <Link
+                to="/portfolio"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                Portfolio
+              </Link>
+              <Link
                 to="/teleradiology"
                 className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
               >
@@ -116,6 +128,12 @@ const Footer = () => {
                 className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
               >
                 Careers
+              </Link>
+              <Link
+                to="/blog"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                Blog
               </Link>
             </div>
           </div>

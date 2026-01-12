@@ -1,15 +1,21 @@
+import { trackDemoRequest } from '@/lib/analytics';
+
 interface AnimatedButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string;
+  trackingSource?: string;
 }
 
 const DEMO_EMAIL = 'info@somatiq.ai';
 const DEMO_SUBJECT = 'Demo Request - Somatiq Platform';
 const DEMO_BODY = 'Hi Somatiq team,\n\nI would like to schedule a demo of your platform.\n\nPlease let me know your availability.\n\nThank you!';
 
-export function AnimatedButton({ children, onClick, href }: AnimatedButtonProps) {
+export function AnimatedButton({ children, onClick, href, trackingSource = 'unknown' }: AnimatedButtonProps) {
   const handleClick = () => {
+    // Track the conversion event
+    trackDemoRequest(trackingSource);
+
     if (onClick) {
       onClick();
     } else if (href) {

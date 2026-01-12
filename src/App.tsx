@@ -5,6 +5,9 @@ import AboutUs from './pages/about-us';
 import './index.css';
 import Teleradiology from './pages/teleradiology';
 import Careers from './pages/careers';
+import Product from './pages/product';
+import Portfolio from './pages/portfolio';
+import Blog from './pages/blog';
 import NotFound from './pages/not-found';
 import ScrollToTop from './components/common/scroll-to-top';
 
@@ -15,9 +18,12 @@ function App() {
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutUs />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/teleradiology" element={<Teleradiology />} />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </MainLayout>
