@@ -7,6 +7,8 @@ import Teleradiology from './pages/teleradiology';
 import Careers from './pages/careers';
 import Product from './pages/product';
 import Portfolio from './pages/portfolio';
+import Radone from './pages/portfolio/radone';
+import Billing from './pages/portfolio/billing';
 import Blog from './pages/blog';
 import NotFound from './pages/not-found';
 import ScrollToTop from './components/common/scroll-to-top';
@@ -20,6 +22,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
           <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio/radone" element={<Radone />} />
+          <Route path="/portfolio/billing" element={<Billing />} />
           <Route path="/teleradiology" element={<Teleradiology />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/careers" element={<Careers />} />

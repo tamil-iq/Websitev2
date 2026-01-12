@@ -171,7 +171,7 @@ function CTASection() {
                         Get Started
                     </span>
                     <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-6">
-                        Ready to Build Something Meaningful?
+                        Interested?
                     </h2>
                 </motion.div>
 
@@ -182,7 +182,7 @@ function CTASection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                 >
-                    If you're excited about solving hard problems in healthcare technology, we'd love to hear from you.
+                    We'd love to hear from you.
                 </motion.p>
 
                 <motion.div

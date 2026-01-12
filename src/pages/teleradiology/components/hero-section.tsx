@@ -76,8 +76,7 @@ export default function HeroSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                    Subspecialty radiologists who take the time to get it right.
-                    Because accurate diagnosis is where better outcomes begin.
+                    Subspecialty radiologists. Accurate diagnosis. Better outcomes.
                 </motion.p>
 
                 {/* CTA */}

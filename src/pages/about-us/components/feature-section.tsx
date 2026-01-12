@@ -5,17 +5,17 @@ import { AnimatedButton } from '@/components/common/animated-button';
 
 const stats = [
     {
-        value: "10",
+        value: "100000",
         suffix: "+",
-        label: "Diagnostic Centres",
+        label: "Scans Processed",
     },
     {
-        value: "1000",
-        suffix: "+",
-        label: "Patients Daily",
+        value: "99.9",
+        suffix: "%",
+        label: "Uptime",
     },
     {
-        value: "50",
+        value: "100",
         suffix: "+",
         label: "Radiologists",
     }

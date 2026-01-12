@@ -279,7 +279,7 @@ export function PatientPortalSection() {
                     </motion.div>
 
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6">
-                        {["What", "your", "patients", "will"].map((word, i) => (
+                        {["Patients"].map((word, i) => (
                             <motion.span
                                 key={i}
                                 initial={{ opacity: 0, y: 20 }}
@@ -293,20 +293,20 @@ export function PatientPortalSection() {
                         <motion.span
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                            transition={{ duration: 0.5, delay: 0.5, ease: "easeOut" }}
+                            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
                             className="inline-block text-violet-400"
                         >
-                            love.
+                            love it.
                         </motion.span>
                     </h2>
 
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                        transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+                        transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
                         className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl"
                     >
-                        A patient experience that truly sets your center or hospital apart—instant access to reports, AI-powered explanations, and effortless sharing.
+                        Instant report access, AI-powered explanations, and effortless sharing.
                     </motion.p>
                 </div>
 

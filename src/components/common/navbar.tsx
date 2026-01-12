@@ -16,8 +16,16 @@ const Navbar = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const navLinks: NavLink[] = [
-    { name: 'Product', path: '/product' },
-    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Platform', path: '/' },
+    {
+      name: 'Portfolio',
+      path: '/portfolio',
+      children: [
+        { name: 'Platform', path: '/', description: 'Unified RIS-PACS solution' },
+        { name: 'Radone Reporting', path: '/portfolio/radone', description: 'Radiology reporting solution' },
+        { name: 'Billing System', path: '/portfolio/billing', description: 'Healthcare billing management' },
+      ]
+    },
     { name: 'Teleradiology', path: '/teleradiology' },
     { name: 'About Us', path: '/about' },
     { name: 'Careers', path: '/careers' },
@@ -85,11 +93,16 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1" ref={dropdownRef}>
             {navLinks.map((link) => (
-              <div key={link.path} className="relative">
+              <div
+                key={link.path}
+                className="relative group"
+                onMouseEnter={() => link.children && setActiveDropdown(link.name)}
+                onMouseLeave={() => link.children && setActiveDropdown(null)}
+              >
                 {link.children ? (
                   // Dropdown menu item
-                  <button
-                    onClick={() => handleDropdownToggle(link.name)}
+                  <Link
+                    to={link.path}
                     className={`flex items-center gap-1 px-3 py-2 rounded-md text-sm tracking-wide transition-colors ${
                       isParentActive(link)
                         ? 'text-foreground font-medium'
@@ -102,7 +115,7 @@ const Navbar = () => {
                         activeDropdown === link.name ? 'rotate-180' : ''
                       }`}
                     />
-                  </button>
+                  </Link>
                 ) : (
                   // Regular link
                   <Link
@@ -118,26 +131,34 @@ const Navbar = () => {
                 )}
 
                 {/* Dropdown Panel */}
-                {link.children && activeDropdown === link.name && (
-                  <div className="absolute top-full left-0 mt-1 w-64 bg-background border border-border rounded-lg shadow-lg py-2 animate-in fade-in-0 zoom-in-95 duration-200">
-                    {link.children.map((child) => (
-                      <Link
-                        key={child.path}
-                        to={child.path}
-                        className={`block px-4 py-3 transition-colors ${
-                          isActive(child.path)
-                            ? 'bg-muted/50 text-foreground'
-                            : 'text-muted-foreground hover:bg-muted/30 hover:text-foreground'
-                        }`}
-                      >
-                        <span className="text-sm font-light">{child.name}</span>
-                        {child.description && (
-                          <span className="block text-xs text-muted-foreground/70 mt-0.5">
-                            {child.description}
-                          </span>
-                        )}
-                      </Link>
-                    ))}
+                {link.children && (
+                  <div
+                    className={`absolute top-full left-0 pt-1 w-64 transition-all duration-200 ${
+                      activeDropdown === link.name
+                        ? 'opacity-100 visible translate-y-0'
+                        : 'opacity-0 invisible -translate-y-2'
+                    }`}
+                  >
+                    <div className="bg-background border border-border rounded-lg shadow-lg py-2">
+                      {link.children.map((child) => (
+                        <Link
+                          key={child.path}
+                          to={child.path}
+                          className={`block px-4 py-3 transition-colors ${
+                            isActive(child.path)
+                              ? 'bg-muted/50 text-foreground'
+                              : 'text-muted-foreground hover:bg-muted/30 hover:text-foreground'
+                          }`}
+                        >
+                          <span className="text-sm font-light">{child.name}</span>
+                          {child.description && (
+                            <span className="block text-xs text-muted-foreground/70 mt-0.5">
+                              {child.description}
+                            </span>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>

@@ -8,53 +8,53 @@ const serviceStats = [
     {
         value: "100",
         suffix: "%",
-        label: "Qualified",
-        sublabel: "MD/DNB subspecialists",
+        label: "MD/DNB Specialists",
+        sublabel: "",
     },
     {
         value: "24/7",
         suffix: "",
-        label: "Expert reporting",
-        sublabel: "never compromised",
+        label: "Availability",
+        sublabel: "",
     },
     {
-        value: "2x",
-        suffix: "",
-        label: "Peer review",
-        sublabel: "on every critical finding",
+        value: "<30",
+        suffix: "min",
+        label: "Emergency TAT",
+        sublabel: "",
     }
 ];
 
-// Modalities we support
+// Modalities we support with distinct colors
 const modalities = [
-    { name: "CT", fullName: "Computed Tomography" },
-    { name: "MRI", fullName: "Magnetic Resonance Imaging" },
-    { name: "X-Ray", fullName: "Digital Radiography" },
-    { name: "PET-CT", fullName: "Positron Emission Tomography" },
-    { name: "Ultrasound", fullName: "Sonography" },
-    { name: "Mammography", fullName: "Breast Imaging" },
+    { name: "CT", fullName: "Computed Tomography", color: "#3B82F6" },
+    { name: "MRI", fullName: "Magnetic Resonance", color: "#8B5CF6" },
+    { name: "X-Ray", fullName: "Radiography", color: "#10B981" },
+    { name: "PET-CT", fullName: "Nuclear Imaging", color: "#F59E0B" },
+    { name: "USG", fullName: "Ultrasound", color: "#EC4899" },
+    { name: "Mammo", fullName: "Breast Imaging", color: "#06B6D4" },
 ];
 
 const features = [
     {
         icon: ShieldCheck,
-        title: "Subspecialty Precision",
-        description: "Every case read by a radiologist trained in that specific modality. Neuro, MSK, body, chest — matched expertise, not generalists.",
+        title: "Subspecialty Match",
+        description: "Neuro, MSK, body, chest — every case goes to a trained specialist.",
     },
     {
         icon: Zap,
-        title: "Thorough, Not Just Fast",
-        description: "Yes, we're fast. But speed never comes at the cost of accuracy. Every report is complete, clinically relevant, and actionable.",
+        title: "Fast & Accurate",
+        description: "Speed without compromise. Complete, clinically relevant reports.",
     },
     {
         icon: ClipboardList,
-        title: "Built-in Peer Review",
-        description: "Critical findings are double-read. Discrepancies are tracked, reviewed, and learned from. Quality isn't a checkbox — it's the culture.",
+        title: "Peer Review",
+        description: "Critical findings are double-read. Quality is the culture.",
     },
     {
         icon: Headset,
-        title: "Direct Radiologist Access",
-        description: "Questions about a report? Speak directly with the reading radiologist. No call centers, no runaround — real clinical collaboration.",
+        title: "Direct Access",
+        description: "Speak directly with the reading radiologist. No runaround.",
     },
 ];
 
@@ -218,16 +218,26 @@ function ModalitiesSection() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ duration: 0.5, delay: 0.2 + (index * 0.08) }}
-                            className="group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-2xl border border-border/50 bg-white/[0.02] hover:bg-white/[0.05] hover:border-[#FF7BE5]/30 transition-all duration-300"
+                            className="group relative flex flex-col items-center justify-center p-4 md:p-6 rounded-2xl border border-border/50 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 aspect-square"
+                            style={{
+                                ['--modality-color' as string]: modality.color,
+                            }}
                         >
                             {/* Large modality name */}
-                            <span className="text-2xl md:text-3xl font-semibold text-foreground mb-2 group-hover:text-[#FF7BE5] transition-colors duration-300">
+                            <span
+                                className="text-xl md:text-2xl font-semibold text-foreground mb-1 transition-colors duration-300 group-hover:text-[var(--modality-color)]"
+                            >
                                 {modality.name}
                             </span>
                             {/* Full name */}
-                            <span className="text-sm text-muted font-light text-center">
+                            <span className="text-xs md:text-sm text-muted font-light text-center leading-tight">
                                 {modality.fullName}
                             </span>
+                            {/* Color indicator */}
+                            <div
+                                className="absolute bottom-3 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full opacity-50 group-hover:opacity-100 transition-opacity"
+                                style={{ backgroundColor: modality.color }}
+                            />
                         </motion.div>
                     ))}
                 </div>
@@ -255,10 +265,10 @@ function KeyCapabilitiesSection() {
                 className="text-center mb-16"
             >
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-6">
-                    Quality You Can Trust
+                    Quality First
                 </h2>
                 <p className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl mx-auto">
-                    In a market racing to the bottom, we chose a different path. Every report carries the weight of a patient's diagnosis.
+                    Every report carries the weight of a diagnosis.
                 </p>
             </motion.div>
 
@@ -399,16 +409,16 @@ function JoinNetworkSection() {
                     className="text-center mb-16 p-16 rounded-2xl border border-border/50 bg-white/[0.02]"
                 >
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground mb-6">
-                        Your Patients Deserve Better
+                        Partner With Us
                     </h2>
                     <p className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl mx-auto mb-10">
-                        Partner with radiologists who care about getting it right — not just getting it done. Let's talk about what quality reporting looks like for your center.
+                        Quality reporting for your centre. Let's talk.
                     </p>
                     <a
-                        href="mailto:info@somatiq.ai?subject=Demo%20Request%20-%20Teleradiology%20Services&body=Hi%20Somatiq%20team%2C%0A%0AI%20would%20like%20to%20schedule%20a%20demo%20of%20your%20teleradiology%20services.%0A%0APlease%20let%20me%20know%20your%20availability.%0A%0AThank%20you!"
+                        href="mailto:info@somatiq.ai?subject=Sample%20Reports%20Request%20-%20Teleradiology&body=Hi%20Somatiq%20team%2C%0A%0AI%20would%20like%20to%20request%20sample%20reports%20to%20evaluate%20your%20teleradiology%20services.%0A%0APlease%20share%20a%20few%20sample%20reports%20and%20let%20me%20know%20how%20we%20can%20start%20a%20pilot.%0A%0AThank%20you!"
                         className="inline-block bg-white text-black font-medium text-base px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors"
                     >
-                        REQUEST A DEMO
+                        REQUEST SAMPLE REPORTS
                     </a>
                 </motion.div>
 

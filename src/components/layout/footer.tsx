@@ -1,9 +1,16 @@
-import { ChevronsUp } from "lucide-react";
+import { ChevronsUp, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import footerBg from "@/assets/footer-bg.jpg";
 import { AnimatedButton } from "@/components/common/animated-button";
 import { Separator } from "@/components/common/separator";
 import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from "@/components/ui/marquee";
+
+const portfolioItems = [
+  { name: "Platform", path: "/", description: "Unified RIS-PACS solution" },
+  { name: "Radone Reporting", path: "/portfolio/radone", description: "Radiology reporting solution" },
+  { name: "Billing System", path: "/portfolio/billing", description: "Healthcare billing management" },
+];
 
 const trustedCompanies = [
   { name: "NewMed", logo: "/newmed-without-bg.png" },
@@ -100,17 +107,36 @@ const Footer = () => {
             </h3>
             <div className="flex flex-col gap-3">
               <Link
-                to="/product"
+                to="/"
                 className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
               >
-                Product
+                Platform
               </Link>
-              <Link
-                to="/portfolio"
-                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
-              >
-                Portfolio
-              </Link>
+              {/* Portfolio with hover dropdown */}
+              <div className="relative group">
+                <Link
+                  to="/portfolio"
+                  className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors inline-flex items-center gap-1"
+                >
+                  Portfolio
+                  <ChevronDown className="w-3 h-3 transition-transform group-hover:rotate-180" />
+                </Link>
+                {/* Dropdown */}
+                <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="bg-background/95 backdrop-blur-sm border border-white/10 rounded-lg py-2 min-w-[200px] shadow-xl">
+                    {portfolioItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className="block px-4 py-2 hover:bg-white/5 transition-colors"
+                      >
+                        <span className="text-foreground/80 text-sm font-light block">{item.name}</span>
+                        <span className="text-foreground/40 text-xs font-light">{item.description}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
               <Link
                 to="/teleradiology"
                 className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
