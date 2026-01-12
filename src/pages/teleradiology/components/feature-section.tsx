@@ -404,9 +404,12 @@ function JoinNetworkSection() {
                     <p className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl mx-auto mb-10">
                         Partner with radiologists who care about getting it right — not just getting it done. Let's talk about what quality reporting looks like for your center.
                     </p>
-                    <button className="bg-white text-black font-medium text-base px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors">
+                    <a
+                        href="mailto:info@somatiq.ai?subject=Demo%20Request%20-%20Teleradiology%20Services&body=Hi%20Somatiq%20team%2C%0A%0AI%20would%20like%20to%20schedule%20a%20demo%20of%20your%20teleradiology%20services.%0A%0APlease%20let%20me%20know%20your%20availability.%0A%0AThank%20you!"
+                        className="inline-block bg-white text-black font-medium text-base px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
                         REQUEST A DEMO
-                    </button>
+                    </a>
                 </motion.div>
 
                 {/* For Radiologists */}

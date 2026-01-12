@@ -1,5 +1,5 @@
 import bgimage1 from "@/assets/teleradiology/hero-left.png";
-import bgimage2 from "@/assets/teleradiology/hero-section.png";
+import bgimage2 from "@/assets/teleradiology/hero-section.jpg";
 import { motion } from "framer-motion";
 
 

@@ -9,6 +9,8 @@ const Home = () => {
   const [showGradient, setShowGradient] = useState(false);
 
   useEffect(() => {
+    const currentRef = heroRef.current;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         // Show gradient when hero section is NOT intersecting (i.e., scrolled past it)
@@ -20,13 +22,13 @@ const Home = () => {
       }
     );
 
-    if (heroRef.current) {
-      observer.observe(heroRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (heroRef.current) {
-        observer.unobserve(heroRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

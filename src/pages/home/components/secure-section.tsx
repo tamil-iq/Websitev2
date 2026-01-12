@@ -324,7 +324,10 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                     transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
                     className="text-center"
                 >
-                    <button className="group inline-flex items-center gap-2 px-6 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-full transition-all duration-300">
+                    <button
+                        onClick={() => window.location.href = 'mailto:info@somatiq.ai?subject=Demo%20Request%20-%20Somatiq%20Platform&body=Hi%20Somatiq%20team%2C%0A%0AI%20would%20like%20to%20schedule%20a%20demo%20of%20your%20platform.%0A%0APlease%20let%20me%20know%20your%20availability.%0A%0AThank%20you!'}
+                        className="group inline-flex items-center gap-2 px-6 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-full transition-all duration-300"
+                    >
                         <span className="text-primary font-light tracking-wide">Experience the platform</span>
                         <svg
                             className="w-4 h-4 text-primary transition-transform duration-300 group-hover:translate-x-1"

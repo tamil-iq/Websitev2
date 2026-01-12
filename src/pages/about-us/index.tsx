@@ -1,8 +1,16 @@
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import HeroSection from './components/hero-section';
 import FeatureSection from './components/feature-section';
 
 const AboutUs = () => {
+  useEffect(() => {
+    document.title = 'About Us | Somatiq - Building Imaging Infrastructure for a Billion People';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Meet the team behind Somatiq. Founded by radiologists and technologists from Siemens Healthineers, we are building intelligent imaging infrastructure for healthcare.');
+    }
+  }, []);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

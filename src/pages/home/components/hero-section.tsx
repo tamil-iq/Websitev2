@@ -2,8 +2,10 @@
 import { AnimatedButton } from '@/components/common/animated-button';
 import { RippleButton } from "@/components/ui/ripple-button";
 import { ChevronsRightIcon } from '@/components/ui/right-icon';
+import { LazyImage } from '@/components/ui/lazy-image';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import dashboardImg from '@/assets/homepage/dashboard-monitoring.png';
 
 // Animated counter component
 const AnimatedCounter = ({ value, suffix = "", duration = 2 }: { value: number; suffix?: string; duration?: number }) => {
@@ -133,7 +135,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           className="max-w-2xl mx-auto text-lg md:text-xl text-foreground/60 leading-relaxed font-light pt-4"
         >
-          From patient registration to final report — unified RIS-PACS with native intelligence.
+          Unified RIS-PACS that cuts reporting time in half — from registration to signed report, all in one place.
         </motion.p>
 
         {/* Stats Section */}
@@ -163,7 +165,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
         >
-          <AnimatedButton onClick={() => console.log('Schedule demo clicked')}>
+          <AnimatedButton>
             SCHEDULE A DEMO
           </AnimatedButton>
           <RippleButton onClick={() => {
@@ -178,55 +180,31 @@ const HeroSection = () => {
             </div>
           </RippleButton>
         </motion.div>
+
+        {/* Product Screenshot */}
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          animate={buttonsInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.95 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
+          className="relative mt-16 w-full max-w-5xl mx-auto"
+        >
+          {/* Glow effect behind the image */}
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-primary/5 to-transparent rounded-2xl blur-2xl -z-10 scale-105" />
+
+          {/* Dashboard image with border and shadow */}
+          <div className="relative rounded-xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/10 bg-background/50 backdrop-blur-sm">
+            <LazyImage
+              src={dashboardImg}
+              alt="Somatiq Dashboard - Real-time monitoring and analytics for radiology workflow"
+              className="w-full h-auto"
+            />
+            {/* Subtle gradient overlay at the bottom for fade effect */}
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
+          </div>
+        </motion.div>
       </div>
     </section>
   )
 }
 
 export default HeroSection;
-
-
-//hero section based on the figma design
-// const HeroSection = ({ loading }: HeroSectionProps) => {
-//   if (loading) return <HeroSectionSkeleton />;
-
-//   return (
-//    <section className="relative w-full overflow-hidden bg-black h-[80vh]">
-//   <div 
-//     className="pointer-events-none absolute inset-0"
-//     style={{
-//       background: 'linear-gradient(to bottom, black 0%, var(--background-gradient) 100%)',
-//       opacity: 0.20
-//     }}
-//   />
-  
-//   <div className="relative w-full max-w-7xl mx-24 px-4 pt-24 sm:px-6 lg:px-8 z-10">
-//     <div>
-//       <div>
-//         <h1 className="mt-5 text-4xl font-normal tracking-wide text-foreground sm:text-5xl">
-//           One Intelligent platform for all <br/>your Diagnostic Imaging
-//         </h1>
-  
-//         <p className="mt-6 max-w-xl text-sm tracking-wider leading-relaxed text-muted font-light ">
-//           Unified RIS-PACS with AI-enabled workflows seamlessly connecting Radiologists, Clinicians and Patients
-//         </p>
-  
-//         <div className="mt-10 flex flex-col items-start gap-4">
-//           <AnimatedButton onClick={() => console.log('Schedule demo clicked')}>
-//             schedule a demo
-//           </AnimatedButton>
-//           <span className="text-sm text-muted tracking-wide font-extralight">Trusted by Bengaluru's largest imaging chain</span>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-  
-//   <img 
-//     src={heroimage} 
-//     alt="" 
-//     className="absolute bottom-0 right-0 left-14 top-1/4 w-full h-auto object-cover"
-//     style={{ transform: 'translateY(10%)' }}
-//   />
-// </section>
-//   );
-// };

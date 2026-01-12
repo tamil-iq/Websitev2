@@ -1,5 +1,6 @@
 import { ChevronsUp } from "lucide-react";
-import footerBg from "@/assets/footer-bg.png";
+import { Link } from "react-router-dom";
+import footerBg from "@/assets/footer-bg.jpg";
 import { AnimatedButton } from "@/components/common/animated-button";
 import { Separator } from "@/components/common/separator";
 import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from "@/components/ui/marquee";
@@ -46,106 +47,109 @@ const Footer = () => {
   };
 
   return (
-    <footer className=" bg-background overflow-hidden relative ">
+    <footer className="bg-background overflow-hidden relative">
       <div
-        className="absolute inset-0 top-56 pointer-events-none object-cover"
+        className="absolute inset-0 pointer-events-none bg-cover bg-center bg-no-repeat opacity-20"
         style={{
           backgroundImage: `url(${footerBg})`,
         }}
       />
 
-      <div className="relative z-10 max-w-4/5 mx-auto px-6 py-12">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
         {/* Scroll to top */}
         <button
           onClick={scrollToTop}
-          className="flex items-center gap-2 mx-auto mb-16 text-footer-muted hover:text-footer-foreground transition-colors group"
+          className="flex items-center gap-2 mx-auto mb-12 text-muted hover:text-foreground transition-colors group"
+          aria-label="Scroll to top of page"
         >
-          <ChevronsUp className="w-4 h-4 animate-bounce-slow" />
+          <ChevronsUp className="w-4 h-4 animate-bounce-slow" aria-hidden="true" />
           <span className="text-sm tracking-wider font-extralight">scroll to the top</span>
-          <ChevronsUp className="w-4 h-4 animate-bounce-slow" />
+          <ChevronsUp className="w-4 h-4 animate-bounce-slow" aria-hidden="true" />
         </button>
 
-        {/* Vision Statement - Left aligned */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-16">
-          <div className="max-w-xl">
-            <p className="text-xs text-muted/60 font-light tracking-widest uppercase mb-3">Our Mission</p>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight text-foreground leading-tight">
-              Building imaging infrastructure
-              <br />
-              for a <span className="text-gradient-radiologist">billion</span> people.
-            </h2>
-          </div>
+        {/* Mission Statement - Prominent */}
+        <div className="text-center mb-16">
+          <p className="text-xs text-muted font-light tracking-[0.2em] uppercase mb-4">Our Mission</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground leading-tight">
+            Building imaging infrastructure
+            <br />
+            for a <span className="text-gradient-radiologist">billion</span> people.
+          </h2>
+        </div>
 
-          {/* CTA section */}
-          <div className="flex flex-col items-start gap-3 md:pt-8">
-            <p className="text-foreground/80 font-light tracking-wide text-sm">
-              Ready to transform your imaging workflow?
+        {/* Main footer content */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+          {/* Logo and CTA - takes more space */}
+          <div className="md:col-span-6 flex flex-col gap-6">
+            <img src="/logo/footer-logo.png" alt="Somatiq Logo" className='w-36' />
+            <p className="text-foreground/60 text-sm font-light max-w-xs">
+              Every second matters. Every detail counts.
             </p>
-            <AnimatedButton>SCHEDULE A DEMO</AnimatedButton>
+            <div className="flex flex-col gap-2">
+              <p className="text-foreground/80 font-light tracking-wide text-sm">
+                Ready to transform your workflow?
+              </p>
+              <AnimatedButton>SCHEDULE A DEMO</AnimatedButton>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="md:col-span-3">
+            <h3 className="text-foreground font-medium text-sm tracking-wide mb-4">
+              Navigate
+            </h3>
+            <div className="flex flex-col gap-3">
+              <Link
+                to="/teleradiology"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                Teleradiology
+              </Link>
+              <Link
+                to="/about"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                About Us
+              </Link>
+              <Link
+                to="/careers"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                Careers
+              </Link>
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div className="md:col-span-3">
+            <h3 className="text-foreground font-medium text-sm tracking-wide mb-4">
+              Contact
+            </h3>
+            <div className="flex flex-col gap-3">
+              <a
+                href="mailto:info@somatiq.ai"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                info@somatiq.ai
+              </a>
+              <a
+                href="https://linkedin.com/company/somatiq"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+                aria-label="Connect with Somatiq on LinkedIn"
+              >
+                LinkedIn
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Footer links section */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-12 pb-8">
-          {/* Logo and tagline */}
-          <div className="flex flex-col gap-4">
-            <img src="/logo/footer-logo.png" alt="Somatiq Logo" className='w-40' />
-            <div className="text-foreground/90 text-sm">
-              <p className="font-extralight tracking-wide">Every second matters.</p>
-              <p className="font-extralight tracking-wide">Every detail counts.</p>
-            </div>
-          </div>
-
-          {/* Links columns */}
-          <div className="flex gap-16 md:gap-24">
-            {/* Connect */}
-            <div className="flex flex-col gap-4">
-              <h3 className="text-foreground font-normal text-sm tracking-wide">
-                Connect
-              </h3>
-              <div className="flex flex-col gap-3">
-                <a
-                  href="#"
-                  className="text-foreground/80 font-light text-xs hover:text-footer-foreground transition-colors hover:underline tracking-wide"
-                >
-                  INSTAGRAM
-                </a>
-                <a
-                  href="#"
-                  className="text-foreground/80 font-light text-xs hover:text-footer-foreground transition-colors tracking-wide hover:underline"
-                >
-                  LINKEDIN
-                </a>
-              </div>
-            </div>
-
-            {/* Legal */}
-            <div className="flex flex-col gap-4">
-              <h3 className="text-foreground font-normal text-sm tracking-wide">
-                Legal
-              </h3>
-              <div className="flex flex-col gap-3">
-                <a
-                  href="#"
-                  className="text-foreground/80 font-light tracking-wide text-xs hover:text-footer-foreground transition-colors hover:underline"
-                >
-                  PRIVACY POLICY
-                </a>
-                <a
-                  href="#"
-                  className="text-foreground/80 font-light tracking-wide text-xs hover:text-footer-foreground transition-colors hover:underline"
-                >
-                  TERMS & CONDITIONS
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
         <Separator />
 
         {/* Copyright */}
         <div className="pt-6 text-center">
-          <p className="text-foreground/80 font-extralight tracking-wide text-sm">
+          <p className="text-foreground/50 font-extralight tracking-wide text-sm">
             © 2026 Somatiq AI Tech Private Limited. All Rights Reserved.
           </p>
         </div>

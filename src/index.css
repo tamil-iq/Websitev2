@@ -60,7 +60,7 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(1 0 0 / 50%);
   --muted-foreground: oklch(0.985 0.002 106);
-  --accent: oklch(60.736% 0.19251 253.874)
+  --accent: oklch(60.736% 0.19251 253.874);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(0.269 0 0);
@@ -126,6 +126,9 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  html {
+    @apply overflow-x-hidden;
   }
   body {
     @apply bg-background text-foreground overflow-x-hidden;

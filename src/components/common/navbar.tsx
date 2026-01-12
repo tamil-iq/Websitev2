@@ -1,25 +1,39 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const navLinks = [
-    // { name: 'Home', path: '/' },
     { name: 'Teleradiology', path: '/teleradiology' },
     { name: 'About Us', path: '/about' },
     { name: 'Careers', path: '/careers' },
   ];
 
+  // Track scroll position for navbar styling
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="bg-background/90 shadow-sm sticky top-0 z-50">
-      <div className=" xl:max-w-4/5 lg:max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
+      isScrolled
+        ? 'bg-background/95 backdrop-blur-md shadow-md border-b border-border/50'
+        : 'bg-background/90 shadow-sm'
+    }`}>
+      <div className="xl:max-w-4/5 lg:max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="shrink-0 w-40 h-16">
             <Link to="/">
@@ -51,7 +65,9 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-blue-400 focus:outline-none"
+              className="text-muted-foreground hover:text-primary focus:outline-none"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -61,7 +77,7 @@ const Navbar = () => {
 
       {isOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black border-t border-gray-800">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t border-border">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -69,15 +85,20 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                   isActive(link.path)
-                    ? 'text-blue-400 bg-gray-900'
-                    : 'text-gray-300 hover:text-blue-400 hover:bg-gray-900'
+                    ? 'text-primary bg-secondary'
+                    : 'text-muted-foreground hover:text-primary hover:bg-secondary'
                 }`}
               >
                 {link.name}
               </Link>
             ))}
             <div className="px-3 py-2">
-              <Button variant="outline" size="default" className="w-full">
+              <Button
+                variant="outline"
+                size="default"
+                className="w-full"
+                onClick={() => window.open('https://ris.somatiq.ai', '_blank')}
+              >
                 Login to RIS
               </Button>
             </div>

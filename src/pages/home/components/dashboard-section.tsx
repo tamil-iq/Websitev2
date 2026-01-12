@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { TrendingUp, Gauge, BarChart3 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { TestimonialWithMarquee } from "@/components/ui/testtimonial-with-marquee";
 
 // Admin bento items - Linear/Notion inspired
 const adminBentoItems = [
@@ -84,8 +85,8 @@ const patientFeatures = [
 ];
 
 const complianceBadges = [
-    { label: "HIPAA" },
-    { label: "ISO 27001" },
+    { label: "HIPAA Compliant" },
+    { label: "ISO 27001 Compliant" },
     { label: "NABH Ready" },
     { label: "Role-Based Access" },
     { label: "24/7 Support" },
@@ -518,6 +519,52 @@ export function ComplianceSection() {
 }
 
 // ============================================
+// TESTIMONIALS DATA
+// ============================================
+const testimonials = [
+    {
+        author: {
+            name: "Dr. Rajesh Kumar",
+            handle: "@rajeshkumar",
+            role: "Chief Radiologist",
+            company: "NewMed Diagnostics",
+            avatar: "/newmed-without-bg.png"
+        },
+        text: "Somatiq has transformed our reporting workflow. What used to take 45 minutes now takes 20. The AI-assisted dictation is remarkably accurate."
+    },
+    {
+        author: {
+            name: "Priya Sharma",
+            handle: "@priyasharma",
+            role: "Operations Head",
+            company: "OM Diagnostics",
+            avatar: "/om-without-bg.png"
+        },
+        text: "Finally, a platform that understands Indian healthcare. The NABH-ready compliance features saved us months of preparation time."
+    },
+    {
+        author: {
+            name: "Dr. Anil Mehta",
+            handle: "@anilmehta",
+            role: "Managing Director",
+            company: "Prima Imaging",
+            avatar: "/prima-without-bg.png"
+        },
+        text: "The real-time dashboard gives me visibility I never had before. I can track TAT across all centers from my phone."
+    },
+    {
+        author: {
+            name: "Sunita Reddy",
+            handle: "@sunitareddy",
+            role: "IT Manager",
+            company: "TX Healthcare",
+            avatar: "/tx-without-bg.png"
+        },
+        text: "Integration was seamless. Their team worked with our existing PACS and had us running in under two weeks."
+    }
+];
+
+// ============================================
 // COMBINED EXPORT
 // ============================================
 export function DashboardSection() {
@@ -526,6 +573,10 @@ export function DashboardSection() {
             <AdministratorsSection />
             <PatientPortalSection />
             <ComplianceSection />
+            <TestimonialWithMarquee
+                title="Trusted by radiologists across India"
+                testimonials={testimonials}
+            />
         </div>
     );
 }

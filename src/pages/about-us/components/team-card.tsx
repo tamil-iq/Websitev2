@@ -1,5 +1,5 @@
-import ProfileImage from "@/assets/about-us/team/viswa.png";
-import ProfileImage2 from "@/assets/about-us/team/naveen.png";
+import ProfileImage from "@/assets/about-us/team/viswa.jpg";
+import ProfileImage2 from "@/assets/about-us/team/naveen.jpg";
 
 const TeamSectionPage = () => {
   const teamMembers = [
