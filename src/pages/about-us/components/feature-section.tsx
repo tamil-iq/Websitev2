@@ -23,12 +23,13 @@ const stats = [
 
 // Counter component
 function Counter({ value, suffix = "", isInView, delay }: { value: string; suffix?: string; isInView: boolean; delay: number }) {
-    const [displayValue, setDisplayValue] = useState(0);
+    const [displayValue, setDisplayValue] = useState("0");
+    const hasDecimal = value.includes('.');
 
     useEffect(() => {
         if (!isInView) return;
 
-        const numericValue = parseInt(value.replace(/\D/g, ''));
+        const numericValue = parseFloat(value);
         if (isNaN(numericValue)) return;
 
         let currentValue = 0;
@@ -38,16 +39,16 @@ function Counter({ value, suffix = "", isInView, delay }: { value: string; suffi
             const interval = setInterval(() => {
                 currentValue += increment;
                 if (currentValue >= numericValue) {
-                    setDisplayValue(numericValue);
+                    setDisplayValue(hasDecimal ? numericValue.toFixed(1) : String(Math.round(numericValue)));
                     clearInterval(interval);
                 } else {
-                    setDisplayValue(Math.round(currentValue));
+                    setDisplayValue(hasDecimal ? currentValue.toFixed(1) : String(Math.round(currentValue)));
                 }
             }, 20);
         }, delay * 1000);
 
         return () => clearTimeout(timer);
-    }, [isInView, value, delay]);
+    }, [isInView, value, delay, hasDecimal]);
 
     return (
         <span className="text-4xl md:text-5xl font-light tracking-tight text-foreground">

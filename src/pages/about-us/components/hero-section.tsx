@@ -70,14 +70,12 @@ export default function HeroSection() {
 
                 {/* Story paragraphs */}
                 <motion.p
-                    className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-3xl mx-auto mb-6"
+                    className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-2xl mx-auto mb-6"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
                 >
-                    We built Somatiq because the imaging infrastructure in our country is{' '}
-                    <span className="text-foreground font-medium">fundamentally broken</span>.
-                    Dominated by legacy vendors, lacking innovation, and not built for the future.
+                    The imaging infrastructure in our country is <span className="text-foreground font-medium">fundamentally broken</span>. Legacy vendors, fragmented workflows, and systems not built for modern care.
                 </motion.p>
 
                 <motion.p
@@ -86,17 +84,16 @@ export default function HeroSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                    This is not just a technology gap — it is a healthcare problem.
+                    This is not just a technology gap — it's a healthcare problem.
                 </motion.p>
 
                 <motion.p
-                    className="text-lg md:text-xl text-foreground/60 font-light leading-relaxed max-w-3xl mx-auto"
+                    className="text-lg md:text-xl text-foreground/60 font-light leading-relaxed max-w-2xl mx-auto"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
                 >
-                    Diagnosis sits at the core of patient care. When workflows are fragmented, outcomes suffer.
-                    We saw a messy ecosystem that needed <span className="text-primary font-medium">rebuilding</span>, not patching.
+                    Diagnosis sits at the core of patient care. We saw a messy ecosystem that needed <span className="text-primary font-medium">rebuilding</span>, not patching.
                 </motion.p>
             </div>
 
