@@ -1,4 +1,4 @@
-import { ShieldCheck, ClipboardList, Headset, Zap, Clock, Users, FileCheck, ArrowRight } from 'lucide-react';
+import { ShieldCheck, ClipboardList, Headset, Zap, Clock, Users, FileCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
@@ -25,14 +25,14 @@ const serviceStats = [
     }
 ];
 
-// Modalities we support with distinct colors
+// Modalities we support
 const modalities = [
-    { name: "CT", fullName: "Computed Tomography", color: "#3B82F6" },
-    { name: "MRI", fullName: "Magnetic Resonance", color: "#8B5CF6" },
-    { name: "X-Ray", fullName: "Radiography", color: "#10B981" },
-    { name: "PET-CT", fullName: "Nuclear Imaging", color: "#F59E0B" },
-    { name: "USG", fullName: "Ultrasound", color: "#EC4899" },
-    { name: "Mammo", fullName: "Breast Imaging", color: "#06B6D4" },
+    { name: "CT", fullName: "Computed Tomography" },
+    { name: "MRI", fullName: "Magnetic Resonance" },
+    { name: "X-Ray", fullName: "Radiography" },
+    { name: "PET-CT", fullName: "Nuclear Imaging" },
+    { name: "USG", fullName: "Ultrasound" },
+    { name: "Mammo", fullName: "Breast Imaging" },
 ];
 
 const features = [
@@ -218,26 +218,16 @@ function ModalitiesSection() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ duration: 0.5, delay: 0.2 + (index * 0.08) }}
-                            className="group relative flex flex-col items-center justify-center p-4 md:p-6 rounded-2xl border border-border/50 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 aspect-square"
-                            style={{
-                                ['--modality-color' as string]: modality.color,
-                            }}
+                            className="group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-2xl border border-border/50 bg-white/[0.02] hover:bg-white/[0.05] hover:border-[#FF7BE5]/30 transition-all duration-300"
                         >
                             {/* Large modality name */}
-                            <span
-                                className="text-xl md:text-2xl font-semibold text-foreground mb-1 transition-colors duration-300 group-hover:text-[var(--modality-color)]"
-                            >
+                            <span className="text-2xl md:text-3xl font-semibold text-foreground mb-2 group-hover:text-[#FF7BE5] transition-colors duration-300">
                                 {modality.name}
                             </span>
                             {/* Full name */}
-                            <span className="text-xs md:text-sm text-muted font-light text-center leading-tight">
+                            <span className="text-sm text-muted font-light text-center">
                                 {modality.fullName}
                             </span>
-                            {/* Color indicator */}
-                            <div
-                                className="absolute bottom-3 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full opacity-50 group-hover:opacity-100 transition-opacity"
-                                style={{ backgroundColor: modality.color }}
-                            />
                         </motion.div>
                     ))}
                 </div>
@@ -320,6 +310,27 @@ function HowItWorksSection() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+    const steps = [
+        {
+            step: "01",
+            title: "Connect",
+            description: "We integrate with your existing PACS/RIS. No hardware changes, no workflow disruption.",
+            icon: Users,
+        },
+        {
+            step: "02",
+            title: "Route",
+            description: "Cases are automatically routed to available subspecialty radiologists based on your rules.",
+            icon: FileCheck,
+        },
+        {
+            step: "03",
+            title: "Report",
+            description: "Reports delivered directly into your system. Seamless, as if read in-house.",
+            icon: Clock,
+        },
+    ];
+
     return (
         <motion.section
             ref={ref}
@@ -348,38 +359,153 @@ function HowItWorksSection() {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {howItWorksSteps.map((step, index) => (
+                {/* Desktop Layout */}
+                <div className="hidden md:grid md:grid-cols-3 gap-8 relative">
+                    {/* Dotted connecting line with moving dot */}
+                    <div className="absolute top-[180px] left-[16.67%] right-[16.67%] h-[2px] z-0">
+                        {/* Dotted line background */}
+                        <motion.div
+                            className="absolute inset-0"
+                            initial={{ opacity: 0 }}
+                            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                            style={{
+                                backgroundImage: 'repeating-linear-gradient(90deg, rgba(255, 123, 229, 0.5) 0px, rgba(255, 123, 229, 0.5) 6px, transparent 6px, transparent 12px)',
+                            }}
+                        />
+                        {/* Moving glowing dot */}
+                        <motion.div
+                            className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#FF7BE5] shadow-[0_0_16px_6px_rgba(255,123,229,0.7)]"
+                            initial={{ left: '-2%', opacity: 0 }}
+                            animate={isInView ? {
+                                left: ['-2%', '102%'],
+                                opacity: [0, 1, 1, 1, 0],
+                            } : { left: '-2%', opacity: 0 }}
+                            transition={{
+                                duration: 4,
+                                delay: 1,
+                                repeat: Infinity,
+                                ease: "linear",
+                            }}
+                        />
+                    </div>
+
+                    {steps.map((step, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                            transition={{ duration: 0.5, delay: 0.2 + (index * 0.15) }}
-                            className="relative flex flex-col items-center text-center p-8"
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+                            transition={{ duration: 0.6, delay: 0.3 + (index * 0.2), ease: "easeOut" }}
+                            className="relative flex flex-col items-center text-center p-8 group z-10"
                         >
-                            {/* Step number */}
-                            <span className="text-7xl md:text-8xl font-extralight text-muted/20 mb-4">
+                            {/* Step number with scale animation */}
+                            <motion.span
+                                className="text-7xl md:text-8xl font-extralight text-muted/20 mb-4"
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+                                transition={{ duration: 0.5, delay: 0.4 + (index * 0.2), type: "spring", stiffness: 100 }}
+                            >
                                 {step.step}
-                            </span>
+                            </motion.span>
 
-                            {/* Icon */}
-                            <div className="flex h-20 w-20 items-center justify-center rounded-full border border-muted/30 mb-6">
-                                <step.icon className="h-9 w-9 text-foreground/70" strokeWidth={1.5} />
-                            </div>
+                            {/* Icon with pulse animation on hover */}
+                            <motion.div
+                                className="flex h-20 w-20 items-center justify-center rounded-full border border-muted/30 mb-6 relative overflow-hidden bg-background"
+                                initial={{ opacity: 0, scale: 0 }}
+                                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                                transition={{ duration: 0.5, delay: 0.5 + (index * 0.2), type: "spring", stiffness: 150 }}
+                                whileHover={{ scale: 1.1, borderColor: 'rgba(255, 123, 229, 0.5)' }}
+                            >
+                                {/* Background glow on hover */}
+                                <motion.div
+                                    className="absolute inset-0 bg-[#FF7BE5]/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                />
+                                <step.icon className="h-9 w-9 text-foreground/70 relative z-10 group-hover:text-[#FF7BE5] transition-colors duration-300" strokeWidth={1.5} />
+                            </motion.div>
 
-                            <h3 className="text-2xl md:text-3xl font-medium text-foreground mb-3">
+                            <motion.h3
+                                className="text-2xl md:text-3xl font-medium text-foreground mb-3"
+                                initial={{ opacity: 0 }}
+                                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                                transition={{ duration: 0.4, delay: 0.6 + (index * 0.2) }}
+                            >
                                 {step.title}
-                            </h3>
-                            <p className="text-base md:text-lg text-muted font-light">
+                            </motion.h3>
+                            <motion.p
+                                className="text-base md:text-lg text-muted font-light"
+                                initial={{ opacity: 0 }}
+                                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                                transition={{ duration: 0.4, delay: 0.7 + (index * 0.2) }}
+                            >
                                 {step.description}
-                            </p>
+                            </motion.p>
+                        </motion.div>
+                    ))}
+                </div>
 
-                            {/* Arrow connector (hidden on last item and mobile) */}
-                            {index < howItWorksSteps.length - 1 && (
-                                <div className="hidden md:block absolute top-1/4 -right-4 text-muted/30">
-                                    <ArrowRight className="w-10 h-10" strokeWidth={1} />
+                {/* Mobile Layout - Vertical flow */}
+                <div className="md:hidden relative">
+                    {/* Vertical dotted line with moving dot */}
+                    <div className="absolute left-8 top-[60px] bottom-[60px] w-[2px] z-0">
+                        {/* Dotted line background */}
+                        <motion.div
+                            className="absolute inset-0"
+                            initial={{ opacity: 0 }}
+                            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                            style={{
+                                backgroundImage: 'repeating-linear-gradient(180deg, rgba(255, 123, 229, 0.5) 0px, rgba(255, 123, 229, 0.5) 6px, transparent 6px, transparent 12px)',
+                            }}
+                        />
+                        {/* Moving glowing dot */}
+                        <motion.div
+                            className="absolute left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#FF7BE5] shadow-[0_0_12px_4px_rgba(255,123,229,0.7)]"
+                            initial={{ top: '-2%', opacity: 0 }}
+                            animate={isInView ? {
+                                top: ['-2%', '102%'],
+                                opacity: [0, 1, 1, 1, 0],
+                            } : { top: '-2%', opacity: 0 }}
+                            transition={{
+                                duration: 4,
+                                delay: 1,
+                                repeat: Infinity,
+                                ease: "linear",
+                            }}
+                        />
+                    </div>
+
+                    {steps.map((step, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                            transition={{ duration: 0.6, delay: 0.3 + (index * 0.2), ease: "easeOut" }}
+                            className="relative flex items-start gap-6 py-8 pl-4"
+                        >
+                            {/* Icon circle */}
+                            <motion.div
+                                className="flex-shrink-0 flex h-12 w-12 items-center justify-center rounded-full border border-muted/30 relative bg-background z-10"
+                                initial={{ opacity: 0, scale: 0 }}
+                                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                                transition={{ duration: 0.5, delay: 0.4 + (index * 0.2), type: "spring", stiffness: 150 }}
+                            >
+                                <step.icon className="h-6 w-6 text-foreground/70" strokeWidth={1.5} />
+                            </motion.div>
+
+                            {/* Content */}
+                            <div className="flex-1 pt-1">
+                                <div className="flex items-baseline gap-3 mb-2">
+                                    <span className="text-3xl font-extralight text-muted/30">
+                                        {step.step}
+                                    </span>
+                                    <h3 className="text-xl font-medium text-foreground">
+                                        {step.title}
+                                    </h3>
                                 </div>
-                            )}
+                                <p className="text-sm text-muted font-light leading-relaxed">
+                                    {step.description}
+                                </p>
+                            </div>
                         </motion.div>
                     ))}
                 </div>
