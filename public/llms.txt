@@ -1,0 +1,55 @@
+# Somatiq
+
+> Intelligent RIS-PACS platform for radiology. One unified platform for your entire diagnostic imaging workflow.
+
+## Company Overview
+
+Somatiq is a healthcare technology company building modern radiology infrastructure for India. Founded by radiologists and engineers, we provide an AI-first RIS-PACS (Radiology Information System and Picture Archiving and Communication System) platform that unifies the entire diagnostic imaging workflow.
+
+## What We Do
+
+- **Unified RIS-PACS Platform**: Single intelligent platform from patient registration to final report
+- **Teleradiology Services**: 24/7 expert reporting with subspecialty radiologists
+- **AI-Powered Workflows**: Native intelligence built into every feature, not bolted on
+- **Modern User Experience**: Consumer-grade UX designed for radiologists
+
+## Key Differentiators
+
+- AI-first architecture (not retrofitted)
+- 10x faster deployment (days, not months)
+- Built by radiologists who understand clinical workflows
+- Part of NVIDIA Inception program
+- Live and commercialized across 10+ diagnostic centres in India
+
+## Target Users
+
+- Diagnostic imaging centres
+- Hospitals with radiology departments
+- Radiology practices
+- Healthcare providers seeking teleradiology services
+
+## Location
+
+Bengaluru, India
+
+## Contact
+
+- Website: https://somatiq.ai
+- Email: hello@somatiq.ai
+
+## Founders
+
+- Dr. Vishwanath R S - MD, CIIP, Co-Founder & CEO (Former Siemens Healthineers)
+- Naveen K - Co-Founder & CTO (Previously founded AI startup acquired by teleradiology provider)
+
+## Technical Details
+
+- Cloud-native platform
+- DICOM compliant
+- HL7/FHIR integration capable
+- Web-based viewer
+- Mobile responsive
+
+## Keywords
+
+RIS-PACS, radiology software, medical imaging, teleradiology, diagnostic imaging, healthcare technology, radiology workflow, DICOM viewer, radiology AI, India healthcare, Bengaluru startup
