@@ -10,6 +10,7 @@ import Portfolio from './pages/portfolio';
 import Radone from './pages/portfolio/radone';
 import Billing from './pages/portfolio/billing';
 import Blog from './pages/blog';
+import Contact from './pages/contact';
 import NotFound from './pages/not-found';
 import ScrollToTop from './components/common/scroll-to-top';
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </MainLayout>

@@ -58,26 +58,26 @@ const features = [
     },
 ];
 
-const howItWorksSteps = [
-    {
-        step: "01",
-        title: "Connect",
-        description: "We integrate with your existing PACS/RIS. No hardware changes, no workflow disruption.",
-        icon: Users,
-    },
-    {
-        step: "02",
-        title: "Route",
-        description: "Cases are automatically routed to available subspecialty radiologists based on your rules.",
-        icon: FileCheck,
-    },
-    {
-        step: "03",
-        title: "Report",
-        description: "Reports delivered directly into your system. Seamless, as if read in-house.",
-        icon: Clock,
-    },
-];
+// const howItWorksSteps = [
+//     {
+//         step: "01",
+//         title: "Connect",
+//         description: "We integrate with your existing PACS/RIS. No hardware changes, no workflow disruption.",
+//         icon: Users,
+//     },
+//     {
+//         step: "02",
+//         title: "Route",
+//         description: "Cases are automatically routed to available subspecialty radiologists based on your rules.",
+//         icon: FileCheck,
+//     },
+//     {
+//         step: "03",
+//         title: "Report",
+//         description: "Reports delivered directly into your system. Seamless, as if read in-house.",
+//         icon: Clock,
+//     },
+// ];
 
 function Counter({ value, suffix = "", isInView, delay }: { value: string; suffix?: string; isInView: boolean; delay: number }) {
     const [displayValue, setDisplayValue] = useState(0);

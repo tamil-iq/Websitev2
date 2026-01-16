@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import Navbar from '../common/navbar';
-import Footer, { TrustedBySection } from './footer.tsx';
+import Footer from './footer.tsx';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -13,7 +13,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <main className="flex-1 pt-16">
         {children}
       </main>
-      <TrustedBySection />
+      {/* <TrustedBySection /> */}
       <Footer />
     </div>
   );

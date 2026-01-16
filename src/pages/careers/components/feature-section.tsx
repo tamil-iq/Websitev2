@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 const benefits = [
     {
@@ -131,18 +132,28 @@ function OpportunitySection() {
                     {opportunities.map((opportunity, index) => (
                         <motion.div
                             key={index}
-                            className="py-6 border-b border-white/[0.08] last:border-b-0"
+                            className="py-6 border-b border-white/[0.08] last:border-b-0 group"
                             initial={{ opacity: 0, x: -20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                            <h3 className="text-lg font-medium text-foreground mb-2">
-                                {opportunity.title}
-                            </h3>
-                            <p className="text-sm text-foreground/60 font-light">
-                                {opportunity.description}
-                            </p>
+                            <Link
+                                to={`/contact?role=${encodeURIComponent(opportunity.title)}`}
+                                className="flex items-start justify-between gap-4 hover:opacity-80 transition-opacity"
+                            >
+                                <div className="flex-1">
+                                    <h3 className="text-lg font-medium text-foreground mb-2">
+                                        {opportunity.title}
+                                    </h3>
+                                    <p className="text-sm text-foreground/60 font-light">
+                                        {opportunity.description}
+                                    </p>
+                                </div>
+                                <div className="flex-shrink-0 pt-1">
+                                    <ArrowRight className="w-5 h-5 text-foreground/60 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                                </div>
+                            </Link>
                         </motion.div>
                     ))}
                 </div>

@@ -72,16 +72,16 @@ const features = [
     },
 ];
 
-const testimonialData = {
-    quote:
-        "My reporting time reduced by nearly 50%. The platform felt familiar from day one, with virtually no learning curve—allowing me to focus on what truly matters: the patient.",
-    author: {
-        name: "Dr. Nikita Sridhar",
-        role: "Consultant Radiologist",
-        organization: "Prima Diagnostics, Bengaluru",
-        avatarUrl: "",
-    },
-};
+// const testimonialData = {
+//     quote:
+//         "My reporting time reduced by nearly 50%. The platform felt familiar from day one, with virtually no learning curve—allowing me to focus on what truly matters: the patient.",
+//     author: {
+//         name: "Dr. Nikita Sridhar",
+//         role: "Consultant Radiologist",
+//         organization: "Prima Diagnostics, Bengaluru",
+//         avatarUrl: "",
+//     },
+// };
 
 type ViewerSectionProps = {
     hideLocalGradient?: boolean;
@@ -288,7 +288,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                 <Separator bgColor='bg-linear-to-r from-transparent via-foreground/20 to-transparent' />
 
                 {/* Testimonial */}
-                <motion.div
+                {/* <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
@@ -315,10 +315,10 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                             <p className="text-xs text-muted/70 font-extralight tracking-wide">{testimonialData.author.organization}</p>
                         </div>
                     </div>
-                </motion.div>
+                </motion.div> */}
 
                 {/* CTA */}
-                <motion.div
+                {/* <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
@@ -339,7 +339,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                         </svg>
                     </button>
-                </motion.div>
+                </motion.div> */}
 
             </div>
         </section>

@@ -2,55 +2,54 @@
 import { AnimatedButton } from '@/components/common/animated-button';
 import { RippleButton } from "@/components/ui/ripple-button";
 import { ChevronsRightIcon } from '@/components/ui/right-icon';
-import { LazyImage } from '@/components/ui/lazy-image';
+// import { LazyImage } from '@/components/ui/lazy-image';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
-import dashboardImg from '@/assets/homepage/dashboard-monitoring.png';
+import { useRef } from 'react';
+// import dashboardImg from '@/assets/homepage/dashboard-monitoring.png';
 
 // Animated counter component
-const AnimatedCounter = ({ value, suffix = "", duration = 2 }: { value: number; suffix?: string; duration?: number }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [displayValue, setDisplayValue] = useState(0);
+// const AnimatedCounter = ({ value, suffix = "", duration = 2 }: { value: number; suffix?: string; duration?: number }) => {
+//   const ref = useRef(null);
+//   const isInView = useInView(ref, { once: true, margin: "-100px" });
+//   const [displayValue, setDisplayValue] = useState(0);
 
-  useEffect(() => {
-    if (!isInView) return;
+//   useEffect(() => {
+//     if (!isInView) return;
 
-    let startTime: number;
-    let animationFrame: number;
+//     let startTime: number;
+//     let animationFrame: number;
 
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / (duration * 1000), 1);
+//     const animate = (currentTime: number) => {
+//       if (!startTime) startTime = currentTime;
+//       const elapsed = currentTime - startTime;
+//       const progress = Math.min(elapsed / (duration * 1000), 1);
 
-      // Ease out cubic for smooth deceleration
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      setDisplayValue(Math.floor(easeOut * value));
+//       // Ease out cubic for smooth deceleration
+//       const easeOut = 1 - Math.pow(1 - progress, 3);
+//       setDisplayValue(Math.floor(easeOut * value));
 
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
+//       if (progress < 1) {
+//         animationFrame = requestAnimationFrame(animate);
+//       }
+//     };
 
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [isInView, value, duration]);
+//     animationFrame = requestAnimationFrame(animate);
+//     return () => cancelAnimationFrame(animationFrame);
+//   }, [isInView, value, duration]);
 
-  return (
-    <span ref={ref} className="text-gradient-radiologist tabular-nums">
-      {displayValue}{suffix}
-    </span>
-  );
-};
+//   return (
+//     <span ref={ref} className="text-gradient-radiologist tabular-nums">
+//       {displayValue}{suffix}
+//     </span>
+//   );
+// };
 
 // Stats data
-const stats = [
-  { value: 100000, suffix: "+", label: "Scans processed" },
-  { value: 99.9, suffix: "%", label: "Uptime" },
-  { value: 100, suffix: "+", label: "Radiologists using platform" },
-];
-
+// const stats = [
+//   { value: 100000, suffix: "+", label: "Scans processed" },
+//   { value: 99.9, suffix: "%", label: "Uptime" },
+//   { value: 100, suffix: "+", label: "Radiologists using platform" },
+// ];
 
 
 
@@ -71,7 +70,7 @@ const TrustBadge = () => {
         <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
       </span>
       <span className="text-sm text-muted font-light tracking-wide">
-        Trusted by Bengaluru's largest imaging chain
+        Trusted by Bengaluru's largest imaging Chain.
       </span>
     </motion.div>
   );
@@ -139,7 +138,7 @@ const HeroSection = () => {
         </motion.p>
 
         {/* Stats Section */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={subheadlineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
@@ -155,7 +154,7 @@ const HeroSection = () => {
               </span>
             </div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         {/* CTA buttons */}
         <motion.div
@@ -182,26 +181,23 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Product Screenshot */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           animate={buttonsInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.95 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
           className="relative mt-16 w-full max-w-5xl mx-auto"
         >
-          {/* Glow effect behind the image */}
           <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-primary/5 to-transparent rounded-2xl blur-2xl -z-10 scale-105" />
 
-          {/* Dashboard image with border and shadow */}
           <div className="relative rounded-xl overflow-hidden border border-border/50 shadow-2xl shadow-primary/10 bg-background/50 backdrop-blur-sm">
             <LazyImage
               src={dashboardImg}
               alt="Somatiq Dashboard - Real-time monitoring and analytics for radiology workflow"
               className="w-full h-auto"
             />
-            {/* Subtle gradient overlay at the bottom for fade effect */}
             <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   )

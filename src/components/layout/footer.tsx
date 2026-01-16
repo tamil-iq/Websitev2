@@ -1,6 +1,6 @@
 import { ChevronsUp, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import footerBg from "@/assets/footer-bg.jpg";
 import { AnimatedButton } from "@/components/common/animated-button";
 import { Separator } from "@/components/common/separator";

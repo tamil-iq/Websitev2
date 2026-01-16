@@ -170,9 +170,11 @@ function CTASection() {
                     <p className="text-base md:text-lg text-foreground/60 font-light max-w-xl mx-auto mb-8">
                         Join diagnostic centers across India already using Somatiq.
                     </p>
+                    <div className='flex justify-center'>
                     <AnimatedButton>
                         SCHEDULE A DEMO
                     </AnimatedButton>
+                    </div>
                 </motion.div>
             </div>
         </motion.section>
