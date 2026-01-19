@@ -2,6 +2,7 @@ import { ShieldCheck, ClipboardList, Headset, Zap, Clock, Users, FileCheck } fro
 import { cn } from '@/lib/utils';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import { trackEvent, trackContactClick } from '@/lib/analytics';
 
 // Service-focused stats for teleradiology
 const serviceStats = [
@@ -39,7 +40,7 @@ const features = [
     {
         icon: ShieldCheck,
         title: "Subspecialty Match",
-        description: "Neuro, MSK, body, chest — every case goes to a trained specialist.",
+        description: "Neuro, MSK, body, chest. Every case goes to a trained specialist.",
     },
     {
         icon: Zap,
@@ -205,7 +206,7 @@ function ModalitiesSection() {
                             Matched Expertise.
                         </span>
                     </h2>
-                    <p className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto">
                         Every study read by a radiologist trained in that specific modality.
                     </p>
                 </motion.div>
@@ -257,7 +258,7 @@ function KeyCapabilitiesSection() {
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-6">
                     Quality First
                 </h2>
-                <p className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto">
                     Every report carries the weight of a diagnosis.
                 </p>
             </motion.div>
@@ -354,7 +355,7 @@ function HowItWorksSection() {
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground mb-6">
                         How It Works
                     </h2>
-                    <p className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto">
                         Get started in days, not months. We handle the integration.
                     </p>
                 </motion.div>
@@ -537,12 +538,13 @@ function JoinNetworkSection() {
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground mb-6">
                         Partner With Us
                     </h2>
-                    <p className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl mx-auto mb-10">
+                    <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto mb-10">
                         Quality reporting for your centre. Let's talk.
                     </p>
                     <a
                         href="mailto:info@somatiq.ai?subject=Sample%20Reports%20Request%20-%20Teleradiology&body=Hi%20Somatiq%20team%2C%0A%0AI%20would%20like%20to%20request%20sample%20reports%20to%20evaluate%20your%20teleradiology%20services.%0A%0APlease%20share%20a%20few%20sample%20reports%20and%20let%20me%20know%20how%20we%20can%20start%20a%20pilot.%0A%0AThank%20you!"
                         className="inline-block bg-white text-black font-medium text-base px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors"
+                        onClick={() => trackEvent('generate_lead', { event_category: 'conversion', event_label: 'sample_reports_request', source: 'teleradiology_page' })}
                     >
                         REQUEST SAMPLE REPORTS
                     </a>
@@ -558,13 +560,14 @@ function JoinNetworkSection() {
                     <h3 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-6">
                         Are You a Radiologist?
                     </h3>
-                    <p className="text-lg md:text-xl text-foreground/60 font-light max-w-2xl mx-auto mb-8">
+                    <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto mb-8">
                         Join a network that values precision over volume. Work on cases matched to your subspecialty, with time to do your best work.
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                         <a
                             href="mailto:info@somatiq.ai"
                             className="inline-flex items-center gap-2 text-base text-foreground/80 hover:text-foreground transition-colors"
+                            onClick={() => trackContactClick('teleradiology_radiologist_email')}
                         >
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
@@ -576,6 +579,7 @@ function JoinNetworkSection() {
                         <a
                             href="/careers"
                             className="text-base font-medium text-foreground hover:text-foreground/80 transition-colors underline underline-offset-4"
+                            onClick={() => trackEvent('click', { event_category: 'navigation', event_label: 'view_careers', source: 'teleradiology_page' })}
                         >
                             View Open Positions
                         </a>

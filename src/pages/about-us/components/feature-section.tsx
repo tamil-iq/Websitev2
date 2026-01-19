@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import TeamSectionPage from './team-card';
 import { AnimatedButton } from '@/components/common/animated-button';
+import { trackOutboundLink } from '@/lib/analytics';
 
 const stats = [
     {
@@ -83,6 +84,7 @@ function TractionSection() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#76B900]/30 bg-[#76B900]/5 hover:bg-[#76B900]/10 transition-colors"
+                        onClick={() => trackOutboundLink('nvidia_inception')}
                     >
                         <div className="w-5 h-5 rounded bg-[#76B900] flex items-center justify-center">
                             <svg className="w-3 h-3 text-black" viewBox="0 0 24 24" fill="currentColor">
@@ -167,11 +169,11 @@ function CTASection() {
                     <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground mb-4">
                         Ready to Modernize Your Workflow?
                     </h2>
-                    <p className="text-base md:text-lg text-foreground/60 font-light max-w-xl mx-auto mb-8">
+                    <p className="text-base md:text-lg text-foreground/60 max-w-xl mx-auto mb-8">
                         Join diagnostic centers across India already using Somatiq.
                     </p>
                     <div className='flex justify-center'>
-                    <AnimatedButton>
+                    <AnimatedButton trackingSource="about_cta_demo">
                         SCHEDULE A DEMO
                     </AnimatedButton>
                     </div>

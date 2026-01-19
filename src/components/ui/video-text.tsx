@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import type { ElementType, ReactNode } from "react"
+import type { ReactNode } from "react"
 
 import { cn } from "@/lib/utils"
 
@@ -57,11 +57,6 @@ export interface VideoTextProps {
    * @default "sans-serif"
    */
   fontFamily?: string
-  /**
-   * The element type to render for the text
-   * @default "div"
-   */
-  as?: ElementType
 }
 
 export function VideoText({
@@ -77,7 +72,6 @@ export function VideoText({
   textAnchor = "middle",
   dominantBaseline = "middle",
   fontFamily = "sans-serif",
-  as: Component = "div",
 }: VideoTextProps) {
   const [svgMask, setSvgMask] = useState("")
   const content = React.Children.toArray(children).join("")
@@ -98,7 +92,7 @@ export function VideoText({
   const dataUrlMask = `url("data:image/svg+xml,${encodeURIComponent(svgMask)}")`
 
   return (
-    <Component className={cn(`relative size-full`, className)}>
+    <div className={cn(`relative size-full`, className)}>
       {/* Create a container that masks the video to only show within text */}
       <div
         className="absolute inset-0 flex items-center justify-center"
@@ -128,6 +122,6 @@ export function VideoText({
 
       {/* Add a backup text element for SEO/accessibility */}
       <span className="sr-only">{content}</span>
-    </Component>
+    </div>
   )
 }

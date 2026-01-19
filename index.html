@@ -28,13 +28,19 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://somatiq.ai/" />
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CGV0WZTKW1"></script>
+    <!-- Google Analytics 4 (production only) -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-CGV0WZTKW1');
+      if (window.location.hostname === 'somatiq.ai') {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-CGV0WZTKW1';
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CGV0WZTKW1');
+      }
     </script>
 
     <!-- Structured Data - Organization Schema -->

@@ -15,7 +15,7 @@ const Billing = () => {
         <h1 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
           Billing System
         </h1>
-        <p className="text-lg text-muted-foreground font-light leading-relaxed">
+        <p className="text-lg text-muted-foreground leading-relaxed">
           Healthcare billing management with automated invoicing, insurance claims processing, and revenue cycle management.
         </p>
         <div className="pt-4">

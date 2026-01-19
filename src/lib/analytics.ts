@@ -38,3 +38,23 @@ export const trackOutboundLink = (url: string) => {
     link_url: url,
   });
 };
+
+// Track page views for SPA navigation
+export const trackPageView = (pageName: string, pageTitle?: string) => {
+  trackEvent('page_view', {
+    page_location: window.location.href,
+    page_path: window.location.pathname,
+    page_title: pageTitle || pageName,
+    page_name: pageName,
+  });
+};
+
+// Track feature engagement (scrolling to sections, viewing content)
+export const trackEngagement = (action: string, label: string, value?: number) => {
+  trackEvent('engagement', {
+    event_category: 'user_engagement',
+    event_action: action,
+    event_label: label,
+    ...(value !== undefined && { value }),
+  });
+};

@@ -178,7 +178,7 @@ export default function HeroSection() {
                    <p className="text-4xl font-light text-white mb-3 tracking-wide text-center leading-normal">Why We Built&nbsp;
                    <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent">SOMATIQ</span>
                    </p>
-                   <p className='text-muted text-lg'>This is not just a <label className='text-primary'>technology gap</label> — it is a <label className='text-primary'>healthcare problem.</label></p>
+                   <p className='text-muted text-lg'>This is not just a <label className='text-primary'>technology gap</label>. It is a <label className='text-primary'>healthcare problem.</label></p>
                 </motion.div>
                 <div className="col-span-1 xl:hidden lg:block"></div>
                 

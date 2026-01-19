@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { trackEvent, trackContactClick } from '@/lib/analytics';
 
 const benefits = [
     {
@@ -68,7 +69,7 @@ function WhySomatiqSection() {
                     <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
                         Why Somatiq?
                     </h2>
-                    <p className="text-lg text-foreground/60 font-light max-w-2xl mx-auto">
+                    <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
                         We're a small team solving big problems in healthcare technology.
                     </p>
                 </motion.div>
@@ -87,7 +88,7 @@ function WhySomatiqSection() {
                             <h3 className="text-xl font-medium text-foreground mb-3">
                                 {benefit.title}
                             </h3>
-                            <p className="text-sm text-foreground/60 font-light leading-relaxed">
+                            <p className="text-sm text-foreground/60 leading-relaxed">
                                 {benefit.description}
                             </p>
                         </motion.div>
@@ -122,7 +123,7 @@ function OpportunitySection() {
                     <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
                         Open Roles
                     </h2>
-                    <p className="text-lg text-foreground/60 font-light">
+                    <p className="text-lg text-foreground/60">
                         Let's build the future of radiology, together.
                     </p>
                 </motion.div>
@@ -141,12 +142,13 @@ function OpportunitySection() {
                             <Link
                                 to={`/contact?role=${encodeURIComponent(opportunity.title)}`}
                                 className="flex items-start justify-between gap-4 hover:opacity-80 transition-opacity"
+                                onClick={() => trackEvent('generate_lead', { event_category: 'conversion', event_label: 'job_interest', role: opportunity.title })}
                             >
                                 <div className="flex-1">
                                     <h3 className="text-lg font-medium text-foreground mb-2">
                                         {opportunity.title}
                                     </h3>
-                                    <p className="text-sm text-foreground/60 font-light">
+                                    <p className="text-sm text-foreground/60">
                                         {opportunity.description}
                                     </p>
                                 </div>
@@ -187,7 +189,7 @@ function CTASection() {
                 </motion.div>
 
                 <motion.p
-                    className="text-lg text-foreground/60 font-light mb-10 max-w-xl mx-auto"
+                    className="text-lg text-foreground/60 mb-10 max-w-xl mx-auto"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -206,6 +208,7 @@ function CTASection() {
                     <a
                         href="mailto:careers@somatiq.ai"
                         className="inline-flex items-center gap-2 bg-primary text-white font-medium text-sm px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
+                        onClick={() => trackContactClick('careers_email')}
                     >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -215,6 +218,7 @@ function CTASection() {
                     <Link
                         to="/contact"
                         className="inline-flex items-center gap-2 text-foreground/70 font-medium text-sm px-6 py-3 rounded-lg border border-white/[0.1] hover:border-white/[0.2] hover:text-foreground transition-all"
+                        onClick={() => trackEvent('click', { event_category: 'navigation', event_label: 'contact_us', source: 'careers_page' })}
                     >
                         Contact Us
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

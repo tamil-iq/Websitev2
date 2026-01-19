@@ -15,7 +15,7 @@ const Radone = () => {
         <h1 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
           Radone Reporting
         </h1>
-        <p className="text-lg text-muted-foreground font-light leading-relaxed">
+        <p className="text-lg text-muted-foreground leading-relaxed">
           Advanced radiology reporting solution with AI-powered templates, voice dictation, and seamless PACS integration.
         </p>
         <div className="pt-4">

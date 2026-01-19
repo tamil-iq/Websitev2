@@ -49,24 +49,24 @@ const features = [
     {
         id: 'reporting',
         label: "REPORTING",
-        headline: <>Focus on <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">diagnosis.<AIBadge /></span></>,
-        description: "We'll handle everything else.",
+        headline: <>Less <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">typing.<AIBadge /></span></>,
+        description: "Dictate naturally. Create flawless reports.",
         video: "/videos/ai-reporting.mp4",
         color: "59, 130, 246",
     },
     {
         id: 'viewer',
         label: "VIEWER",
-        headline: <>Feels like <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">magic.<MagicIcon /></span></>,
-        description: "True workstation power with the ease of a browser.",
+        headline: <>No <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">downloads.<MagicIcon /></span></>,
+        description: "Enterprise imaging in any browser.",
         video: "/videos/zero-footprint.mp4",
         color: "59, 130, 246",
     },
     {
         id: 'anywhere',
         label: "ACCESS",
-        headline: <>Total <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">freedom.<DeviceIcon /></span></>,
-        description: "One secure login. Any device. Anywhere.",
+        headline: <>No <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">boundaries.<DeviceIcon /></span></>,
+        description: "Your worklist follows you everywhere.",
         video: "/videos/any-device.mp4",
         color: "59, 130, 246",
     },
@@ -269,7 +269,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                                 <path d="M8 5v14l11-7z" />
                                             </svg>
                                         </div>
-                                        <p className="text-muted font-light tracking-wide">{currentFeature.description}</p>
+                                        <p className="text-muted tracking-wide">{currentFeature.description}</p>
                                         <p className="text-xs text-muted/60 font-extralight mt-1">Video demo coming soon</p>
                                     </div>
                                 </motion.div>

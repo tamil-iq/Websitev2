@@ -1,16 +1,11 @@
-import { ChevronsUp, ChevronDown } from "lucide-react";
+import { ChevronsUp } from "lucide-react";
 import { Link } from "react-router-dom";
 // import { useState } from "react";
 import footerBg from "@/assets/footer-bg.jpg";
 import { AnimatedButton } from "@/components/common/animated-button";
 import { Separator } from "@/components/common/separator";
 import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from "@/components/ui/marquee";
-
-const portfolioItems = [
-  { name: "Platform", path: "/", description: "Unified RIS-PACS solution" },
-  { name: "Radone Reporting", path: "/portfolio/radone", description: "Radiology reporting solution" },
-  { name: "Billing System", path: "/portfolio/billing", description: "Healthcare billing management" },
-];
+import { trackContactClick, trackOutboundLink } from "@/lib/analytics";
 
 const trustedCompanies = [
   { name: "NewMed", logo: "/newmed-without-bg.png" },
@@ -85,25 +80,25 @@ const Footer = () => {
         </div>
 
         {/* Main footer content */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
-          {/* Logo and CTA - takes more space */}
-          <div className="md:col-span-6 flex flex-col gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-12 mb-12">
+          {/* Logo and CTA */}
+          <div className="col-span-2 md:col-span-4 flex flex-col gap-6">
             <img src="/logo/footer-logo.png" alt="Somatiq Logo" className='w-36' />
-            <p className="text-foreground/60 text-sm font-light max-w-xs">
+            <p className="text-foreground/60 text-sm max-w-xs">
               Every second matters. Every detail counts.
             </p>
             <div className="flex flex-col gap-2">
-              <p className="text-foreground/80 font-light tracking-wide text-sm">
+              <p className="text-foreground/80 tracking-wide text-sm">
                 Ready to transform your workflow?
               </p>
-              <AnimatedButton>SCHEDULE A DEMO</AnimatedButton>
+              <AnimatedButton trackingSource="footer_demo">SCHEDULE A DEMO</AnimatedButton>
             </div>
           </div>
 
-          {/* Navigation */}
-          <div className="md:col-span-3">
+          {/* Products */}
+          <div className="col-span-1 md:col-span-2">
             <h3 className="text-foreground font-medium text-sm tracking-wide mb-4">
-              Navigate
+              Products
             </h3>
             <div className="flex flex-col gap-3">
               <Link
@@ -112,37 +107,33 @@ const Footer = () => {
               >
                 Platform
               </Link>
-              {/* Portfolio with hover dropdown */}
-              <div className="relative group">
-                <Link
-                  to="/portfolio"
-                  className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors inline-flex items-center gap-1"
-                >
-                  Portfolio
-                  <ChevronDown className="w-3 h-3 transition-transform group-hover:rotate-180" />
-                </Link>
-                {/* Dropdown */}
-                <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                  <div className="bg-background/95 backdrop-blur-sm border border-white/10 rounded-lg py-2 min-w-[200px] shadow-xl">
-                    {portfolioItems.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        className="block px-4 py-2 hover:bg-white/5 transition-colors"
-                      >
-                        <span className="text-foreground/80 text-sm font-light block">{item.name}</span>
-                        <span className="text-foreground/40 text-xs font-light">{item.description}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <Link
+                to="/portfolio/radone"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                Radone Reporting
+              </Link>
+              <Link
+                to="/portfolio/billing"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                Billing System
+              </Link>
               <Link
                 to="/teleradiology"
                 className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
               >
                 Teleradiology
               </Link>
+            </div>
+          </div>
+
+          {/* Company */}
+          <div className="col-span-1 md:col-span-2">
+            <h3 className="text-foreground font-medium text-sm tracking-wide mb-4">
+              Company
+            </h3>
+            <div className="flex flex-col gap-3">
               <Link
                 to="/about"
                 className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
@@ -150,10 +141,10 @@ const Footer = () => {
                 About Us
               </Link>
               <Link
-                to="/careers"
+                to="/about#team"
                 className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
               >
-                Careers
+                Our Team
               </Link>
               <Link
                 to="/blog"
@@ -161,11 +152,48 @@ const Footer = () => {
               >
                 Blog
               </Link>
+              <a
+                href="https://linkedin.com/company/somatiq"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+                onClick={() => trackOutboundLink('linkedin')}
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+
+          {/* Careers */}
+          <div className="col-span-1 md:col-span-2">
+            <h3 className="text-foreground font-medium text-sm tracking-wide mb-4">
+              Careers
+            </h3>
+            <div className="flex flex-col gap-3">
+              <Link
+                to="/careers"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                Open Positions
+              </Link>
+              <Link
+                to="/careers#why"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+              >
+                Why Somatiq?
+              </Link>
+              <a
+                href="mailto:careers@somatiq.ai"
+                className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+                onClick={() => trackContactClick('footer_careers_email')}
+              >
+                careers@somatiq.ai
+              </a>
             </div>
           </div>
 
           {/* Contact */}
-          <div className="md:col-span-3">
+          <div className="col-span-1 md:col-span-2">
             <h3 className="text-foreground font-medium text-sm tracking-wide mb-4">
               Contact
             </h3>
@@ -173,18 +201,19 @@ const Footer = () => {
               <a
                 href="mailto:info@somatiq.ai"
                 className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
+                onClick={() => trackContactClick('footer_email')}
               >
                 info@somatiq.ai
               </a>
-              <a
-                href="https://linkedin.com/company/somatiq"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/contact"
                 className="text-foreground/60 font-light text-sm hover:text-foreground transition-colors"
-                aria-label="Connect with Somatiq on LinkedIn"
               >
-                LinkedIn
-              </a>
+                Contact Us
+              </Link>
+              <span className="text-foreground/40 font-light text-xs mt-2">
+                Bengaluru, India
+              </span>
             </div>
           </div>
         </div>
