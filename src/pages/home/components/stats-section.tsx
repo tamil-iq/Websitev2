@@ -76,11 +76,8 @@ const StatsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 md:py-20 px-6 overflow-hidden"
+      className="relative py-12 md:py-16 px-6 overflow-hidden"
     >
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-
       <div className="relative max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

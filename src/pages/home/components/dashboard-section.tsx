@@ -66,17 +66,11 @@ export function AdministratorsSection() {
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
     return (
-        <section id="administrators-section" className="relative py-24 px-6 overflow-hidden">
-            {/* Gradient background */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/8 rounded-full blur-[120px]" />
-                <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-teal-500/8 rounded-full blur-[100px]" />
-            </div>
-
+        <section id="administrators-section" className="relative pt-16 pb-24 px-6 overflow-hidden">
             <div ref={sectionRef} className="relative max-w-6xl mx-auto">
 
                 {/* Section Header - Left aligned like Radiologists */}
-                <div className="text-left mb-16">
+                <div className="text-left mb-12">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -328,24 +322,18 @@ export function PatientPortalSection() {
     const [activeFeature, setActiveFeature] = useState(0);
 
     return (
-        <section id="patients-section" className="relative py-24 px-6 overflow-hidden">
-            {/* Stripe-inspired gradient background */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/3 right-0 w-[800px] h-[800px] bg-violet-500/5 rounded-full blur-[150px]" />
-                <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-[120px]" />
-            </div>
-
+        <section id="patients-section" className="relative pt-16 pb-24 px-6 overflow-hidden">
             <div ref={sectionRef} className="relative max-w-6xl mx-auto">
 
                 {/* Section Header - Left aligned like Radiologists */}
-                <div className="text-left mb-16">
+                <div className="text-left mb-12">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, ease: "easeOut" }}
                         className="inline-flex items-center gap-3 mb-6"
                     >
-                        <span className="w-5 h-3 rounded-full bg-violet-400" />
+                        <span className="w-5 h-3 rounded-full bg-primary" />
                         <span className="text-sm text-foreground/70 font-light tracking-wide">For Patients</span>
                         <svg className="w-4 h-4 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -368,7 +356,7 @@ export function PatientPortalSection() {
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-                            className="inline-block text-violet-400"
+                            className="inline-block text-primary"
                         >
                             love it.
                         </motion.span>
@@ -404,7 +392,7 @@ export function PatientPortalSection() {
                                 className={cn(
                                     "w-full group relative flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300",
                                     activeFeature === index
-                                        ? "bg-white/[0.06] border border-violet-500/30"
+                                        ? "bg-white/[0.06] border border-primary/30"
                                         : "bg-white/[0.02] border border-transparent hover:bg-white/[0.04] hover:border-white/[0.08]"
                                 )}
                             >
@@ -412,7 +400,7 @@ export function PatientPortalSection() {
                                 {activeFeature === index && (
                                     <motion.div
                                         layoutId="activeIndicator"
-                                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-violet-400 to-purple-500 rounded-full"
+                                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-primary to-primary/70 rounded-full"
                                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                     />
                                 )}
@@ -443,7 +431,7 @@ export function PatientPortalSection() {
                                     className={cn(
                                         "w-4 h-4 transition-all duration-300",
                                         activeFeature === index
-                                            ? "text-violet-400 translate-x-0 opacity-100"
+                                            ? "text-primary translate-x-0 opacity-100"
                                             : "text-foreground/30 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
                                     )}
                                     fill="none"
@@ -465,7 +453,7 @@ export function PatientPortalSection() {
                         className="lg:col-span-3 relative"
                     >
                         {/* Glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-purple-500/10 to-fuchsia-500/20 rounded-3xl blur-3xl opacity-50" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-3xl blur-3xl opacity-50" />
 
                         {/* Stacked cards - Stripe depth effect */}
                         <div className="relative h-[400px] md:h-[450px]">
@@ -515,13 +503,13 @@ export function PatientPortalSection() {
                                         <motion.div
                                             initial={{ opacity: 0, scale: 0 }}
                                             animate={{ opacity: 1, scale: 1 }}
-                                            className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-violet-500/20 border border-violet-500/30"
+                                            className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/20 border border-primary/30"
                                         >
                                             <span className="relative flex h-1.5 w-1.5">
-                                                <span className="animate-ping absolute h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-                                                <span className="relative rounded-full h-1.5 w-1.5 bg-violet-400"></span>
+                                                <span className="animate-ping absolute h-full w-full rounded-full bg-primary opacity-75"></span>
+                                                <span className="relative rounded-full h-1.5 w-1.5 bg-primary"></span>
                                             </span>
-                                            <span className="text-[10px] text-violet-300 font-medium">AI Active</span>
+                                            <span className="text-[10px] text-primary/80 font-medium">AI Active</span>
                                         </motion.div>
                                     )}
                                 </div>
@@ -558,7 +546,7 @@ export function ComplianceSection() {
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
     return (
-        <section className="relative py-16 px-4">
+        <section className="relative pt-12 pb-16 px-4">
             <div ref={sectionRef} className="relative max-w-5xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -638,15 +626,31 @@ const testimonials = [
     }
 ];
 
+// Section divider for visual flow
+const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'subtle' }) => (
+    <div className="relative w-full py-4">
+        <div
+            className={cn(
+                "mx-auto",
+                variant === 'default' && "h-px w-full max-w-3xl bg-gradient-to-r from-transparent via-white/[0.06] to-transparent",
+                variant === 'subtle' && "h-8 w-full"
+            )}
+        />
+    </div>
+);
+
 // ============================================
 // COMBINED EXPORT
 // ============================================
 export function DashboardSection() {
     return (
-        <div id="features-section">
+        <div id="features-section" className="relative">
             <AdministratorsSection />
+            <SectionDivider />
             <PatientPortalSection />
+            <SectionDivider variant="subtle" />
             <ComplianceSection />
+            <SectionDivider />
             <TestimonialWithMarquee
                 title="Trusted by radiologists across India"
                 testimonials={testimonials}

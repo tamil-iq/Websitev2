@@ -140,11 +140,11 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
         <section
             ref={sectionRef}
             id="radiologists-section"
-            className="relative py-24 px-6 overflow-hidden bg-background"
+            className="relative pt-16 pb-24 px-6 overflow-hidden"
         >
-            {/* Background gradient */}
+            {/* Background gradient - subtle fade in from hero */}
             <div className={cn(
-                "pointer-events-none absolute inset-0 bg-gradient-to-b from-[#3B82F6]/20 to-transparent transition-opacity duration-300",
+                "pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent transition-opacity duration-500",
                 hideLocalGradient ? "opacity-0" : "opacity-100"
             )} />
 

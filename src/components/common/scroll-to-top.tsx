@@ -16,12 +16,11 @@ const pageNames: Record<string, string> = {
   '/contact': 'contact',
 };
 
+// Analytics tracker for SPA navigation (scroll-to-top removed)
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     // Track page view for SPA navigation
     const pageName = pageNames[pathname] || 'unknown';
     trackPageView(pageName);

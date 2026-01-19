@@ -3,6 +3,8 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { trackOutboundLink } from '@/lib/analytics';
+import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavLink {
   name: string;
@@ -13,6 +15,9 @@ interface NavLink {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const location = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -33,6 +38,34 @@ const Navbar = () => {
     { name: 'Careers', path: '/careers' },
     { name: 'Blog', path: '/blog' },
   ];
+
+  // Scroll-aware navbar: show/hide on scroll direction, change style on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Update scrolled state for background styling
+      setIsScrolled(currentScrollY > 20);
+
+      // Hide/show navbar based on scroll direction (only after scrolling 100px)
+      if (currentScrollY > 100) {
+        if (currentScrollY > lastScrollY.current && currentScrollY > 200) {
+          // Scrolling down & past threshold - hide navbar
+          setIsVisible(false);
+        } else {
+          // Scrolling up - show navbar
+          setIsVisible(true);
+        }
+      } else {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -78,11 +111,27 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm">
+    <motion.nav
+      initial={{ y: 0 }}
+      animate={{
+        y: isVisible ? 0 : -100,
+      }}
+      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled
+          ? "bg-background/80 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/5"
+          : "bg-transparent border-b border-transparent"
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 lg:h-18">
           {/* Logo */}
-          <div className="shrink-0 w-36 h-14">
+          <motion.div
+            className="shrink-0 w-36 h-14"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.2 }}
+          >
             <Link to="/" className="block h-full">
               <img
                 src="/logo/navbar-logo.svg"
@@ -90,14 +139,14 @@ const Navbar = () => {
                 className="w-full h-full object-contain"
               />
             </Link>
-          </div>
+          </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1" ref={dropdownRef}>
+          <div className="hidden lg:flex items-center gap-1" ref={dropdownRef}>
             {navLinks.map((link) => (
               <div
                 key={link.path}
-                className="relative group"
+                className="relative"
                 onMouseEnter={() => link.children && setActiveDropdown(link.name)}
                 onMouseLeave={() => link.children && setActiveDropdown(null)}
               >
@@ -105,177 +154,275 @@ const Navbar = () => {
                   // Dropdown menu item
                   <Link
                     to={link.path}
-                    className={`flex items-center gap-1 px-3 py-2 rounded-md text-sm tracking-wide transition-colors ${
+                    className={cn(
+                      "group relative flex items-center gap-1 px-4 py-2 rounded-lg text-sm tracking-wide transition-all duration-200",
                       isParentActive(link)
-                        ? 'text-foreground font-medium'
-                        : 'text-muted-foreground font-light hover:text-foreground hover:bg-muted/30'
-                    }`}
+                        ? "text-foreground font-medium"
+                        : "text-foreground/60 font-light hover:text-foreground"
+                    )}
                   >
                     {link.name}
                     <ChevronDown
-                      className={`w-4 h-4 transition-transform duration-200 ${
-                        activeDropdown === link.name ? 'rotate-180' : ''
-                      }`}
+                      className={cn(
+                        "w-3.5 h-3.5 transition-transform duration-200",
+                        activeDropdown === link.name ? "rotate-180" : ""
+                      )}
                     />
+                    {/* Hover indicator */}
+                    <span className={cn(
+                      "absolute bottom-0 left-4 right-4 h-[2px] bg-primary rounded-full transition-transform duration-200 origin-left",
+                      isParentActive(link) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    )} />
                   </Link>
                 ) : (
                   // Regular link
                   <Link
                     to={link.path}
-                    className={`px-3 py-2 rounded-md text-sm tracking-wide transition-colors ${
+                    className={cn(
+                      "group relative px-4 py-2 rounded-lg text-sm tracking-wide transition-all duration-200",
                       isActive(link.path)
-                        ? 'text-foreground font-medium'
-                        : 'text-muted-foreground font-light hover:text-foreground hover:bg-muted/30'
-                    }`}
+                        ? "text-foreground font-medium"
+                        : "text-foreground/60 font-light hover:text-foreground"
+                    )}
                   >
                     {link.name}
+                    {/* Hover indicator */}
+                    <span className={cn(
+                      "absolute bottom-0 left-4 right-4 h-[2px] bg-primary rounded-full transition-transform duration-200 origin-left",
+                      isActive(link.path) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    )} />
                   </Link>
                 )}
 
                 {/* Dropdown Panel */}
-                {link.children && (
-                  <div
-                    className={`absolute top-full left-0 pt-1 w-64 transition-all duration-200 ${
-                      activeDropdown === link.name
-                        ? 'opacity-100 visible translate-y-0'
-                        : 'opacity-0 invisible -translate-y-2'
-                    }`}
-                  >
-                    <div className="bg-background border border-border rounded-lg shadow-lg py-2">
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.path}
-                          to={child.path}
-                          className={`block px-4 py-3 transition-colors ${
-                            isActive(child.path)
-                              ? 'bg-muted/50 text-foreground'
-                              : 'text-muted-foreground hover:bg-muted/30 hover:text-foreground'
-                          }`}
-                        >
-                          <span className="text-sm font-light">{child.name}</span>
-                          {child.description && (
-                            <span className="block text-xs text-muted-foreground/70 mt-0.5">
-                              {child.description}
-                            </span>
-                          )}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                <AnimatePresence>
+                  {link.children && activeDropdown === link.name && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                      transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
+                      className="absolute top-full left-0 pt-2 w-72"
+                    >
+                      <div className="bg-background/95 backdrop-blur-xl border border-white/[0.08] rounded-xl shadow-xl shadow-black/20 py-2 overflow-hidden">
+                        {link.children.map((child, index) => (
+                          <motion.div
+                            key={child.path}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.15, delay: index * 0.03 }}
+                          >
+                            <Link
+                              to={child.path}
+                              className={cn(
+                                "group block px-4 py-3 transition-all duration-200",
+                                isActive(child.path)
+                                  ? "bg-primary/10"
+                                  : "hover:bg-white/[0.04]"
+                              )}
+                            >
+                              <span className={cn(
+                                "text-sm transition-colors duration-200",
+                                isActive(child.path)
+                                  ? "text-foreground font-medium"
+                                  : "text-foreground/80 group-hover:text-foreground font-light"
+                              )}>
+                                {child.name}
+                              </span>
+                              {child.description && (
+                                <span className="block text-xs text-foreground/40 mt-0.5 group-hover:text-foreground/50 transition-colors">
+                                  {child.description}
+                                </span>
+                              )}
+                            </Link>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
 
             {/* CTA Button */}
-            <Button
-              className="ml-4 bg-foreground text-background rounded-md text-sm font-medium hover:bg-foreground/90 cursor-pointer"
-              onClick={() => {
-                trackOutboundLink('ris_login');
-                window.open('https://ris.somatiq.ai', '_blank');
-              }}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="ml-4"
             >
-              Login to RIS
-            </Button>
+              <Button
+                className={cn(
+                  "relative overflow-hidden rounded-lg text-sm font-medium transition-all duration-300",
+                  isScrolled
+                    ? "bg-primary text-white hover:bg-primary/90"
+                    : "bg-white/10 text-foreground hover:bg-white/20 border border-white/10"
+                )}
+                onClick={() => {
+                  trackOutboundLink('ris_login');
+                  window.open('https://ris.somatiq.ai', '_blank');
+                }}
+              >
+                Login to RIS
+              </Button>
+            </motion.div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50"
-              aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={isOpen}
-            >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsOpen(!isOpen)}
+            className={cn(
+              "lg:hidden p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50",
+              isOpen
+                ? "bg-white/10 text-foreground"
+                : "text-foreground/60 hover:text-foreground hover:bg-white/5"
+            )}
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
+          >
+            <AnimatePresence mode="wait">
+              {isOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <X size={24} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <Menu size={24} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
       </div>
 
       {/* Mobile Navigation */}
-      <div
-        className={`lg:hidden fixed inset-0 top-16 bg-background/98 backdrop-blur-md transition-all duration-300 ${
-          isOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="h-full overflow-y-auto px-4 py-6">
-          <div className="space-y-1">
-            {navLinks.map((link) => (
-              <div key={link.path}>
-                {link.children ? (
-                  // Mobile dropdown
-                  <div>
-                    <button
-                      onClick={() => handleDropdownToggle(link.name)}
-                      className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-base transition-colors ${
-                        isParentActive(link)
-                          ? 'text-foreground font-medium bg-muted/30'
-                          : 'text-muted-foreground font-light hover:text-foreground hover:bg-muted/20'
-                      }`}
-                    >
-                      {link.name}
-                      <ChevronDown
-                        className={`w-5 h-5 transition-transform duration-200 ${
-                          activeDropdown === link.name ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </button>
-
-                    {/* Mobile dropdown items */}
-                    <div className={`overflow-hidden transition-all duration-200 ${
-                      activeDropdown === link.name ? 'max-h-96' : 'max-h-0'
-                    }`}>
-                      <div className="pl-4 py-2 space-y-1">
-                        {link.children.map((child) => (
-                          <Link
-                            key={child.path}
-                            to={child.path}
-                            className={`block px-4 py-2 rounded-lg text-sm transition-colors ${
-                              isActive(child.path)
-                                ? 'text-foreground font-medium bg-muted/30'
-                                : 'text-muted-foreground font-light hover:text-foreground hover:bg-muted/20'
-                            }`}
-                          >
-                            {child.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  // Mobile regular link
-                  <Link
-                    to={link.path}
-                    className={`block px-4 py-3 rounded-lg text-base transition-colors ${
-                      isActive(link.path)
-                        ? 'text-foreground font-medium bg-muted/30'
-                        : 'text-muted-foreground font-light hover:text-foreground hover:bg-muted/20'
-                    }`}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'calc(100vh - 4rem)' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            className="lg:hidden fixed inset-x-0 top-16 bg-background/98 backdrop-blur-xl border-t border-white/[0.08] overflow-hidden"
+          >
+            <div className="h-full overflow-y-auto px-4 py-6">
+              <div className="space-y-1">
+                {navLinks.map((link, linkIndex) => (
+                  <motion.div
+                    key={link.path}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2, delay: linkIndex * 0.05 }}
                   >
-                    {link.name}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </div>
+                    {link.children ? (
+                      // Mobile dropdown
+                      <div>
+                        <button
+                          onClick={() => handleDropdownToggle(link.name)}
+                          className={cn(
+                            "w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-base transition-all duration-200",
+                            isParentActive(link)
+                              ? "text-foreground font-medium bg-white/[0.06]"
+                              : "text-foreground/70 font-light hover:text-foreground hover:bg-white/[0.04]"
+                          )}
+                        >
+                          {link.name}
+                          <motion.div
+                            animate={{ rotate: activeDropdown === link.name ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <ChevronDown className="w-5 h-5" />
+                          </motion.div>
+                        </button>
 
-          {/* Mobile CTA */}
-          <div className="mt-6 px-4">
-            <Button
-              className="w-full bg-foreground text-background rounded-md text-sm font-medium hover:bg-foreground/90"
-              onClick={() => {
-                trackOutboundLink('ris_login_mobile');
-                window.open('https://ris.somatiq.ai', '_blank');
-              }}
-            >
-              Login to RIS
-            </Button>
-          </div>
-        </div>
-      </div>
-    </nav>
+                        {/* Mobile dropdown items */}
+                        <AnimatePresence>
+                          {activeDropdown === link.name && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pl-4 py-2 space-y-1">
+                                {link.children.map((child, childIndex) => (
+                                  <motion.div
+                                    key={child.path}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.15, delay: childIndex * 0.03 }}
+                                  >
+                                    <Link
+                                      to={child.path}
+                                      className={cn(
+                                        "block px-4 py-2.5 rounded-lg text-sm transition-all duration-200",
+                                        isActive(child.path)
+                                          ? "text-foreground font-medium bg-primary/10"
+                                          : "text-foreground/60 font-light hover:text-foreground hover:bg-white/[0.04]"
+                                      )}
+                                    >
+                                      {child.name}
+                                    </Link>
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      // Mobile regular link
+                      <Link
+                        to={link.path}
+                        className={cn(
+                          "block px-4 py-3.5 rounded-xl text-base transition-all duration-200",
+                          isActive(link.path)
+                            ? "text-foreground font-medium bg-white/[0.06]"
+                            : "text-foreground/70 font-light hover:text-foreground hover:bg-white/[0.04]"
+                        )}
+                      >
+                        {link.name}
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Mobile CTA */}
+              <motion.div
+                className="mt-8 px-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+              >
+                <Button
+                  className="w-full bg-primary text-white rounded-xl text-base font-medium hover:bg-primary/90 py-6"
+                  onClick={() => {
+                    trackOutboundLink('ris_login_mobile');
+                    window.open('https://ris.somatiq.ai', '_blank');
+                  }}
+                >
+                  Login to RIS
+                </Button>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
