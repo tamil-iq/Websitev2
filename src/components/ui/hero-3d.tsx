@@ -160,7 +160,6 @@ const Hero3DScene = () => {
 
       <AnimatedSphere />
       <ElectronBeam count={10} />
-      <GridPlane />
     </>
   );
 };
