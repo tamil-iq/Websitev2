@@ -1,5 +1,6 @@
 import HeroSection from './components/hero-section';
 import SecureSection from './components/secure-section';
+import StatsSection from './components/stats-section';
 import { HomePageSections } from './components/dashboard-section';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -53,6 +54,7 @@ const Home = () => {
         <HeroSection />
       </div>
       <SecureSection hideLocalGradient={showGradient} />
+      <StatsSection />
       <HomePageSections />
     </div>
   );

@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
+import { trackOutboundLink } from '@/lib/analytics';
 
 interface NavLink {
   name: string;
@@ -21,9 +22,10 @@ const Navbar = () => {
       name: 'Portfolio',
       path: '/portfolio',
       children: [
-        { name: 'Platform', path: '/', description: 'Unified RIS-PACS solution' },
-        { name: 'Radone Reporting', path: '/portfolio/radone', description: 'Radiology reporting solution' },
-        { name: 'Billing System', path: '/portfolio/billing', description: 'Healthcare billing management' },
+        { name: 'Platform', path: '/', description: 'Unified RIS, PACS, and Reporting' },
+        { name: 'RadLinQ', path: '/portfolio/radlinq', description: 'Teleradiology software' },
+        { name: 'RadOne', path: '/portfolio/radone', description: 'Independent reporting module' },
+        { name: 'InvoiceIQ', path: '/portfolio/invoiceiq', description: 'Smart healthcare billing' },
       ]
     },
     { name: 'Teleradiology', path: '/teleradiology' },
@@ -167,7 +169,10 @@ const Navbar = () => {
             {/* CTA Button */}
             <Button
               className="ml-4 bg-foreground text-background rounded-md text-sm font-medium hover:bg-foreground/90 cursor-pointer"
-              onClick={() => window.open('https://ris.somatiq.ai', '_blank')}
+              onClick={() => {
+                trackOutboundLink('ris_login');
+                window.open('https://ris.somatiq.ai', '_blank');
+              }}
             >
               Login to RIS
             </Button>
@@ -260,7 +265,10 @@ const Navbar = () => {
           <div className="mt-6 px-4">
             <Button
               className="w-full bg-foreground text-background rounded-md text-sm font-medium hover:bg-foreground/90"
-              onClick={() => window.open('https://ris.somatiq.ai', '_blank')}
+              onClick={() => {
+                trackOutboundLink('ris_login_mobile');
+                window.open('https://ris.somatiq.ai', '_blank');
+              }}
             >
               Login to RIS
             </Button>

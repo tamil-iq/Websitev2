@@ -132,7 +132,27 @@
   }
   body {
     @apply bg-background text-foreground overflow-x-hidden;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* Typography Scale - Standardized weights
+   * Headlines (H1-H3): semibold (600)
+   * Subheadings: medium (500)
+   * Body: normal (400)
+   * Labels/captions: normal (400) or medium (500)
+   * Muted/secondary: normal (400) with reduced opacity
+   */
+
+  h1, h2, h3 {
+    @apply font-semibold tracking-tight;
+  }
+
+  h4, h5, h6 {
+    @apply font-medium;
+  }
+
+  p {
+    @apply font-normal;
   }
 }
 
@@ -150,6 +170,66 @@
 
   .text-gradient-right {
     @apply bg-linear-to-l from-muted via-foreground to-foreground bg-clip-text text-transparent;
+  }
+
+  /* Hero gradient text - animated glow */
+  .hero-gradient-text {
+    background: linear-gradient(
+      90deg,
+      #0EA5E9 0%,
+      #38bdf8 25%,
+      #8B5CF6 50%,
+      #38bdf8 75%,
+      #0EA5E9 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    animation: hero-gradient-shift 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.4));
+  }
+
+  @keyframes hero-gradient-shift {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+  }
+
+  /* Hero gradient text - static (no animation) */
+  .hero-gradient-text-static {
+    background: linear-gradient(
+      90deg,
+      #0EA5E9 0%,
+      #38bdf8 50%,
+      #8B5CF6 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.4));
+  }
+
+  /* Hero text with wave-inspired gradient pattern */
+  .hero-wave-text {
+    background:
+      linear-gradient(
+        135deg,
+        #1d4ed8 0%,
+        #3b82f6 20%,
+        #60a5fa 35%,
+        #93c5fd 50%,
+        #60a5fa 65%,
+        #3b82f6 80%,
+        #1d4ed8 100%
+      );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.6));
+    padding-bottom: 0.1em;
   }
 
   /* Persona gradient text styles */
