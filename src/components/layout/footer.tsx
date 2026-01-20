@@ -1,4 +1,3 @@
-import { ChevronsUp } from "lucide-react";
 import { Link } from "react-router-dom";
 // import { useState } from "react";
 import footerBg from "@/assets/footer-bg-original.svg";
@@ -15,10 +14,6 @@ const trustedCompanies = [
 ];
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <footer className=" overflow-hidden relative">
       <div
@@ -29,17 +24,6 @@ const Footer = () => {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
-        {/* Scroll to top */}
-        <button
-          onClick={scrollToTop}
-          className="flex items-center gap-2 mx-auto mb-12 text-muted hover:text-foreground transition-colors group"
-          aria-label="Scroll to top of page"
-        >
-          <ChevronsUp className="w-4 h-4 animate-bounce-slow" aria-hidden="true" />
-          <span className="text-sm tracking-wider font-extralight">scroll to the top</span>
-          <ChevronsUp className="w-4 h-4 animate-bounce-slow" aria-hidden="true" />
-        </button>
-
         {/* Mission Statement - Prominent */}
         <div className="text-center mb-16">
           <p className="text-xs text-muted font-light tracking-[0.2em] uppercase mb-4">Our Mission</p>
