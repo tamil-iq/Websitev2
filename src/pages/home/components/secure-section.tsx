@@ -155,7 +155,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                 hideLocalGradient ? "opacity-0" : "opacity-100"
             )} />
 
-            <div className="relative max-w-6xl mx-auto space-y-16">
+            <div className="relative max-w-360 mx-auto space-y-16">
 
                 {/* Section Header */}
                 <div className="text-left">
@@ -259,34 +259,18 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         {/* Glow effect */}
                         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20 rounded-2xl blur-3xl opacity-50" />
 
-                        {/* Video container - stretches to match cards */}
-                        <div className="relative flex-1 min-h-[300px] rounded-2xl border border-white/[0.1] overflow-hidden shadow-2xl shadow-black/50">
+                        {/* Video container - centered */}
+                        <div className="relative flex-1 flex items-center justify-center min-h-[300px] rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
                             <AnimatePresence mode="wait">
-                                <motion.div
-                                    key={currentFeature.id}
-                                    initial={{ opacity: 0, scale: 0.98 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.98 }}
-                                    transition={{ duration: 0.4, ease: "easeOut" }}
-                                    className="absolute inset-0 bg-black/50 flex items-center justify-center"
-                                >
-                                    {/* GIF display */}
-                                    <div className="w-full h-full">
-                                        <img 
-                                            className="w-full h-full object-cover"
-                                            src={currentFeature.gif}
-                                            alt={currentFeature.description}
-                                        />
-                                    </div>
-                                </motion.div>
+                                
+                                    {/* GIF display - centered with fixed dimensions */}
+                                    <img 
+                                        className="w-full h-auto max-w-full mx-auto object-contain"
+                                        style={{ width: '100%', height: '400px', objectFit: 'contain' }}
+                                        src={currentFeature.gif}
+                                        alt={currentFeature.description}
+                                    />
                             </AnimatePresence>
-
-                            {/* Feature label overlay */}
-                            <div className="absolute top-4 left-4 z-10">
-                                <div className="px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm border border-white/[0.1]">
-                                    <span className="text-xs text-foreground font-light tracking-wide">{currentFeature.label}</span>
-                                </div>
-                            </div>
                         </div>
                     </motion.div>
                 </div>

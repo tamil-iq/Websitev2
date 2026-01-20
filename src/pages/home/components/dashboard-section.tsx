@@ -1,7 +1,7 @@
 import chatui from "@/assets/homepage/chat-ui.png";
 import scanreports from "@/assets/homepage/scan-reports.png";
-import aipowered from "@/assets/homepage/video/instant.gif";
-import instantgif from "@/assets/homepage/video/login.gif";
+import aipowered from "@/assets/homepage/video/aipowered.gif";
+import instantgif from "@/assets/homepage/video/instant.gif";
 import share from "@/assets/homepage/video/share.gif";
 import lifetime from "@/assets/homepage/video/lifetime.gif";
 import { cn } from "@/lib/utils";
