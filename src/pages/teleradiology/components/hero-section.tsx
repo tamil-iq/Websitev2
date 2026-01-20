@@ -12,9 +12,9 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
         >
-            <div className="relative w-full overflow-hidden hidden md:flex items-center justify-center container max-w-full h-screen -mt-16">
+            <div className="relative w-full overflow-hidden flex items-center justify-center container max-w-full h-screen -mt-16">
             {/* Background images with blur */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none block">
                 {/* Top gradient overlay */}
                 <div
                     className="absolute inset-0"

@@ -235,7 +235,7 @@ export default function FeatureSection() {
     return (
         <div>
             <WhySomatiqSection />
-            <OpportunitySection />
+            {/* <OpportunitySection /> */}
             <CTASection />
         </div>
     );

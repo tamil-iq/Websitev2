@@ -12,7 +12,7 @@ const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'subtle
   <div className="relative w-full">
     <div
       className={cn(
-        "mx-auto transition-all duration-500",
+        "mx-auto transition-all duration-500 hidden md:block",
         variant === 'default' && "h-px w-full max-w-4xl bg-gradient-to-r from-transparent via-white/[0.08] to-transparent",
         variant === 'subtle' && "h-24 w-full",
         variant === 'accent' && "h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-primary/20 to-transparent"

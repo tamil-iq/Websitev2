@@ -17,7 +17,7 @@ const DonutChart: React.FC = () => {
   ];
 
   return (
-    <div className="w-full h-[220px] bg-none relative">
+    <div className="w-full h-[450px] md:h-[220px] bg-none relative">
       {/* Legend - top right */}
       <div className="absolute top-0 right-0 flex flex-wrap gap-x-3 gap-y-1 text-[10px]">
         {data.map((item) => (

@@ -20,9 +20,11 @@ const Radone = () => {
         </p>
         <div className="pt-4">
           <Link to="/">
+          <div className='flex items-center justify-center'>
             <AnimatedButton trackingSource="radone_page">
               EXPLORE PLATFORM
             </AnimatedButton>
+            </div>
           </Link>
         </div>
       </div>

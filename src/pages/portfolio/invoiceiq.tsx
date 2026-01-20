@@ -20,9 +20,11 @@ const InvoiceIQ = () => {
         </p>
         <div className="pt-4">
           <Link to="/portfolio">
+          <div className='flex items-center justify-center'>
             <AnimatedButton trackingSource="invoiceiq_page">
               VIEW ALL PRODUCTS
             </AnimatedButton>
+            </div>
           </Link>
         </div>
       </div>

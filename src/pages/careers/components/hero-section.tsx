@@ -109,13 +109,13 @@ export default function HeroSection() {
                         className=" flex flex-col items-center justify-center gap-6"
                         variants={containerVariants}
                     >
-                        <motion.h1 className="text-5xl font-normal tracking-wide text-foreground" variants={titleVariants}>
+                        <motion.h1 className="text-5xl font-normal tracking-wide text-foreground text-center" variants={titleVariants}>
                             <label className='text-gradient'>Build the Future of Radiology</label>
                         </motion.h1>
                         {/* <motion.p className="text-xl text-foreground font-extralight tracking-wide" variants={subtitleVariants}>
                             For Radiologists — Shape the Future of Radiology & AI
                         </motion.p> */}
-                        <motion.span className="text-sm text-muted font-light tracking-wider max-w-xl" variants={descriptionVariants}>
+                        <motion.span className="text-sm text-muted font-light tracking-wider max-w-xl text-center" variants={descriptionVariants}>
                         Join engineers, designers, and operators shaping how diagnostics work. We're building intelligent software that makes radiology more accessible and efficient.                        </motion.span>
                         {/* <motion.span className="text-sm text-foreground font-light tracking-wide" variants={missionVariants}>
                             Our mission: faster, smarter, and more fulfilling reporting.

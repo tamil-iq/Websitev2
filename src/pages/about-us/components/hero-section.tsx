@@ -103,20 +103,20 @@ export default function HeroSection() {
                     }}
                 />
                 {/* Horizontal gradient borders */}
-                <div 
-                    className="absolute left-0 right-0 top-1/4 h-px pointer-events-none opacity-30 hidden md:block"
+                 <div 
+                    className="absolute left-0 right-0 top-1/4 h-px pointer-events-none opacity-30"
                     style={{
                         background: 'linear-gradient(to right, rgb(70, 153, 248,0.1) 13%, rgb(70, 153, 248,0.6) 21%, rgb(70, 153, 248) 79%, rgb(70, 153, 248,0.1) 87%)'
                     }}
                 />
                 <div 
-                    className="absolute left-0 right-0 top-2/4 h-px pointer-events-none opacity-30 hidden md:block"
+                    className="absolute left-0 right-0 top-2/4 h-px pointer-events-none opacity-30"
                     style={{
                         background: 'linear-gradient(to right, rgb(70, 153, 248,0.1) 13%, rgb(70, 153, 248,0.6) 21%, rgb(70, 153, 248) 79%, rgb(70, 153, 248,0.1) 87%)'
                     }}
                 />
                 <div 
-                    className="absolute left-0 right-0 top-3/4 h-px pointer-events-none opacity-30 hidden md:block"
+                    className="absolute left-0 right-0 top-3/4 h-px pointer-events-none opacity-30"
                     style={{
                         background: 'linear-gradient(to right, rgb(70, 153, 248,0.1) 13%, rgb(70, 153, 248,0.6) 21%, rgb(70, 153, 248) 79%, rgb(70, 153, 248,0.1) 87%)'
                     }}

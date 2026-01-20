@@ -20,9 +20,11 @@ const Blog = () => {
         </p>
         <div className="pt-4">
           <Link to="/">
+          <div className='flex items-center justify-center'>
             <AnimatedButton trackingSource="blog_page">
               EXPLORE HOMEPAGE
             </AnimatedButton>
+            </div>
           </Link>
         </div>
       </div>

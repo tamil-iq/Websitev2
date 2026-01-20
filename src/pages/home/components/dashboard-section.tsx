@@ -4,6 +4,7 @@ import aipowered from "@/assets/homepage/video/aipowered.gif";
 import instantgif from "@/assets/homepage/video/instant.gif";
 import share from "@/assets/homepage/video/share.gif";
 import lifetime from "@/assets/homepage/video/lifetime.gif";
+import patientportal from "@/assets/homepage/video/patientportal.gif";
 import { cn } from "@/lib/utils";
 import { TrendingUp, Gauge, BarChart3 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -72,7 +73,7 @@ export function AdministratorsSection() {
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
     return (
-        <section id="administrators-section" className="relative pt-16 pb-24 px-6 overflow-hidden">
+        <section id="administrators-section" className="relative pt-32 md:pt-16 md:pb-24 pb-0 px-6 overflow-hidden">
             <div ref={sectionRef} className="relative max-w-6xl mx-auto">
 
                 {/* Section Header - Left aligned like Radiologists */}
@@ -350,11 +351,10 @@ export function AdministratorsSection() {
 export function PatientPortalSection() {
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-    const [activeFeature, setActiveFeature] = useState(0);
 
     return (
-        <section id="patients-section" className="relative pt-16 pb-24 px-6 overflow-hidden">
-            <div ref={sectionRef} className="relative max-w-6xl mx-auto">
+        <section id="patients-section" className="relative md:pt-16 md:pb-24 pt-32 pb-0 px-6 overflow-hidden">
+            <div ref={sectionRef} className="relative max-w-7xl mx-auto">
 
                 {/* Section Header - Left aligned like Radiologists */}
                 <div className="text-left mb-12">
@@ -403,10 +403,10 @@ export function PatientPortalSection() {
                     </motion.p>
                 </div>
 
-                {/* Main Content - Figma-style interactive layout */}
+                {/* Main Content - Static layout with features and image */}
                 <div className="grid lg:grid-cols-5 gap-8 items-center">
 
-                    {/* Left: Feature Pills - Notion style */}
+                    {/* Left: Feature Pills - Static display */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
@@ -414,69 +414,29 @@ export function PatientPortalSection() {
                         className="lg:col-span-2 space-y-3"
                     >
                         {patientFeatures.map((feature, index) => (
-                            <motion.button
+                            <motion.div
                                 key={feature.id}
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                                 transition={{ duration: 0.4, delay: 0.3 + index * 0.1, ease: "easeOut" }}
-                                onClick={() => setActiveFeature(index)}
-                                className={cn(
-                                    "w-full group relative flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300",
-                                    activeFeature === index
-                                        ? "bg-white/[0.06] border border-primary/30"
-                                        : "bg-white/[0.02] border border-transparent hover:bg-white/[0.04] hover:border-white/[0.08]"
-                                )}
+                                className="w-full group relative flex items-center gap-4 p-4 rounded-xl text-left transition-all duration-300 bg-white/[0.02] border border-white/[0.08]"
                             >
-                                {/* Active indicator */}
-                                {activeFeature === index && (
-                                    <motion.div
-                                        layoutId="activeIndicator"
-                                        className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-primary to-primary/70 rounded-full"
-                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                    />
-                                )}
-
-                                <div className={cn(
-                                    "flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300",
-                                    activeFeature === index
-                                        ? "bg-white/[0.08] text-foreground"
-                                        : "bg-white/[0.03] text-muted group-hover:text-foreground/70"
-                                )}>
+                                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-white/[0.03] text-foreground/70">
                                     {feature.icon}
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h3 className={cn(
-                                        "font-medium text-base md:text-lg transition-colors duration-300",
-                                        activeFeature === index ? "text-foreground" : "text-foreground/70"
-                                    )}>
+                                    <h3 className="font-medium text-base md:text-lg text-foreground">
                                         {feature.title}
                                     </h3>
-                                    <p className={cn(
-                                        "text-sm font-light mt-1 transition-colors duration-300 line-clamp-2",
-                                        activeFeature === index ? "text-muted" : "text-muted/70"
-                                    )}>
+                                    <p className="text-sm font-light mt-1 text-muted">
                                         {feature.description}
                                     </p>
                                 </div>
-                                <svg
-                                    className={cn(
-                                        "w-4 h-4 transition-all duration-300",
-                                        activeFeature === index
-                                            ? "text-primary translate-x-0 opacity-100"
-                                            : "text-foreground/30 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
-                                    )}
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={2}
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                </svg>
-                            </motion.button>
+                            </motion.div>
                         ))}
                     </motion.div>
 
-                    {/* Right: Floating UI Preview - Stripe layered style */}
+                    {/* Right: Static UI Preview */}
                     <motion.div
                         initial={{ opacity: 0, x: 30 }}
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
@@ -486,78 +446,22 @@ export function PatientPortalSection() {
                         {/* Glow effect */}
                         <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-3xl blur-3xl opacity-50" />
 
-                        {/* Stacked cards - Stripe depth effect */}
+                        {/* Static image display */}
                         <div className="relative h-[400px] md:h-[450px]">
-                            {/* Instant Report Access - Feature 0 */}
-                            {activeFeature === 0 && (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.2 }}
-                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-10"
-                                >
-                                    <div className="rounded-2xl overflow-hidden">
-                                        <img
-                                            src={instantgif}
-                                            alt="Instant Report Access"
-                                            // className="w-full"
-                                        />
-                                    </div>
-                                </motion.div>
-                            )}
-
-                            {/* AI-Powered Clarity - Feature 1 */}
-                            {activeFeature === 1 && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1.02 }}
-                                    transition={{ duration: 0.6, delay: 0.3 }}
-                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-10"
-                                >
-                                    <div className="relative rounded-2xl overflow-hidden">
-                                        <img
-                                            src={aipowered}
-                                            alt="AI Chat"
-                                        />   
-                                    </div>
-                                </motion.div>
-                            )}
-                            
-                            {/* Easy Physician Sharing - Feature 2 */}
-                            {activeFeature === 2 && (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    transition={{ duration: 0.5, delay: 0.2 }}
-                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-10"
-                                >
-                                    <div className="rounded-2xl overflow-hidden">
-                                        <img
-                                            src={share}
-                                            alt="Easy Physician Sharing"
-                                        />
-                                    </div>
-                                </motion.div>
-                            )}
-                            
-                            {/* Lifetime Health Record - Feature 3 */}
-                            {activeFeature === 3 && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.3 }}
-                                    className="absolute top-8 left-0 w-full transition-all duration-500"
-                                >
-                                    <div className="relative rounded-2xl overflow-hidden">
-                                        <img
-                                            src={lifetime}
-                                            alt="Lifetime Health Record"
-                                            className="w-full"
-                                        />
-                                       
-                                    </div>
-                                </motion.div>
-                            )}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-10"
+                            >
+                                <div className="rounded-2xl overflow-hidden">
+                                    <img
+                                        src={patientportal}
+                                        alt="Patient Portal"
+                                        className="w-full"
+                                    />
+                                </div>
+                            </motion.div>
                         </div>
                     </motion.div>
                 </div>
@@ -639,7 +543,7 @@ const testimonials = [
 
 // Section divider for visual flow
 const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'subtle' }) => (
-    <div className="relative w-full py-4">
+    <div className="relative w-full py-4 hidden md:block">
         <div
             className={cn(
                 "mx-auto",
