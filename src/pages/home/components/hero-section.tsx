@@ -103,7 +103,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={buttonsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-16 md:pt-24"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 md:pt-12"
         >
           <AnimatedButton trackingSource="hero_demo">
             SCHEDULE A DEMO

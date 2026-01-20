@@ -168,11 +168,10 @@ const Navbar = () => {
                         activeDropdown === link.name ? "rotate-180" : ""
                       )}
                     />
-                    {/* Hover indicator */}
-                    <span className={cn(
+                    {/* <span className={cn(
                       "absolute bottom-0 left-4 right-4 h-[2px] bg-primary rounded-full transition-transform duration-200 origin-left",
                       isParentActive(link) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                    )} />
+                    )} /> */}
                   </Link>
                 ) : (
                   // Regular link
@@ -187,10 +186,10 @@ const Navbar = () => {
                   >
                     {link.name}
                     {/* Hover indicator */}
-                    <span className={cn(
+                    {/* <span className={cn(
                       "absolute bottom-0 left-4 right-4 h-[2px] bg-primary rounded-full transition-transform duration-200 origin-left",
                       isActive(link.path) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                    )} />
+                    )} /> */}
                   </Link>
                 )}
 

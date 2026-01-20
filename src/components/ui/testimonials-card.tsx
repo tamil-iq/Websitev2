@@ -29,16 +29,16 @@ export function TestimonialCard({
       {...(href ? { href } : {})}
       className={cn(
         "flex flex-col justify-between gap-4 rounded-lg border-t",
-        "bg-card backdrop-blur-md border border-border",
+        "bg-card border border-border",
         "p-4 text-start sm:p-6",
         "hover:from-muted/60 hover:to-muted/20",
-        "max-w-[320px] sm:max-w-[400px]",
-        "transition-colors duration-300",
+        "max-w-[320px] sm:max-w-[500px]",
+        "transition-colors duration-100",
         className
       )}
     >
       
-      <p className="sm:text-md mt-4 text-sm text-foreground tracking-wide font-extralight">
+      <p className="sm:text-md mt-4 text-sm text-foreground tracking-wide font-extralight text-justify">
         {text}
       </p>
       <div className="flex items-center gap-3">

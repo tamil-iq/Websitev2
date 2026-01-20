@@ -7,6 +7,7 @@ import { AnimatedTextCycle } from '@/components/ui/animated-text-cycle';
 // Import GIFs directly
 import dictateGif from '@/assets/homepage/video/dictate.gif';
 import viewerGif from '@/assets/homepage/video/viewer.gif';
+import boundaryGif from '@/assets/homepage/video/boundries.gif';
 // Import other GIFs when they're available
 // import anyDeviceGif from '@/assets/homepage/video/any-device.gif';
 
@@ -73,7 +74,7 @@ const features = [
         label: "ACCESS",
         headline: <>No <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">boundaries.<DeviceIcon /></span></>,
         description: "Your worklist follows you everywhere.",
-        gif: dictateGif, // Using dictate.gif as placeholder until any-device.gif is available
+        gif: boundaryGif, // Using dictate.gif as placeholder until any-device.gif is available
         color: "59, 130, 246",
     },
 ];

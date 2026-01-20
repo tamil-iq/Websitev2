@@ -1,5 +1,9 @@
 import chatui from "@/assets/homepage/chat-ui.png";
 import scanreports from "@/assets/homepage/scan-reports.png";
+import aipowered from "@/assets/homepage/video/instant.gif";
+import instantgif from "@/assets/homepage/video/login.gif";
+import share from "@/assets/homepage/video/share.gif";
+import lifetime from "@/assets/homepage/video/lifetime.gif";
 import { cn } from "@/lib/utils";
 import { TrendingUp, Gauge, BarChart3 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -488,76 +492,74 @@ export function PatientPortalSection() {
 
                         {/* Stacked cards - Stripe depth effect */}
                         <div className="relative h-[400px] md:h-[450px]">
-                            {/* Back layer - Reports */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20, rotate: -3 }}
-                                animate={isInView ? {
-                                    opacity: activeFeature === 0 || activeFeature === 3 ? 0.9 : 0.5,
-                                    y: 0,
-                                    rotate: -3,
-                                    scale: activeFeature === 0 || activeFeature === 3 ? 1 : 0.95
-                                } : { opacity: 0, y: 20 }}
-                                transition={{ duration: 0.6, delay: 0.5 }}
-                                className="absolute top-8 left-0 w-[70%] transition-all duration-500"
-                            >
-                                <div className="relative rounded-2xl overflow-hidden border border-white/[0.1] shadow-2xl shadow-black/50">
-                                    <img
-                                        src={scanreports}
-                                        alt="Scan reports"
-                                        className="w-full"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
-                                </div>
-                            </motion.div>
+                            {/* Instant Report Access - Feature 0 */}
+                            {activeFeature === 0 && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.2 }}
+                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-10"
+                                >
+                                    <div className="rounded-2xl overflow-hidden">
+                                        <img
+                                            src={instantgif}
+                                            alt="Instant Report Access"
+                                            // className="w-full"
+                                        />
+                                    </div>
+                                </motion.div>
+                            )}
 
-                            {/* Front layer - Chat AI */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20, rotate: 2 }}
-                                animate={isInView ? {
-                                    opacity: activeFeature === 1 ? 1 : 0.8,
-                                    y: 0,
-                                    rotate: 2,
-                                    scale: activeFeature === 1 ? 1.02 : 1,
-                                    x: activeFeature === 1 ? -10 : 0
-                                } : { opacity: 0, y: 20 }}
-                                transition={{ duration: 0.6, delay: 0.6 }}
-                                className="absolute top-16 right-0 w-[75%] transition-all duration-500"
-                            >
-                                <div className="relative rounded-2xl overflow-hidden border border-white/[0.1] shadow-2xl shadow-black/50">
-                                    <img
-                                        src={chatui}
-                                        alt="AI Chat"
-                                        className="w-full"
-                                    />
-                                    {/* AI sparkle indicator */}
-                                    {activeFeature === 1 && (
-                                        <motion.div
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            className="absolute top-4 right-4 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/20 border border-primary/30"
-                                        >
-                                            <span className="relative flex h-1.5 w-1.5">
-                                                <span className="animate-ping absolute h-full w-full rounded-full bg-primary opacity-75"></span>
-                                                <span className="relative rounded-full h-1.5 w-1.5 bg-primary"></span>
-                                            </span>
-                                            <span className="text-[10px] text-primary/80 font-medium">AI Active</span>
-                                        </motion.div>
-                                    )}
-                                </div>
-                            </motion.div>
-
-                            {/* Floating badge for share feature */}
+                            {/* AI-Powered Clarity - Feature 1 */}
+                            {activeFeature === 1 && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1.02 }}
+                                    transition={{ duration: 0.6, delay: 0.3 }}
+                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-10"
+                                >
+                                    <div className="relative rounded-2xl overflow-hidden">
+                                        <img
+                                            src={aipowered}
+                                            alt="AI Chat"
+                                        />   
+                                    </div>
+                                </motion.div>
+                            )}
+                            
+                            {/* Easy Physician Sharing - Feature 2 */}
                             {activeFeature === 2 && (
                                 <motion.div
-                                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                                    exit={{ opacity: 0, scale: 0.8 }}
-                                    className="absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center gap-2"
+                                    transition={{ duration: 0.5, delay: 0.2 }}
+                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full z-10"
                                 >
-                                    <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                    </svg>
-                                    <span className="text-xs text-emerald-300 font-medium">Link shared securely</span>
+                                    <div className="rounded-2xl overflow-hidden">
+                                        <img
+                                            src={share}
+                                            alt="Easy Physician Sharing"
+                                        />
+                                    </div>
+                                </motion.div>
+                            )}
+                            
+                            {/* Lifetime Health Record - Feature 3 */}
+                            {activeFeature === 3 && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.6, delay: 0.3 }}
+                                    className="absolute top-8 left-0 w-full transition-all duration-500"
+                                >
+                                    <div className="relative rounded-2xl overflow-hidden">
+                                        <img
+                                            src={lifetime}
+                                            alt="Lifetime Health Record"
+                                            className="w-full"
+                                        />
+                                       
+                                    </div>
                                 </motion.div>
                             )}
                         </div>
@@ -578,7 +580,7 @@ export function ComplianceSection() {
 
     return (
         <section className="relative pt-12 pb-16 px-4">
-            <div ref={sectionRef} className="relative max-w-5xl mx-auto">
+            <div ref={sectionRef} className="relative max-w-full mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -604,27 +606,27 @@ const testimonials = [
             company: "Prima Diagnostics",
             avatar: "/prima-without-bg.png"
         },
-        text: "Somatiq unified all our centers onto one intelligent platform. We previously struggled with fragmented systems that made coordination tedious and increased IT overheads. With Somatiq's integrated RIS-PACS, our workflow is now streamlined across modalities and locations. Reporting speed has improved by nearly 30%, making our imaging operations faster, smarter and more cohesive than ever."
+        text: "Somatiq unified all our centers on a single intelligent platform. Earlier, fragmented systems made coordination cumbersome and increased IT overhead. With Somatiq’s integrated RIS-PACS, our workflows are now seamlessly connected across modalities and locations. Reporting speed has improved by nearly 30%, making our imaging operations faster, smarter, and more cohesive than ever."
     },
     {
         author: {
             name: "Dr. Murali Nadig",
             handle: "@muralinadig",
-            role: "MD and Chief (Nuclear Medicine)",
+            role: "MD and Chief, Nuclear Medicine",
             company: "NewMedd Diagnostics",
             avatar: "/newmed-without-bg.png"
         },
-        text: "Before adopting Somatiq, our workflow relied on systems with limited integration across centers. Transitioning to Somatiq's unified platform has elevated the way we operate—connecting our Bengaluru and Mysore centers seamlessly for real-time image exchange, reporting and case allocation. The result has been smoother coordination, improved efficiency and faster reporting turnaround times."
+        text: "Before Somatiq, our workflow depended on systems with limited cross-center integration. Moving to Somatiq’s unified platform transformed our operations—seamlessly connecting our Bengaluru and Mysore centers for real-time image sharing, reporting, and case allocation. The outcome has been smoother coordination, higher efficiency, and significantly faster report turnaround times."
     },
     {
         author: {
             name: "Saketh",
             handle: "@saketh",
-            role: "Director, Africa operations",
+            role: "Director, Africa Operations",
             company: "TX Biomarker",
             avatar: "/tx-without-bg.png"
         },
-        text: "Somatiq built our entire imaging workflow from the ground up right from setup to integrated reporting. The system allows our radiologists to deliver high-quality reports with exceptional turnaround time. What stands out is how it improved diagnostic accessibility for our patients, connecting our imaging center with radiologists across borders."
+        text: "Somatiq designed our entire imaging workflow from the ground up—from initial setup to fully integrated reporting. The platform empowers our radiologists to deliver high-quality reports with exceptional turnaround times. Most importantly, it has expanded diagnostic access for patients by seamlessly connecting our imaging center with radiologists across borders."
     },
     {
         author: {
@@ -634,9 +636,10 @@ const testimonials = [
             company: "OM Diagnostics",
             avatar: "/om-without-bg.png"
         },
-        text: "We've been using Somatiq as our teleradiology platform, and it has been a game-changer. With the current shortage of in-house radiologists, Somatiq enabled us to maintain high-quality diagnostic services through remote expert support. The platform is reliable, efficient and designed with radiologists in mind."
+        text: "Somatiq has been a game-changer for our teleradiology operations. Amid a shortage of in-house radiologists, the platform enabled us to maintain high-quality diagnostic services through reliable remote expert support. It is efficient, dependable, and thoughtfully designed with radiologists at its core."
     }
 ];
+
 
 // Section divider for visual flow
 const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'subtle' }) => (
@@ -664,7 +667,7 @@ export function DashboardSection() {
             <ComplianceSection />
             <SectionDivider />
             <TestimonialWithMarquee
-                title="Trusted by radiologists across India"
+                title="Trusted by centers across India"
                 testimonials={testimonials}
             />
         </div>

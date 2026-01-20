@@ -1,7 +1,7 @@
 import { ChevronsUp } from "lucide-react";
 import { Link } from "react-router-dom";
 // import { useState } from "react";
-import footerBg from "@/assets/footer-bg.jpg";
+import footerBg from "@/assets/footer-bg-original.svg";
 import { AnimatedButton } from "@/components/common/animated-button";
 import { Separator } from "@/components/common/separator";
 import { Marquee, MarqueeContent, MarqueeFade, MarqueeItem } from "@/components/ui/marquee";
@@ -14,35 +14,6 @@ const trustedCompanies = [
   { name: "TX Healthcare", logo: "/tx-without-bg.png" },
 ];
 
-export const TrustedBySection = () => {
-  return (
-    <section className="py-16 bg-background">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-8">
-          <span className="text-sm text-muted/70 font-light tracking-widest uppercase">
-            Trusted by
-          </span>
-        </div>
-        <Marquee className="w-full max-w-full min-h-[100px]">
-          <MarqueeFade side="left" />
-          <MarqueeFade side="right" />
-          <MarqueeContent>
-            {trustedCompanies.map((company, index) => (
-              <MarqueeItem className="h-20 w-auto px-8 flex items-center justify-center group/logo" key={index}>
-                <img
-                  alt={company.name}
-                  className="h-20 w-auto max-w-[180px] object-contain grayscale brightness-0 invert opacity-60 transition-all duration-300 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 group-hover/logo:scale-110"
-                  src={company.logo}
-                />
-              </MarqueeItem>
-            ))}
-          </MarqueeContent>
-        </Marquee>
-      </div>
-    </section>
-  );
-};
-
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -51,7 +22,7 @@ const Footer = () => {
   return (
     <footer className=" overflow-hidden relative">
       <div
-        className="absolute inset-0 pointer-events-none bg-cover bg-center bg-no-repeat opacity-20"
+        className="absolute inset-0 pointer-events-none bg-cover bg-center bg-no-repeat opacity-80"
         style={{
           backgroundImage: `url(${footerBg})`,
         }}
@@ -87,12 +58,12 @@ const Footer = () => {
             <p className="text-foreground/60 text-sm max-w-xs">
               Every second matters. Every detail counts.
             </p>
-            <div className="flex flex-col gap-2">
+            {/* <div className="flex flex-col gap-2">
               <p className="text-foreground/80 tracking-wide text-sm">
                 Ready to transform your workflow?
               </p>
               <AnimatedButton trackingSource="footer_demo">SCHEDULE A DEMO</AnimatedButton>
-            </div>
+            </div> */}
           </div>
 
           {/* Products */}
