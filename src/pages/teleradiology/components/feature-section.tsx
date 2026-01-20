@@ -533,7 +533,7 @@ function JoinNetworkSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
-                    className="text-center mb-16 p-16 rounded-2xl border border-border/50 bg-white/[0.02]"
+                    className="text-center p-16 rounded-2xl border border-border/50 bg-white/[0.02]"
                 >
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground mb-6">
                         Partner With Us
@@ -550,41 +550,6 @@ function JoinNetworkSection() {
                     </a>
                 </motion.div>
 
-                {/* For Radiologists */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="text-center p-16 rounded-2xl border border-[#FF7BE5]/20 bg-[#FF7BE5]/5"
-                >
-                    <h3 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-6">
-                        Are You a Radiologist?
-                    </h3>
-                    <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto mb-8">
-                        Join a network that values precision over volume. Work on cases matched to your subspecialty, with time to do your best work.
-                    </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                        <a
-                            href="mailto:info@somatiq.ai"
-                            className="inline-flex items-center gap-2 text-base text-foreground/80 hover:text-foreground transition-colors"
-                            onClick={() => trackContactClick('teleradiology_radiologist_email')}
-                        >
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                            </svg>
-                            <span>info@somatiq.ai</span>
-                        </a>
-                        <span className="text-muted/50 hidden sm:inline">|</span>
-                        <a
-                            href="/careers"
-                            className="text-base font-medium text-foreground hover:text-foreground/80 transition-colors underline underline-offset-4"
-                            onClick={() => trackEvent('click', { event_category: 'navigation', event_label: 'view_careers', source: 'teleradiology_page' })}
-                        >
-                            View Open Positions
-                        </a>
-                    </div>
-                </motion.div>
             </div>
         </motion.section>
     );

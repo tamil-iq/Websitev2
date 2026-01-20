@@ -129,22 +129,21 @@ export function AdministratorsSection() {
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
                 >
-                    {/* Today's Scans Card */}
+                    {/* Today's Scans Card - Top Left Corner */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
+                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 via-teal-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="relative z-10">
-                            <div className="flex items-center gap-3 mb-3">
+                            <div className="flex items-center gap-3 mb-4">
                                 <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
                                     <BarChart3 className="w-5 h-5 text-foreground/70" />
                                 </div>
                                 <h3 className="text-xl font-medium text-foreground">Multi site Scan Volume</h3>
                             </div>
-                            <p className="text-muted font-light text-sm mb-6">Real-time scan volume with centre breakdown</p>
 
                             {/* Stats Display */}
                             <div className="space-y-5">
@@ -156,10 +155,9 @@ export function AdministratorsSection() {
                                 {/* Modality Split Bars */}
                                 <div className="space-y-3">
                                     {[
-                                        { name: "Site 1", count: 245, color: "bg-emerald-400", percent: 29 },
-                                        { name: "Site 2", count: 189, color: "bg-cyan-400", percent: 22 },
-                                        { name: "Site 3", count: 312, color: "bg-blue-400", percent: 37 },
-                                        { name: "Site 4", count: 101, color: "bg-violet-400", percent: 12 },
+                                        { name: "Site A", count: 312, color: "bg-[#00b4d8]", percent: 42 },  // turquoise-surf
+                                        { name: "Site B", count: 289, color: "bg-[#0077b6]", percent: 38 },  // bright-teal-blue
+                                        { name: "Site C", count: 146, color: "bg-[#90e0ef]", percent: 20 },  // frosted-blue
                                     ].map((modality) => (
                                         <div key={modality.name} className="space-y-1.5">
                                             <div className="flex justify-between text-sm">
@@ -181,33 +179,32 @@ export function AdministratorsSection() {
                         </div>
                     </motion.div>
 
-                    {/* Reporting TAT Card */}
+                    {/* Reporting TAT Card - Top Right Corner */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
+                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-bl from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="relative z-10">
-                            <div className="flex items-center gap-3 mb-3">
+                            <div className="flex items-center gap-3 mb-4">
                                 <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
                                     <TrendingUp className="w-5 h-5 text-foreground/70" />
                                 </div>
                                 <h3 className="text-xl font-medium text-foreground">Reporting TAT</h3>
                             </div>
-                            <p className="text-muted font-light text-sm mb-6">Average turnaround time with Modality breakdown</p>
 
                             {/* TAT Stats Display */}
                             <div className="space-y-5">
                                 <div className="flex items-baseline gap-2">
                                     <span className="text-5xl font-semibold text-foreground">20</span>
                                     <span className="text-muted text-lg">min</span>
-                                    <div className="ml-3 flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30">
-                                        <svg className="w-3 h-3 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <div className="ml-3 flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#00b4d8]/20 border border-[#00b4d8]/30">
+                                        <svg className="w-3 h-3 text-[#90e0ef]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" transform="rotate(180 12 12)" />
                                         </svg>
-                                        <span className="text-xs text-emerald-400 font-medium">12%</span>
+                                        <span className="text-xs text-[#90e0ef] font-medium">12%</span>
                                     </div>
                                 </div>
                                 {/* <span className="text-muted text-xs">vs last week</span> */}
@@ -224,9 +221,9 @@ export function AdministratorsSection() {
                                             <span className="text-sm text-foreground/80">{doc.name}</span>
                                             <span className={cn(
                                                 "text-xs font-medium px-2 py-0.5 rounded",
-                                                doc.status === "fast" && "text-emerald-400 bg-emerald-500/10",
-                                                doc.status === "normal" && "text-blue-400 bg-blue-500/10",
-                                                doc.status === "slow" && "text-amber-400 bg-amber-500/10"
+                                                doc.status === "fast" && "text-[#caf0f8] bg-[#00b4d8]/10",      // light-cyan / turquoise
+                                                doc.status === "normal" && "text-[#90e0ef] bg-[#0077b6]/10",   // frosted-blue / bright-teal
+                                                doc.status === "slow" && "text-[#00b4d8] bg-[#03045e]/10"      // turquoise / deep-twilight
                                             )}>
                                                 {doc.tat}
                                             </span>
@@ -237,14 +234,14 @@ export function AdministratorsSection() {
                         </div>
                     </motion.div>
 
-                    {/* SLA Compliance Card */}
+                    {/* SLA Compliance Card - Bottom Left Corner */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
-                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
+                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="relative z-10">
                             <div >
                                 <div className="flex-1">
@@ -252,62 +249,61 @@ export function AdministratorsSection() {
                                         <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
                                             <Gauge className="w-5 h-5 text-foreground/70" />
                                         </div>
-                                        <h3 className="text-xl font-medium text-foreground">SLA Compliance</h3>
+                                        <h3 className="text-xl font-medium text-foreground">Today's SLA Compliance</h3>
                                     </div>
-                                    <p className="text-muted font-light text-sm mb-4">Performance tracking with actionable alerts</p>
 
-                                    {/* SLA Stats Grid */}
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                                            <div className="text-3xl font-semibold text-emerald-400">1240</div>
-                                            <div className="text-xs text-muted mt-1">Studies Booked</div>
+                                    {/* SLA Stats Grid - Compact */}
+                                    <div className="grid grid-cols-4 gap-2 mb-3">
+                                        <div className="text-center p-2 rounded-lg bg-white/[0.02]">
+                                            <div className="text-lg font-medium text-foreground/60">124</div>
+                                            <div className="text-[10px] text-muted">Booked</div>
                                         </div>
-                                        <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                                            <div className="text-3xl font-semibold text-amber-400">847</div>
-                                            <div className="text-xs text-muted mt-1">Acquired</div>
+                                        <div className="text-center p-2 rounded-lg bg-white/[0.02]">
+                                            <div className="text-lg font-medium text-foreground/60">98</div>
+                                            <div className="text-[10px] text-muted">Acquired</div>
                                         </div>
-                                        <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                                            <div className="text-3xl font-semibold text-blue-400">112</div>
-                                            <div className="text-xs text-muted mt-1">In-Reporting</div>
+                                        <div className="text-center p-2 rounded-lg bg-white/[0.02]">
+                                            <div className="text-lg font-medium text-foreground/60">12</div>
+                                            <div className="text-[10px] text-muted">Reporting</div>
                                         </div>
-                                        <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                                            <div className="text-3xl font-semibold text-blue-400">735</div>
-                                            <div className="text-xs text-muted mt-1">Finalized</div>
+                                        <div className="text-center p-2 rounded-lg bg-white/[0.02]">
+                                            <div className="text-lg font-medium text-foreground/60">86</div>
+                                            <div className="text-[10px] text-muted">Finalized</div>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Actionable Alerts */}
+                                {/* Actionable Alerts - Prominent */}
                                 <div className="space-y-3">
-                                    <h4 className="text-sm font-medium text-foreground/80 mb-3">Actionable Alerts</h4>
+                                    <h4 className="text-sm font-medium text-foreground mb-2">Actionable Alerts</h4>
                                     {[
-                                        { type: "urgent", message: "Reporting TAT for STAT Case is critical", action: "Reassign" },
-                                        { type: "warning", message: "System is experiencing high load, TAT may be impacted", action: "View" },
-                                        { type: "info", message: "MRI queue cleared ahead of schedule", action: "Details" },
+                                        { type: "urgent", message: "2 emergency cases pending in worklist", action: "Assign" },
+                                        { type: "warning", message: "CT scanner queue nearing SLA threshold", action: "View Details" },
+                                        { type: "info", message: "Preliminary report awaiting final sign-off", action: "View Details" },
                                     ].map((alert, idx) => (
                                         <div
                                             key={idx}
                                             className={cn(
-                                                "flex items-center justify-between p-3 rounded-lg border",
-                                                alert.type === "urgent" && "bg-red-500/10 border-red-500/20",
-                                                alert.type === "warning" && "bg-amber-500/10 border-amber-500/20",
-                                                alert.type === "info" && "bg-emerald-500/10 border-emerald-500/20"
+                                                "flex items-center justify-between p-3 rounded-xl border transition-all duration-200",
+                                                alert.type === "urgent" && "bg-[#03045e]/20 border-[#0077b6]/40 hover:border-[#00b4d8]/60",
+                                                alert.type === "warning" && "bg-[#0077b6]/15 border-[#00b4d8]/30 hover:border-[#00b4d8]/50",
+                                                alert.type === "info" && "bg-[#00b4d8]/10 border-[#90e0ef]/30 hover:border-[#90e0ef]/50"
                                             )}
                                         >
-                                            <div className="flex items-center gap-2">
+                                            <div className="flex items-center gap-3">
                                                 <span className={cn(
-                                                    "w-2 h-2 rounded-full",
-                                                    alert.type === "urgent" && "bg-red-400",
-                                                    alert.type === "warning" && "bg-amber-400",
-                                                    alert.type === "info" && "bg-emerald-400"
+                                                    "w-2.5 h-2.5 rounded-full animate-pulse",
+                                                    alert.type === "urgent" && "bg-red-500",
+                                                    alert.type === "warning" && "bg-[#90e0ef]",
+                                                    alert.type === "info" && "bg-[#caf0f8]"
                                                 )} />
-                                                <span className="text-sm text-foreground/80">{alert.message}</span>
+                                                <span className="text-sm text-foreground">{alert.message}</span>
                                             </div>
                                             <button className={cn(
-                                                "text-xs font-medium px-3 py-1 rounded-full transition-colors",
-                                                alert.type === "urgent" && "text-red-400 bg-red-500/20 hover:bg-red-500/30",
-                                                alert.type === "warning" && "text-amber-400 bg-amber-500/20 hover:bg-amber-500/30",
-                                                alert.type === "info" && "text-emerald-400 bg-emerald-500/20 hover:bg-emerald-500/30"
+                                                "text-xs font-semibold px-4 py-1.5 rounded-full transition-all duration-200 border",
+                                                alert.type === "urgent" && "text-white bg-[#0077b6] border-[#00b4d8] hover:bg-[#00b4d8] hover:scale-105",
+                                                alert.type === "warning" && "text-white bg-[#0077b6]/80 border-[#00b4d8]/60 hover:bg-[#00b4d8] hover:scale-105",
+                                                alert.type === "info" && "text-white bg-[#00b4d8]/70 border-[#90e0ef]/50 hover:bg-[#00b4d8] hover:scale-105"
                                             )}>
                                                 {alert.action}
                                             </button>
@@ -317,13 +313,14 @@ export function AdministratorsSection() {
                             </div>
                         </div>
                     </motion.div>
-                     <motion.div
+                     {/* Chart Card - Bottom Right Corner */}
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
+                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-tl from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="relative z-10">
                             <div >
                                 <div className="flex-1">
@@ -331,9 +328,8 @@ export function AdministratorsSection() {
                                         <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
                                             <Gauge className="w-5 h-5 text-foreground/70" />
                                         </div>
-                                        <h3 className="text-xl font-medium text-foreground">Chart header placeholder</h3>
+                                        <h3 className="text-xl font-medium text-foreground">Workflow Status</h3>
                                     </div>
-                                        <p className="text-muted font-light text-sm mb-4">Performance tracking with actionable alerts</p>
                                     <DonutChart />
                                   
                                 </div>

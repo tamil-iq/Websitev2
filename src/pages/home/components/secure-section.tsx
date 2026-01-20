@@ -18,11 +18,25 @@ const AIBadge = () => (
     </span>
 );
 
-// Device icon for "freedom" word
+// Device icons for "boundaries" word - mobile + tablet
 const DeviceIcon = () => (
-    <span className="absolute -top-2 -right-3 text-white/90">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <span className="absolute -top-3 -right-5 flex items-end gap-0.5 text-white/90">
+        {/* Tablet icon */}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 0H6C4.34 0 3 1.34 3 3v18c0 1.66 1.34 3 3 3h12c1.66 0 3-1.34 3-3V3c0-1.66-1.34-3-3-3zm-4 22h-4v-1h4v1zm5-3H5V3h14v16z"/>
+        </svg>
+        {/* Mobile icon */}
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
             <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
+        </svg>
+    </span>
+);
+
+// Lightning bolt icon for "install" word
+const LightningIcon = () => (
+    <span className="absolute -top-3 -right-3 text-yellow-400">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
         </svg>
     </span>
 );
@@ -64,8 +78,8 @@ const features = [
     {
         id: 'viewer',
         label: "VIEWER",
-        headline: <>No <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">downloads.<MagicIcon /></span></>,
-        description: "Enterprise imaging in any browser.",
+        headline: <>Zero <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">install.<LightningIcon /></span></>,
+        description: "Advanced Viewer in any browser with MPR, MIP and 3D.",
         gif: viewerGif,
         color: "59, 130, 246",
     },
@@ -155,7 +169,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                 hideLocalGradient ? "opacity-0" : "opacity-100"
             )} />
 
-            <div className="relative max-w-360 mx-auto space-y-16">
+            <div className="relative max-w-6xl mx-auto space-y-16">
 
                 {/* Section Header */}
                 <div className="text-left">
