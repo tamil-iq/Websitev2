@@ -5,6 +5,8 @@ import { TrendingUp, Gauge, BarChart3 } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { TestimonialWithMarquee } from "@/components/ui/testtimonial-with-marquee";
+import DonutChart from "./donut-chart";
+import CertificationsSection from "./certification";
 
 // Patient features - Benefits for patients visiting diagnostic centers
 const patientFeatures = [
@@ -136,9 +138,9 @@ export function AdministratorsSection() {
                                 <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
                                     <BarChart3 className="w-5 h-5 text-foreground/70" />
                                 </div>
-                                <h3 className="text-xl font-medium text-foreground">Today's Scans</h3>
+                                <h3 className="text-xl font-medium text-foreground">Multi site Scan Volume</h3>
                             </div>
-                            <p className="text-muted font-light text-sm mb-6">Real-time scan volume with modality breakdown</p>
+                            <p className="text-muted font-light text-sm mb-6">Real-time scan volume with centre breakdown</p>
 
                             {/* Stats Display */}
                             <div className="space-y-5">
@@ -150,10 +152,10 @@ export function AdministratorsSection() {
                                 {/* Modality Split Bars */}
                                 <div className="space-y-3">
                                     {[
-                                        { name: "CT", count: 245, color: "bg-emerald-400", percent: 29 },
-                                        { name: "MRI", count: 189, color: "bg-cyan-400", percent: 22 },
-                                        { name: "X-Ray", count: 312, color: "bg-blue-400", percent: 37 },
-                                        { name: "USG", count: 101, color: "bg-violet-400", percent: 12 },
+                                        { name: "Site 1", count: 245, color: "bg-emerald-400", percent: 29 },
+                                        { name: "Site 2", count: 189, color: "bg-cyan-400", percent: 22 },
+                                        { name: "Site 3", count: 312, color: "bg-blue-400", percent: 37 },
+                                        { name: "Site 4", count: 101, color: "bg-violet-400", percent: 12 },
                                     ].map((modality) => (
                                         <div key={modality.name} className="space-y-1.5">
                                             <div className="flex justify-between text-sm">
@@ -190,12 +192,12 @@ export function AdministratorsSection() {
                                 </div>
                                 <h3 className="text-xl font-medium text-foreground">Reporting TAT</h3>
                             </div>
-                            <p className="text-muted font-light text-sm mb-6">Average turnaround time by radiologist</p>
+                            <p className="text-muted font-light text-sm mb-6">Average turnaround time with Modality breakdown</p>
 
                             {/* TAT Stats Display */}
                             <div className="space-y-5">
                                 <div className="flex items-baseline gap-2">
-                                    <span className="text-5xl font-semibold text-foreground">23</span>
+                                    <span className="text-5xl font-semibold text-foreground">20</span>
                                     <span className="text-muted text-lg">min</span>
                                     <div className="ml-3 flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30">
                                         <svg className="w-3 h-3 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -204,15 +206,15 @@ export function AdministratorsSection() {
                                         <span className="text-xs text-emerald-400 font-medium">12%</span>
                                     </div>
                                 </div>
-                                <span className="text-muted text-xs">vs last week</span>
+                                {/* <span className="text-muted text-xs">vs last week</span> */}
 
                                 {/* Radiologist TAT Breakdown */}
                                 <div className="grid grid-cols-2 gap-3 mt-4">
                                     {[
-                                        { name: "Radiologist A", tat: "18 min", status: "fast" },
-                                        { name: "Radiologist B", tat: "24 min", status: "normal" },
-                                        { name: "Radiologist C", tat: "21 min", status: "fast" },
-                                        { name: "Radiologist D", tat: "29 min", status: "slow" },
+                                        { name: "CT", tat: "25 min", status: "fast" },
+                                        { name: "MRI", tat: "30 min", status: "normal" },
+                                        { name: "X-Ray", tat: "12 min", status: "fast" },
+                                        { name: "USG", tat: "15 min", status: "slow" },
                                     ].map((doc) => (
                                         <div key={doc.name} className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06]">
                                             <span className="text-sm text-foreground/80">{doc.name}</span>
@@ -231,16 +233,16 @@ export function AdministratorsSection() {
                         </div>
                     </motion.div>
 
-                    {/* SLA Compliance Card - Full Width */}
+                    {/* SLA Compliance Card */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
-                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04] md:col-span-2"
+                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
                     >
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="relative z-10">
-                            <div className="flex flex-col md:flex-row gap-6">
+                            <div >
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-3">
                                         <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
@@ -251,28 +253,32 @@ export function AdministratorsSection() {
                                     <p className="text-muted font-light text-sm mb-4">Performance tracking with actionable alerts</p>
 
                                     {/* SLA Stats Grid */}
-                                    <div className="grid grid-cols-3 gap-4">
+                                    <div className="grid grid-cols-2 gap-4">
                                         <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                                            <div className="text-3xl font-semibold text-emerald-400">96.4%</div>
-                                            <div className="text-xs text-muted mt-1">Compliance Rate</div>
+                                            <div className="text-3xl font-semibold text-emerald-400">1240</div>
+                                            <div className="text-xs text-muted mt-1">Studies Booked</div>
                                         </div>
                                         <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                                            <div className="text-3xl font-semibold text-amber-400">12</div>
-                                            <div className="text-xs text-muted mt-1">Breaches Today</div>
+                                            <div className="text-3xl font-semibold text-amber-400">847</div>
+                                            <div className="text-xs text-muted mt-1">Acquired</div>
                                         </div>
                                         <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                                            <div className="text-3xl font-semibold text-blue-400">34</div>
-                                            <div className="text-xs text-muted mt-1">Pending Review</div>
+                                            <div className="text-3xl font-semibold text-blue-400">112</div>
+                                            <div className="text-xs text-muted mt-1">In-Reporting</div>
+                                        </div>
+                                        <div className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                                            <div className="text-3xl font-semibold text-blue-400">735</div>
+                                            <div className="text-xs text-muted mt-1">Finalized</div>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Actionable Alerts */}
-                                <div className="md:w-1/2 space-y-3">
+                                <div className="space-y-3">
                                     <h4 className="text-sm font-medium text-foreground/80 mb-3">Actionable Alerts</h4>
                                     {[
-                                        { type: "urgent", message: "3 CT scans pending > 2 hours", action: "Reassign" },
-                                        { type: "warning", message: "Radiologist D approaching daily limit", action: "View" },
+                                        { type: "urgent", message: "Reporting TAT for STAT Case is critical", action: "Reassign" },
+                                        { type: "warning", message: "System is experiencing high load, TAT may be impacted", action: "View" },
                                         { type: "info", message: "MRI queue cleared ahead of schedule", action: "Details" },
                                     ].map((alert, idx) => (
                                         <div
@@ -307,6 +313,31 @@ export function AdministratorsSection() {
                             </div>
                         </div>
                     </motion.div>
+                     <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                        transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+                        className="group relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-hidden transition-all duration-300 hover:border-white/[0.15] hover:bg-white/[0.04]"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="relative z-10">
+                            <div >
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className="p-2 rounded-lg bg-white/[0.05] border border-white/[0.08]">
+                                            <Gauge className="w-5 h-5 text-foreground/70" />
+                                        </div>
+                                        <h3 className="text-xl font-medium text-foreground">Chart header placeholder</h3>
+                                    </div>
+                                        <p className="text-muted font-light text-sm mb-4">Performance tracking with actionable alerts</p>
+                                    <DonutChart />
+                                  
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </motion.div>
                 </motion.div>
             </div>
         </section>
@@ -333,7 +364,7 @@ export function PatientPortalSection() {
                         transition={{ duration: 0.5, ease: "easeOut" }}
                         className="inline-flex items-center gap-3 mb-6"
                     >
-                        <span className="w-5 h-3 rounded-full bg-primary" />
+                        <span className="w-3 h-3 rounded-full bg-primary" />
                         <span className="text-sm text-foreground/70 font-light tracking-wide">For Patients</span>
                         <svg className="w-4 h-4 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -554,26 +585,7 @@ export function ComplianceSection() {
                     transition={{ duration: 0.6 }}
                     className="text-center"
                 >
-                    <p className="text-sm text-muted font-light tracking-wide mb-6">
-                        Built for healthcare
-                    </p>
-
-                    {/* Horizontal badge row */}
-                    <div className="flex flex-wrap items-center justify-center gap-3">
-                        {complianceBadges.map((badge, index) => (
-                            <motion.div
-                                key={badge.label}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
-                                className="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.15] transition-colors duration-300"
-                            >
-                                <span className="text-sm text-foreground/80 font-light tracking-wide">
-                                    {badge.label}
-                                </span>
-                            </motion.div>
-                        ))}
-                    </div>
+                  <CertificationsSection />
                 </motion.div>
             </div>
         </section>
@@ -586,43 +598,43 @@ export function ComplianceSection() {
 const testimonials = [
     {
         author: {
-            name: "Dr. Rajesh Kumar",
-            handle: "@rajeshkumar",
-            role: "Chief Radiologist",
-            company: "NewMed Diagnostics",
-            avatar: "/newmed-without-bg.png"
+            name: "Dr. Gururaj Rao",
+            handle: "@gururajrao",
+            role: "MD, Chief Radiologist",
+            company: "Prima Diagnostics",
+            avatar: "/prima-without-bg.png"
         },
-        text: "Somatiq has transformed our reporting workflow. What used to take 45 minutes now takes 20. The AI-assisted dictation is remarkably accurate."
+        text: "Somatiq unified all our centers onto one intelligent platform. We previously struggled with fragmented systems that made coordination tedious and increased IT overheads. With Somatiq's integrated RIS-PACS, our workflow is now streamlined across modalities and locations. Reporting speed has improved by nearly 30%, making our imaging operations faster, smarter and more cohesive than ever."
     },
     {
         author: {
-            name: "Priya Sharma",
-            handle: "@priyasharma",
-            role: "Operations Head",
+            name: "Dr. Murali Nadig",
+            handle: "@muralinadig",
+            role: "MD and Chief (Nuclear Medicine)",
+            company: "NewMedd Diagnostics",
+            avatar: "/newmed-without-bg.png"
+        },
+        text: "Before adopting Somatiq, our workflow relied on systems with limited integration across centers. Transitioning to Somatiq's unified platform has elevated the way we operate—connecting our Bengaluru and Mysore centers seamlessly for real-time image exchange, reporting and case allocation. The result has been smoother coordination, improved efficiency and faster reporting turnaround times."
+    },
+    {
+        author: {
+            name: "Saketh",
+            handle: "@saketh",
+            role: "Director, Africa operations",
+            company: "TX Biomarker",
+            avatar: "/tx-without-bg.png"
+        },
+        text: "Somatiq built our entire imaging workflow from the ground up right from setup to integrated reporting. The system allows our radiologists to deliver high-quality reports with exceptional turnaround time. What stands out is how it improved diagnostic accessibility for our patients, connecting our imaging center with radiologists across borders."
+    },
+    {
+        author: {
+            name: "Dr. Amarnath Reddy",
+            handle: "@amarnathreddy",
+            role: "Director",
             company: "OM Diagnostics",
             avatar: "/om-without-bg.png"
         },
-        text: "Finally, a platform that understands Indian healthcare. The NABH-ready compliance features saved us months of preparation time."
-    },
-    {
-        author: {
-            name: "Dr. Anil Mehta",
-            handle: "@anilmehta",
-            role: "Managing Director",
-            company: "Prima Imaging",
-            avatar: "/prima-without-bg.png"
-        },
-        text: "The real-time dashboard gives me visibility I never had before. I can track TAT across all centers from my phone."
-    },
-    {
-        author: {
-            name: "Sunita Reddy",
-            handle: "@sunitareddy",
-            role: "IT Manager",
-            company: "TX Healthcare",
-            avatar: "/tx-without-bg.png"
-        },
-        text: "Integration was seamless. Their team worked with our existing PACS and had us running in under two weeks."
+        text: "We've been using Somatiq as our teleradiology platform, and it has been a game-changer. With the current shortage of in-house radiologists, Somatiq enabled us to maintain high-quality diagnostic services through remote expert support. The platform is reliable, efficient and designed with radiologists in mind."
     }
 ];
 

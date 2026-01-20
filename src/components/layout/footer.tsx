@@ -49,7 +49,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-background overflow-hidden relative">
+    <footer className=" overflow-hidden relative">
       <div
         className="absolute inset-0 pointer-events-none bg-cover bg-center bg-no-repeat opacity-20"
         style={{

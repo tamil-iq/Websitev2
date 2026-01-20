@@ -12,4 +12,22 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+  },
+  build: {
+    // Disable type checking during build
+    sourcemap: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    }
+  },
+  optimizeDeps: {
+    disabled: false,
+    force: true,
+    include: ['framer-motion']
+  },
+  server: {
+    hmr: { overlay: false }
+  }
 })

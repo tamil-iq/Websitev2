@@ -4,6 +4,12 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatedTextCycle } from '@/components/ui/animated-text-cycle';
 
+// Import GIFs directly
+import dictateGif from '@/assets/homepage/video/dictate.gif';
+import viewerGif from '@/assets/homepage/video/viewer.gif';
+// Import other GIFs when they're available
+// import anyDeviceGif from '@/assets/homepage/video/any-device.gif';
+
 // AI Badge component for "breeze" word - static
 const AIBadge = () => (
     <span className="absolute -top-3 -right-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md">
@@ -51,7 +57,7 @@ const features = [
         label: "REPORTING",
         headline: <>Less <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">typing.<AIBadge /></span></>,
         description: "Dictate naturally. Create flawless reports.",
-        video: "/videos/ai-reporting.mp4",
+        gif: dictateGif,
         color: "59, 130, 246",
     },
     {
@@ -59,7 +65,7 @@ const features = [
         label: "VIEWER",
         headline: <>No <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">downloads.<MagicIcon /></span></>,
         description: "Enterprise imaging in any browser.",
-        video: "/videos/zero-footprint.mp4",
+        gif: viewerGif,
         color: "59, 130, 246",
     },
     {
@@ -67,7 +73,7 @@ const features = [
         label: "ACCESS",
         headline: <>No <span className="relative inline-block italic font-bold text-foreground border-b-2 border-primary pb-0.5">boundaries.<DeviceIcon /></span></>,
         description: "Your worklist follows you everywhere.",
-        video: "/videos/any-device.mp4",
+        gif: dictateGif, // Using dictate.gif as placeholder until any-device.gif is available
         color: "59, 130, 246",
     },
 ];
@@ -158,7 +164,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         transition={{ duration: 0.5, ease: "easeOut" }}
                         className="inline-flex items-center gap-3 mb-6"
                     >
-                        <span className="w-5 h-3 rounded-full bg-primary" />
+                        <span className="w-3 h-3 rounded-full bg-primary" />
                         <span className="text-sm text-foreground/70 font-light tracking-wide">For Radiologists</span>
                         <svg className="w-4 h-4 text-foreground/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -169,6 +175,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+                        className="-ml-2"
                     >
                         <AnimatedTextCycle
                             words={["Dictate.", "Review.", "Sign off."]}
@@ -262,15 +269,13 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                     transition={{ duration: 0.4, ease: "easeOut" }}
                                     className="absolute inset-0 bg-black/50 flex items-center justify-center"
                                 >
-                                    {/* Placeholder for actual video */}
-                                    <div className="text-center p-8">
-                                        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/[0.05] flex items-center justify-center">
-                                            <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M8 5v14l11-7z" />
-                                            </svg>
-                                        </div>
-                                        <p className="text-muted tracking-wide">{currentFeature.description}</p>
-                                        <p className="text-xs text-muted/60 font-extralight mt-1">Video demo coming soon</p>
+                                    {/* GIF display */}
+                                    <div className="w-full h-full">
+                                        <img 
+                                            className="w-full h-full object-cover"
+                                            src={currentFeature.gif}
+                                            alt={currentFeature.description}
+                                        />
                                     </div>
                                 </motion.div>
                             </AnimatePresence>
