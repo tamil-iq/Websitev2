@@ -72,7 +72,7 @@ export function AdministratorsSection() {
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
     return (
-        <section id="administrators-section" className="relative pt-16 pb-24 px-6 overflow-hidden">
+        <section id="administrators-section" className="relative pt-32 md:pt-16 md:pb-24 pb-0 px-6 overflow-hidden">
             <div ref={sectionRef} className="relative max-w-6xl mx-auto">
 
                 {/* Section Header - Left aligned like Radiologists */}
@@ -357,7 +357,7 @@ export function PatientPortalSection() {
     const [activeFeature, setActiveFeature] = useState(0);
 
     return (
-        <section id="patients-section" className="relative pt-16 pb-24 px-6 overflow-hidden">
+        <section id="patients-section" className="relative md:pt-16 md:pb-24 pt-32 pb-0 px-6 overflow-hidden">
             <div ref={sectionRef} className="relative max-w-6xl mx-auto">
 
                 {/* Section Header - Left aligned like Radiologists */}
@@ -643,7 +643,7 @@ const testimonials = [
 
 // Section divider for visual flow
 const SectionDivider = ({ variant = 'default' }: { variant?: 'default' | 'subtle' }) => (
-    <div className="relative w-full py-4">
+    <div className="relative w-full py-4 hidden md:block">
         <div
             className={cn(
                 "mx-auto",

@@ -43,7 +43,7 @@ const DonutChart: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-[400px] bg-none rounded-lg p-4">
+    <div className="w-full h-[450px] md:h-[400px] bg-none rounded-lg p-4">
       <ResponsiveContainer width="100%" height="80%">
         <PieChart>
           <Pie

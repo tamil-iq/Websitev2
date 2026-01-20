@@ -5,9 +5,9 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { AnimatedTextCycle } from '@/components/ui/animated-text-cycle';
 
 // Import GIFs directly
-import dictateGif from '@/assets/homepage/video/dictate.gif';
-import viewerGif from '@/assets/homepage/video/viewer.gif';
-import boundaryGif from '@/assets/homepage/video/boundries.gif';
+import dictateGif from '@/assets/homepage/rad-section/less-typing.svg';
+import viewerGif from '@/assets/homepage/rad-section/viewer.svg';
+import boundaryGif from '@/assets/homepage/rad-section/boundries.svg';
 // Import other GIFs when they're available
 // import anyDeviceGif from '@/assets/homepage/video/any-device.gif';
 
@@ -147,7 +147,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
         <section
             ref={sectionRef}
             id="radiologists-section"
-            className="relative pt-16 pb-24 px-6 overflow-hidden"
+            className="relative pt-32 md:pt-16 md:pb-24 pb-0 px-6 overflow-hidden"
         >
             {/* Background gradient - subtle fade in from hero */}
             <div className={cn(
@@ -262,7 +262,14 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                         {/* Video container - centered */}
                         <div className="relative flex-1 flex items-center justify-center min-h-[300px] rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
                             <AnimatePresence mode="wait">
-                                
+                                <motion.div
+                                    key={activeFeature}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 1.05 }}
+                                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                                    className="w-full h-full flex items-center justify-center"
+                                >
                                     {/* GIF display - centered with fixed dimensions */}
                                     <img 
                                         className="w-full h-auto max-w-full mx-auto object-contain"
@@ -270,6 +277,7 @@ const ViewerSection = ({ hideLocalGradient = false }: ViewerSectionProps) => {
                                         src={currentFeature.gif}
                                         alt={currentFeature.description}
                                     />
+                                </motion.div>
                             </AnimatePresence>
                         </div>
                     </motion.div>

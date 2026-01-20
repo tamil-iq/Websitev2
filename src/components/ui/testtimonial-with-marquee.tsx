@@ -35,7 +35,7 @@ export function TestimonialWithMarquee({
         </div>
 
         <div className="relative flex w-full max-w-full flex-col items-center justify-center overflow-x-hidden">
-          <div className="group flex w-full max-w-full overflow-x-hidden p-2 [--gap:1rem] [gap:var(--gap)] flex-row [--duration:40s]">
+          <div className="group flex w-full max-w-full overflow-x-hidden p-2 [--gap:1rem] [gap:var(--gap)] flex-row [--duration:200s]">
             <div 
               className="flex shrink-0 justify-around [gap:var(--gap)] flex-row group-hover:[animation-play-state:paused]"
               style={{
