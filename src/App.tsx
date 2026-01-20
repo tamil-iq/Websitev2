@@ -6,7 +6,6 @@ import './index.css';
 import Teleradiology from './pages/teleradiology';
 import Careers from './pages/careers';
 import Product from './pages/product';
-import Portfolio from './pages/portfolio';
 import Radone from './pages/portfolio/radone';
 import RadLinQ from './pages/portfolio/radlinq';
 import InvoiceIQ from './pages/portfolio/invoiceiq';
@@ -23,7 +22,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product" element={<Product />} />
-          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/radone" element={<Radone />} />
           <Route path="/portfolio/radlinq" element={<RadLinQ />} />
           <Route path="/portfolio/invoiceiq" element={<InvoiceIQ />} />

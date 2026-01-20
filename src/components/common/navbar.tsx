@@ -25,7 +25,7 @@ const Navbar = () => {
     { name: 'Platform', path: '/' },
     {
       name: 'Portfolio',
-      path: '/portfolio',
+      path: '#',
       children: [
         { name: 'Platform', path: '/', description: 'Unified RIS, PACS, and Reporting' },
         { name: 'RadLinQ', path: '/portfolio/radlinq', description: 'Teleradiology software' },
@@ -151,9 +151,9 @@ const Navbar = () => {
                 onMouseLeave={() => link.children && setActiveDropdown(null)}
               >
                 {link.children ? (
-                  // Dropdown menu item
-                  <Link
-                    to={link.path}
+                  // Dropdown menu item - button only, no navigation
+                  <button
+                    onClick={() => handleDropdownToggle(link.name)}
                     className={cn(
                       "group relative flex items-center gap-1 px-4 py-2 rounded-lg text-sm tracking-wide transition-all duration-200",
                       isParentActive(link)
@@ -168,11 +168,7 @@ const Navbar = () => {
                         activeDropdown === link.name ? "rotate-180" : ""
                       )}
                     />
-                    {/* <span className={cn(
-                      "absolute bottom-0 left-4 right-4 h-[2px] bg-primary rounded-full transition-transform duration-200 origin-left",
-                      isParentActive(link) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                    )} /> */}
-                  </Link>
+                  </button>
                 ) : (
                   // Regular link
                   <Link
